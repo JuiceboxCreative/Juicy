@@ -1,0 +1,31 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the header of the site/application.
+// -----------------------------------------------------------------------------
+
+.primary-header{
+
+  .logo img{
+    max-width: 256px;
+
+  }
+
+  .nav-container{
+    position: absolute;
+  }
+
+}
+
+
+
+//desktop only
+@media (min-width: $screen-sm-min) {
+
+  .primary-header{
+
+    .nav-container{
+      position: static;
+    }
+
+  }
+
+}

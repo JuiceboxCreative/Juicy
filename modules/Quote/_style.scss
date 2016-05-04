@@ -1,0 +1,18 @@
+$sm-padding:        30px;
+$padding:           60px;
+
+
+.module-quote {
+    &--padding-top {
+        padding-top: $sm-padding;
+        @media (min-width: $screen-md-min) {
+            padding-top: $padding;
+        }
+    }
+    &--padding-bottom {
+        padding-bottom: $sm-padding;
+        @media (min-width: $screen-md-min) {
+            padding-bottom: $padding;
+        }
+    }
+}

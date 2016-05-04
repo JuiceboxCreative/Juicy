@@ -1,0 +1,10 @@
+// Fonts
+@import 'base/fonts';
+// Variables
+@import 'abstracts/variables';
+// Bootstrap
+@import '../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins';
+@import '../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/normalize';
+@import '../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/grid';
+// Wordpress styles
+@import 'base/wordpress';

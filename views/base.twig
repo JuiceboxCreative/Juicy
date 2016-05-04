@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% block html_head_container %}
+<!--[if IE 8]>    <html class="no-js lt-ie10 lt-ie9" lang="en"> <![endif]-->
+<!--[if IE 9]>      <html class="no-js lt-ie10" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="{{site.charset}}" />
+
+    <title>{{wp_title}}</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="pingback" href="{{site.pingback_url}}" />
+
+    {{function('wp_head')}}
+
+    {% block head %}{% endblock %}
+</head>
+{% endblock %}
+    <body class="{{body_class}}">
+        <div class="page-wrap">
+            {% block beforeHeader %}{% endblock %}
+
+            {% block header %}
+                {% include 'partials/header.twig' %}
+            {% endblock %}
+
+            {% block afterHeader %}{% endblock %}
+
+            {% block beforeMain %}{% endblock %}
+
+            {% block main %}{% endblock %}
+
+            {% block afterMain %}{% endblock %}
+
+            {% block beforeFooter %}{% endblock %}
+
+            {% block footer %}
+                {% include 'partials/footer.twig' %}
+            {% endblock %}
+
+            {% block afterFooter %}{% endblock %}
+        </div>
+        {{ function('wp_footer') }}
+    </body>
+</html>

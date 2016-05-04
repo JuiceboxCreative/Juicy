@@ -1,0 +1,13 @@
+<footer class="footer">
+    <div class="container">
+        <a href="http://www.juicebox.com.au" class="jb">Site by JuiceBox</a>
+        <nav class="footer-navigation" role="navigation">
+            {%
+                include 'partials/nav.twig' with {
+                    nav: navs.footer_links,
+                    navClass: "nav"
+                } only
+            %}
+        </nav>
+    </div>
+</footer>

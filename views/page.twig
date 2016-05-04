@@ -1,0 +1,29 @@
+{% extends 'base.twig' %}
+
+{% if contentClass is not defined %}
+    {% set contentClass = 'col-md-12' %}
+{% endif %}
+
+{% block main %}
+    <section class="section section-main">
+        {% block beforeContentContainer %}{% endblock %}
+        <div class="container">
+            <div class="row">
+            {% block beforeContent %}{% endblock %}
+
+            {% block content %}
+                <article class="article-content article-content-{{ post.post_type }} {{ contentClass }}">
+                    {{ post.content }}
+                </article>
+            {% endblock %}
+
+            {% block afterContent %}{% endblock %}
+            </div>
+        </div>
+        {% block afterContentContainer %}{% endblock %}
+    </section>
+{% endblock %}
+
+{% block afterMain %}
+    {% include 'partials/modules.twig' %}
+{% endblock %}

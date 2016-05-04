@@ -1,0 +1,15 @@
+<li id="menu-item-{{item.ID}}" class="{{item.class}}">
+    <a href="{{item.link}}">{{item.title}}</a>
+
+    {% if item.children is not empty %}
+        <ul class="submenu">
+            {% for child in item.children %}
+                {%
+                    include 'partials/nav-item.twig' with {
+                        item: child
+                    } only
+                %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+</li>

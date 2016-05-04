@@ -1,0 +1,25 @@
+<header class="header primary-header" id="header" role="banner">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 logo">
+                <a href="{{ function('home_url', '/') }}" rel="home">
+                    <img src="{{TimberImage(options.logo).src}}" alt="Site Logo" />
+                </a>
+                <button class="hamburger hamburger--collapse" type="button">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
+                </button>
+            </div>
+            <div class="col-xs-12 col-sm-8 nav-container">
+
+            <nav class="main-navigation" role="navigation">
+                {% include 'partials/nav.twig' with {
+                nav: menus.header_menu,
+                navClass: "nav"
+                } only %}
+            </nav>
+            </div>
+        </div>
+    </div>
+</header>

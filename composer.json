@@ -1,0 +1,24 @@
+{
+  "name": "juicebox/wordpress-starter-theme",
+  "description": "The JuiceBox Wordpress starter theme",
+  "keywords": ["wordpress", "theme", "starter theme"],
+  "homepage": "http://juicebox.com.au",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "JucieBox Creative",
+      "email": "web@juicebox.com.au",
+      "homepage": "http://juicebox.com.au"
+    }
+  ],
+  "type": "wordpress-theme",
+  "require": {
+    "php": ">=5.3.2",
+    "composer/installers": "v1.0.19"
+  },
+  "autoload": {
+    "psr-4": {
+      "": ["src", "modules"]
+    }
+  }
+}

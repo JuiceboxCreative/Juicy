@@ -1,0 +1,15 @@
+<pre>
+{{module|print_r}}
+</pre>
+
+<section class="module module-quote text-center{{ module.padding is not empty ? ' module-quote--' ~ module.padding|join(' module-quote--') : '' }}">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                {% if module.quote is not empty %}
+                    <p>{{module.quote}}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
