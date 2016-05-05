@@ -1,8 +1,8 @@
 <?php
 
-namespace JuiceBox\PostType;
+namespace Juicy\PostType;
 
-use JuiceBox\PostType\CustomPostType;
+use Juicy\PostType\CustomPostType;
 
 class Example extends CustomPostType
 {

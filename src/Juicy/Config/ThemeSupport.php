@@ -1,6 +1,6 @@
 <?php
 
-namespace JuiceBox\Config;
+namespace Juicy\Config;
 
 class ThemeSupport
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace JuiceBox\Core;
+namespace Juicy\Core;
 
 use TimberMenuItem;
 
 class MenuItem extends TimberMenuItem
 {
-    public $PostClass = "JuiceBox\\PostTypes\\Post";
+    public $PostClass = "Juicy\\PostTypes\\Post";
 
     public $listItemClass = 'menu-item';
 

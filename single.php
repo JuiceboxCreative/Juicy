@@ -10,7 +10,7 @@
  */
 
 $context = Timber::get_context();
-$post = Timber::query_post(false, "\\JuiceBox\\Core\\Post");
+$post = Timber::query_post(false, "\\Juicy\\Core\\Post");
 $context['post'] = $post;
 $context['comment_form'] = TimberHelper::get_comment_form();
 

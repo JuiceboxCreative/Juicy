@@ -1,8 +1,8 @@
 <?php
 
-namespace JuiceBox\Taxonomy;
+namespace Juicy\Taxonomy;
 
-use JuiceBox\PostType\CustomPostType;
+use Juicy\PostType\CustomPostType;
 
 class CustomTaxonomy
 {

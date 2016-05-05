@@ -1,6 +1,6 @@
 <?php
 
-namespace JuiceBox\Core;
+namespace Juicy\Core;
 
 use TimberImage;
 

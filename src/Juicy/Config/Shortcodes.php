@@ -1,6 +1,6 @@
 <?php
 
-namespace JuiceBox\Config;
+namespace Juicy\Config;
 
 use Timber;
 
@@ -34,7 +34,7 @@ class Shortcodes
                     'post_type' => $post_type,
                     'posts_per_page' => -1,
                     'sort_column' => 'menu_order'
-                ), "\\JuiceBox\\Core\\Post")
+                ), "\\Juicy\\Core\\Post")
             );
         }
 

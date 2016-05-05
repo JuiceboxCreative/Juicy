@@ -11,7 +11,7 @@
 global $wp_query;
 
 $data = Timber::get_context();
-$data['posts'] = Timber::get_posts(false, "\\JuiceBox\\Core\\Post");
+$data['posts'] = Timber::get_posts(false, "\\Juicy\\Core\\Post");
 
 if (isset($wp_query->query_vars['author'])) {
 	$author = new TimberUser($wp_query->query_vars['author']);

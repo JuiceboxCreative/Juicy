@@ -1,6 +1,6 @@
 <?php
 
-namespace JuiceBox\Core;
+namespace Juicy\Core;
 
 abstract class Module
 {
@@ -23,7 +23,7 @@ abstract class Module
      * Set Module
      *
      * @param array $module
-     * @return JuiceBox\Module
+     * @return Juicy\Module
      */
     public function setModule($module)
     {

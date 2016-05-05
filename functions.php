@@ -14,17 +14,17 @@ if (!class_exists('Timber')) {
     Timber::$locations = __DIR__ . "/modules";
 }
 
-use JuiceBox\Core\Site;
-use JuiceBox\Core\Admin;
+use Juicy\Core\Site;
+use Juicy\Core\Admin;
 
-use JuiceBox\Config\Shortcodes;
-use JuiceBox\Config\CustomFields;
-use JuiceBox\Config\Plugins;
-use JuiceBox\Config\ThemeSupport;
-use JuiceBox\Config\CustomPostTypes;
-use JuiceBox\Config\CustomTaxonomies;
-use JuiceBox\Config\Menus;
-use JuiceBox\Config\Assets;
+use Juicy\Config\Shortcodes;
+use Juicy\Config\CustomFields;
+use Juicy\Config\Plugins;
+use Juicy\Config\ThemeSupport;
+use Juicy\Config\CustomPostTypes;
+use Juicy\Config\CustomTaxonomies;
+use Juicy\Config\Menus;
+use Juicy\Config\Assets;
 
 /**
  * ------------------

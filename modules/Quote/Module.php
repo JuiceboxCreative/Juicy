@@ -2,7 +2,7 @@
 
 namespace Quote;
 
-use JuiceBox\Core\Module as JBModule;
+use Juicy\Core\Module as JBModule;
 use Timber;
 
 class Module extends JBModule

@@ -1,15 +1,15 @@
 <?php
 
-namespace JuiceBox\Core;
+namespace Juicy\Core;
 
 use Timber;
 use TimberTerm;
 
 class Term extends TimberTerm {
 
-    public $PostClass = '\\JuiceBox\\Core\\Post';
-    public $TermClass = '\\JuiceBox\\Core\\Term';
-    public $ImageClass = '\\JuiceBox\\Core\\Image';
+    public $PostClass = '\\Juicy\\Core\\Post';
+    public $TermClass = '\\Juicy\\Core\\Term';
+    public $ImageClass = '\\Juicy\\Core\\Image';
 
     public function title()
     {

@@ -1,8 +1,8 @@
 <?php
 
-namespace JuiceBox\Taxonomy;
+namespace Juicy\Taxonomy;
 
-use JuiceBox\Taxonomy\CustomTaxonomy;
+use Juicy\Taxonomy\CustomTaxonomy;
 
 class Example extends CustomTaxonomy
 {

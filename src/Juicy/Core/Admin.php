@@ -1,6 +1,6 @@
 <?php
 
-namespace JuiceBox\Core;
+namespace Juicy\Core;
 
 use Timber;
 use Twig_SimpleFunction;
@@ -60,7 +60,7 @@ class Admin
     // Custom Backend Footer
     public function custom_admin_footer()
     {
-        _e('<span id="footer-thankyou">Developed by <a href="http://juicebox.com.au" target="_blank">JuiceBox</a></span>.', 'wordpress');
+        _e('<span id="footer-thankyou">Developed by <a href="http://Juicy.com.au" target="_blank">Juicy</a></span>.', 'wordpress');
     }
 
     //Login page CSS
@@ -72,13 +72,13 @@ class Admin
     // changing the logo link from wordpress.org to your site
     public function login_url()
     {
-        return "http://www.juicebox.com.au";
+        return "http://www.Juicy.com.au";
     }
 
     // changing the alt text on the logo to show your site name
     public function login_title()
     {
-        return "Site by JuiceBox";
+        return "Site by Juicy";
     }
 
     public function customise_wysiwyg($buttons)
@@ -126,7 +126,7 @@ class Admin
         );
 
         $replace = array(
-            'JuiceBox Creative',
+            'Juicy Creative',
             'info@juciebox.com.au',
             '91 Brisbane St, Perth WA'
         );

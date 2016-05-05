@@ -1,15 +1,15 @@
 <?php
 
-namespace JuiceBox\Core;
+namespace Juicy\Core;
 
 use TimberSite;
 use TimberMenu;
 use Twig_SimpleFilter;
 use Twig_SimpleFunction;
 use Twig_Extension_StringLoader;
-use JuiceBox\Config\Menus;
-use JuiceBox\Core\Menu;
-use JuiceBox\Core\SchemaOrgBreadcrumbs;
+use Juicy\Config\Menus;
+use Juicy\Core\Menu;
+use Juicy\Core\SchemaOrgBreadcrumbs;
 
 class Site extends TimberSite
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace JuiceBox\Core;
+namespace Juicy\Core;
 
 use TimberPost;
 
 class Post extends TimberPost
 {
-    public $PostClass = '\\JuiceBox\\Core\\Post';
-    public $ImageClass = '\\JuiceBox\\Core\\Image';
+    public $PostClass = '\\Juicy\\Core\\Post';
+    public $ImageClass = '\\Juicy\\Core\\Image';
     public $subnav = null;
     public $modules = null;
 

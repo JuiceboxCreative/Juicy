@@ -1,8 +1,8 @@
 <?php
 
-namespace JuiceBox\Config;
+namespace Juicy\Config;
 
-use JuiceBox\CustomFields\Modules;
+use Juicy\CustomFields\Modules;
 
 class CustomFields
 {

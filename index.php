@@ -18,7 +18,7 @@ if (!class_exists('Timber')){
     return;
 }
 $context = Timber::get_context();
-$context['posts'] = Timber::get_posts(false, "\\JuiceBox\\Core\\Post");
+$context['posts'] = Timber::get_posts(false, "\\Juicy\\Core\\Post");
 $templates = array('index.twig');
 if (is_home()){
     array_unshift($templates, 'home.twig');

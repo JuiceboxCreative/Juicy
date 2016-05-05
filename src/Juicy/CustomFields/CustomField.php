@@ -1,6 +1,6 @@
 <?php
 
-namespace JuiceBox\CustomFields;
+namespace Juicy\CustomFields;
 
 class CustomField
 {

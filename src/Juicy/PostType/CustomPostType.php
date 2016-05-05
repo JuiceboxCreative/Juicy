@@ -1,6 +1,6 @@
 <?php
 
-namespace JuiceBox\PostType;
+namespace Juicy\PostType;
 
 class CustomPostType
 {

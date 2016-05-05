@@ -1,6 +1,6 @@
 <?php
 
-namespace JuiceBox\Config;
+namespace Juicy\Config;
 
 class Plugins {
 
@@ -28,11 +28,11 @@ class Plugins {
             'force_deactivation' => true,
         ),
 
-        // JuiceBox hosted plugins
+        // Juicy hosted plugins
         array(
             'name'               => 'IconBox',
             'slug'               => 'iconbox',
-            'source'             => "http://wp-updater.dev.juicebox.com.au/?action=download&slug=iconbox",
+            'source'             => "http://wp-updater.dev.Juicy.com.au/?action=download&slug=iconbox",
             'required'           => true,
             'force_activation'   => true,
             'force_deactivation' => true,

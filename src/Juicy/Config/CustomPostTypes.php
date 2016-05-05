@@ -1,10 +1,10 @@
 <?php
 
-namespace JuiceBox\Config;
+namespace Juicy\Config;
 
-use JuiceBox\Taxonomy\Example;
+use Juicy\PostType\Example;
 
-class CustomTaxonomies
+class CustomPostTypes
 {
     public static function register($filter = 'init', $priority = 10)
     {
