@@ -60,7 +60,7 @@ class Admin
     // Custom Backend Footer
     public function custom_admin_footer()
     {
-        _e('<span id="footer-thankyou">Developed by <a href="http://Juicy.com.au" target="_blank">Juicy</a></span>.', 'wordpress');
+        _e('<span id="footer-thankyou">Developed by <a href="http://juicebox.com.au" target="_blank">Juicy</a></span>.', 'wordpress');
     }
 
     //Login page CSS

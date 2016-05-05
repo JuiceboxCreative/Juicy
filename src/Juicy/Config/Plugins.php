@@ -10,29 +10,11 @@ class Plugins {
      */
     public static $plugins = array(
 
-        // Pre-packaged plugins
-        array(
-            'name'               => 'VFB Pro',
-            'slug'               => 'vfb-pro',
-            'source'             => 'vfb-pro-3.0.6.zip',
-            'required'           => true,
-            'force_activation'   => true,
-            'force_deactivation' => true,
-        ),
-        array(
-            'name'               => 'Advanced Custom Fields',
-            'slug'               => 'advanced-custom-fields-pro',
-            'source'             => 'advanced-custom-fields-pro.zip',
-            'required'           => true,
-            'force_activation'   => true,
-            'force_deactivation' => true,
-        ),
-
-        // Juicy hosted plugins
+        // Juicebox hosted plugins
         array(
             'name'               => 'IconBox',
             'slug'               => 'iconbox',
-            'source'             => "http://wp-updater.dev.Juicy.com.au/?action=download&slug=iconbox",
+            'source'             => "http://wp-updater.dev.juicebox.com.au/?action=download&slug=iconbox",
             'required'           => true,
             'force_activation'   => true,
             'force_deactivation' => true,
@@ -72,18 +54,18 @@ class Plugins {
         array(
             'name'      => 'W3 Total Cache',
             'slug'      => 'w3-total-cache',
-            'required'  => true,
+            'required'  => false,
             'force_activation'   => false,
         ),
         array(
             'name'      => 'Redirection',
             'slug'      => 'redirection',
-            'required'  => true,
+            'required'  => false,
             'force_activation'   => false,
         ),
         array(
-            'name'              => 'iThemes Security',
-            'slug'              => 'better-wp-security',
+            'name'              => 'iThemes Security Pro',
+            'slug'              => 'better-wp-security-pro',
             'required'          => true,
             'force_activation'  => false
         )
