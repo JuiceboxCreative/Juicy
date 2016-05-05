@@ -1,6 +1,6 @@
 {
-  "name": "WordpressStarterTheme",
-  "version": "0.2.1",
+  "name": "Juicy",
+  "version": "0.1.1",
   "author": "JuiceBox",
   "dependencies": {
       "bootstrap-sass": "3.3.0"
