@@ -10,6 +10,24 @@ class Plugins {
      */
     public static $plugins = array(
 
+        // Pre-packaged plugins
+        array(
+            'name'               => 'Advanced Custom Fields Pro',
+            'slug'               => 'advanced-custom-fields-pro',
+            'source'             => 'advanced-custom-fields-pro.zip',
+            'required'           => true,
+            'force_activation'   => true,
+            'force_deactivation' => true,
+        ),
+        array(
+            'name'              => 'iThemes Security Pro',
+            'slug'              => 'ithemes-security-pro',
+            'source'            => 'ithemes-security-pro.zip',
+            'required'          => true,
+            'force_activation'  => true,
+            'force_deactivation'  => true,
+        ),
+
         // Juicebox hosted plugins
         array(
             'name'               => 'IconBox',
@@ -75,9 +93,9 @@ class Plugins {
     public static function register()
     {
         // Add required plugins using class
-        require_once get_template_directory() . '/src/PluginActivation/PluginActivation.php';
+        require_once get_stylesheet_directory() . '/src/PluginActivation/PluginActivation.php';
 
-        static::$config['default_path'] = get_template_directory() . '/src/PluginActivation/plugins/';
+        static::$config['default_path'] = get_stylesheet_directory() . '/src/PluginActivation/plugins/';
 
         add_action( 'tgmpa_register', array( __CLASS__, 'register_required_plugins' ));
     }
