@@ -6,5 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    '' => array($baseDir . '/src', $baseDir . '/modules'),
+    'Timber\\' => array($vendorDir . '/timber/timber/lib'),
+    '' => array($baseDir . '/src', $baseDir . '/modules', $vendorDir . '/asm89/twig-cache-extension/lib'),
 );
