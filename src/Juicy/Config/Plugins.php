@@ -29,7 +29,7 @@ class Plugins {
         ),
         array(
             'name'              => 'WP Offload S3',
-            'slug'              => 'wp-offload-s3',
+            'slug'              => 'amazon-s3-and-cloudfront-pro',
             'source'            => 'wp-offload-s3.zip',
             'required'          => true,
             'force_activation'  => true,
@@ -37,7 +37,7 @@ class Plugins {
         ),
         array(
             'name'              => 'WP Offload S3 Enable Media Replace',
-            'slug'              => 'wp-offload-s3-enable-media-replace',
+            'slug'              => 'amazon-s3-and-cloudfront-enable-media-replace',
             'source'            => 'wp-offload-s3-enable-media-replace.zip',
             'required'          => true,
             'force_activation'  => true,
