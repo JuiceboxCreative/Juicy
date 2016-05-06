@@ -75,9 +75,9 @@ class Plugins {
     public static function register()
     {
         // Add required plugins using class
-        require_once get_stylesheet_directory() . '/src/PluginActivation/PluginActivation.php';
+        require_once get_template_directory() . '/src/PluginActivation/PluginActivation.php';
 
-        static::$config['default_path'] = get_stylesheet_directory() . '/src/PluginActivation/plugins/';
+        static::$config['default_path'] = get_template_directory() . '/src/PluginActivation/plugins/';
 
         add_action( 'tgmpa_register', array( __CLASS__, 'register_required_plugins' ));
     }

@@ -24,23 +24,23 @@ class Assets
      * @param  string  $filter   The name of the filter to hook into
      * @param  integer $priority The priority to attach the filter with
      */
-    public static function load($filter = 'wp_enqueue_scripts', $priority = 10)
+    public static function load($filter = 'wp_enqueue_scripts', $priority = 5)
     {
         // Register the filter
         add_filter($filter, function () {
 
             // CSS
-            wp_enqueue_style('jb_styles', get_template_directory_uri() . "/css/main.css", array(), static::$stylesheetVersion);
+            wp_enqueue_style('juicy_styles', get_template_directory_uri() . "/css/main.css", array(), static::$stylesheetVersion);
 
             // JS
-            wp_enqueue_script('jb_modernizr', get_template_directory_uri() . "/js/modernizr.js", array(),  static::$scriptVersion);
-            wp_enqueue_script('jb_script', get_template_directory_uri() . "/js/main.js", array('jquery'), static::$scriptVersion, true);
+            wp_enqueue_script('juicy_modernizr', get_template_directory_uri() . "/js/modernizr.js", array(), static::$scriptVersion);
+            wp_enqueue_script('juicy_script', get_template_directory_uri() . "/js/main.js", array('jquery'), static::$scriptVersion, true);
 
-            wp_localize_script('jb_script', 'themeData', array(
+            wp_localize_script('juicy_script', 'themeData', array(
                 'themeDir' => get_template_directory_uri()
             ));
 
-            wp_enqueue_script('jb_script');
+            wp_enqueue_script('juicy_script');
 
         }, $priority);
     }

@@ -2,9 +2,6 @@
   "name": "Juicy",
   "version": "0.1.1",
   "author": "JuiceBox",
-  "dependencies": {
-      "bootstrap-sass": "3.3.0"
-  },
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-sass": "*",
