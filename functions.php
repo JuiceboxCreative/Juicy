@@ -1,6 +1,6 @@
 <?php
 //Include composer autoloader
-include __DIR__ . "/vendor/autoload.php";
+include dirname(ABSPATH) . "/vendor/autoload.php";
 
 //Make sure timber plugin is activated
 if (!class_exists('Timber')) {
