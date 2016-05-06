@@ -63,12 +63,6 @@ class Plugins {
             'required'  => false,
             'force_activation'   => false,
         ),
-        array(
-            'name'              => 'iThemes Security Pro',
-            'slug'              => 'better-wp-security-pro',
-            'required'          => true,
-            'force_activation'  => false
-        )
     );
 
     public static $config = array(
