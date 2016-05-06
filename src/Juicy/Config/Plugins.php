@@ -27,6 +27,22 @@ class Plugins {
             'force_activation'  => true,
             'force_deactivation'  => true,
         ),
+        array(
+            'name'              => 'WP Offload S3',
+            'slug'              => 'wp-offload-s3',
+            'source'            => 'wp-offload-s3.zip',
+            'required'          => true,
+            'force_activation'  => true,
+            'force_deactivation'  => true,
+        ),
+        array(
+            'name'              => 'WP Offload S3 Enable Media Replace',
+            'slug'              => 'wp-offload-s3-enable-media-replace',
+            'source'            => 'wp-offload-s3-enable-media-replace.zip',
+            'required'          => true,
+            'force_activation'  => true,
+            'force_deactivation'  => true,
+        ),
 
         // Juicebox hosted plugins
         array(
@@ -80,6 +96,12 @@ class Plugins {
             'slug'      => 'redirection',
             'required'  => false,
             'force_activation'   => false,
+        ),
+        array(
+            'name'      => 'Enable Media Replace',
+            'slug'      => 'enable-media-replace',
+            'required'  => true,
+            'force_activation'   => true,
         ),
     );
 
