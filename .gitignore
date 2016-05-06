@@ -2,7 +2,7 @@ assets/*
 node_modules
 *.DS_Store
 *.sublime*
-vendor/**/.git
+/vendor
 .sass-cache
 
 
