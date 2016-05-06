@@ -68,12 +68,6 @@ class Plugins {
             'force_activation'   => true,
         ),
         array(
-            'name'      => 'Timber Library',
-            'slug'      => 'timber-library',
-            'required'  => true,
-            'force_activation'   => true,
-        ),
-        array(
             'name'      => 'Wordpress SEO',
             'slug'      => 'wordpress-seo',
             'required'  => true,
