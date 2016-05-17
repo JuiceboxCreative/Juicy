@@ -57,15 +57,12 @@ class Modules extends CustomField
     {
         $dir = new \DirectoryIterator(get_template_directory() . '/modules');
         foreach ($dir as $dirinfo) {
-            if (!$dirinfo->isDot()) {
+            if (!$dirinfo->isDot() && $dir->isDir()) {
                 $class = $dirinfo->getFilename() . '\\Module';
 
                 // fields[0] is the layouts array
                 static::$fields['fields'][0]['layouts'][] = $class::$layout;
             }
         }
-
-
-        acf_add_local_field_group(static::$fields);
     }
 }
