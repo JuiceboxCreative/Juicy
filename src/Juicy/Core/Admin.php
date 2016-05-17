@@ -72,13 +72,13 @@ class Admin
     // changing the logo link from wordpress.org to your site
     public function login_url()
     {
-        return "http://www.Juicy.com.au";
+        return "http://www.juicebox.com.au";
     }
 
     // changing the alt text on the logo to show your site name
     public function login_title()
     {
-        return "Site by Juicy";
+        return "Site by Juicebox";
     }
 
     public function customise_wysiwyg($buttons)
