@@ -14,9 +14,6 @@ if (!class_exists('Timber')) {
     Timber::$locations = __DIR__ . "/modules";
 }
 
-use Juicy\Core\Site;
-use Juicy\Core\Admin;
-
 use Juicy\Config\Shortcodes;
 use Juicy\Config\CustomFields;
 use Juicy\Config\Plugins;
@@ -31,10 +28,6 @@ use Juicy\Config\Assets;
  * Core
  * ------------------
  */
-// Site Config
-new Site();
-new Admin();
-
 Shortcodes::register();
 
 /**
