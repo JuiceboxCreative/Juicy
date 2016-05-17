@@ -38,9 +38,6 @@ Shortcodes::register();
 // Required plugins
 Plugins::register();
 
-// Register custom fields
-CustomFields::register();
-
 // Register support of certain theme features
 ThemeSupport::register();
 
