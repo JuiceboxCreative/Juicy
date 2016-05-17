@@ -2,16 +2,14 @@
 
 namespace Juicy\CustomFields;
 
-use Quote\Module as Quote;
-
 class Modules extends CustomField
 {
     public static $fields = array(
-        'key' => 'group_5667dac192df7',
+        'key' => 'group_modules',
         'title' => 'Modules',
         'fields' => array(
             array(
-                'key' => 'field_5667dace01da6',
+                'key' => 'group_modules_field_modules',
                 'label' => 'Modules',
                 'name' => 'modules',
                 'type' => 'flexible_content',
@@ -57,8 +55,16 @@ class Modules extends CustomField
 
     public static function register()
     {
-        // fields[0] is the layouts array
-        static::$fields['fields'][0]['layouts'][] = Quote::$layout;
+        $dir = new \DirectoryIterator(get_template_directory() . '/modules');
+        foreach ($dir as $dirinfo) {
+            if (!$dirinfo->isDot()) {
+                $class = $dirinfo->getFilename() . '\\Module';
+
+                // fields[0] is the layouts array
+                static::$fields['fields'][0]['layouts'][] = $class::$layout;
+            }
+        }
+
 
         acf_add_local_field_group(static::$fields);
     }
