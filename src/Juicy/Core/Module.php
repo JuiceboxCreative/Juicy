@@ -75,7 +75,7 @@ abstract class Module
         wp_enqueue_script($name, $modulePath.'javascript.js', $this->jsDependencies, '0.0.1', true);
     }
 
-    private function getNamespace()
+    protected function getNamespace()
     {
         $reflector = new \ReflectionClass($this);
 
