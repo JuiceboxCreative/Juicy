@@ -2,14 +2,10 @@
 
 namespace Juicy\Core;
 
-use TimberSite;
-use TimberMenu;
-use Twig_SimpleFilter;
+use Timber\Site as TimberSite;
+use Timber\Timber;
 use Twig_SimpleFunction;
-use Twig_Extension_StringLoader;
 use Juicy\Config\Menus;
-use Juicy\Core\Menu;
-use Juicy\Core\SchemaOrgBreadcrumbs;
 
 class Site extends TimberSite
 {
@@ -41,6 +37,12 @@ class Site extends TimberSite
         add_action('wp_head', array($this, 'add_ie_html5_shim'));
 
         add_action( 'after_setup_theme', array($this, 'schema_breadcrumbs') );
+
+        // Set additional Timber twig directories.
+        Timber::$locations = array(
+            get_template_directory() . '/modules',
+            get_stylesheet_directory() . '/modules',
+        );
 
         parent::__construct();
     }
@@ -76,7 +78,7 @@ class Site extends TimberSite
     //Remove p tags from around images in content
     public function filter_ptags_on_images($content)
     {
-       return preg_replace('/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(<\/a>)?\s*<\/p>/iU', '\1\2\3', $content);
+        return preg_replace('/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(<\/a>)?\s*<\/p>/iU', '\1\2\3', $content);
     }
 
     // add ie media query shim to header
