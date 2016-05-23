@@ -87,4 +87,9 @@ class Post extends TimberPost
 
         return $processedModules;
     }
+
+    public function has_children() {
+        $children = $this->get_children();
+        return (is_array($children) && count($children) > 0);
+    }
 }
