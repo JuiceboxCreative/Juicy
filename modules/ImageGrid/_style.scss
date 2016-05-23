@@ -1,0 +1,15 @@
+.module-image-grid {
+
+    text-align: center;
+
+    &__items {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    &__item {
+        flex: 1 0 auto;
+    }
+
+}
