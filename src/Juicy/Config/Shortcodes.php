@@ -18,7 +18,7 @@ class Shortcodes
         add_shortcode('dummy-content', array(__CLASS__, 'dummy_content'));
     }
 
-    public function html_sitemap()
+    public static function html_sitemap()
     {
         $sections = array();
 
