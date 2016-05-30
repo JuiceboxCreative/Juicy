@@ -19,6 +19,8 @@ class Site extends TimberSite
         'legal_links' => 'Legal Links' // secondary nav in footer
     );
 
+    protected $MenuClass = '\\Juicy\\Core\\Menu';
+
     public function __construct()
     {
         //Add global variables to twig
@@ -51,7 +53,7 @@ class Site extends TimberSite
     {
         $context['menus'] = array();
         foreach (Menus::$menus as $key => $value) {
-            $context['menus'][$key] = new Menu($key);
+            $context['menus'][$key] = new $this->MenuClass($key);
         }
 
         $context['options'] = get_fields('option');

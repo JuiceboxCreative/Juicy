@@ -2,11 +2,11 @@
 
 namespace Juicy\Core;
 
-use TimberMenuItem;
+use Timber\MenuItem as TimberMenuItem;
 
 class MenuItem extends TimberMenuItem
 {
-    public $PostClass = "Juicy\\PostTypes\\Post";
+    public $PostClass = "Juicy\\Core\\Post";
 
     public $listItemClass = 'menu-item';
 
