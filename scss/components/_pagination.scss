@@ -22,12 +22,7 @@
     }
 
     &__link {
-        color: $blue-0;
         padding: 10px;
-
-        @include on-event() {
-
-        }
     }
 
     &__active {

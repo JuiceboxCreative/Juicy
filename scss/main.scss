@@ -2,7 +2,6 @@
 
 // 1. Configuration and helpers
 @import
-'abstracts/functions',
 'abstracts/mixins';
 
 // 2. Vendors
@@ -11,9 +10,7 @@
 
 // 4. Base stuff
 @import
-'base/base',
-'base/fonts',
-'base/helpers';
+'base/base';
 
 // 5. Layout-related sections
 @import
