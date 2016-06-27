@@ -4,6 +4,8 @@ node_modules
 *.sublime*
 /vendor
 .sass-cache
+*.css.map
+*.js.map
 
 
 # Created by https://www.gitignore.io/api/phpstorm

@@ -7,15 +7,18 @@ abstract class Module
     protected $module = null;
     protected $jsDependencies = array('jquery');
     protected $name;
+    protected $post;
 
     /**
      * Returns processed module
      *
      * @param array $module
      */
-    public function __construct($module)
+    public function __construct($module, $name, $post)
     {
         $this->setModule($module);
+        $this->setName($name);
+        $this->setPost($post);
         $this->processModule();
     }
 
@@ -40,6 +43,52 @@ abstract class Module
     public function getModule()
     {
         return $this->module;
+    }
+
+    /**
+     * Set Name
+     *
+     * @param array $name
+     * @return Juicy\Name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get Name
+     *
+     * @return array
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set Post
+     *
+     * @param array $post
+     * @return Juicy\Post
+     */
+    public function setPost($post)
+    {
+        $this->post = $post;
+
+        return $this;
+    }
+
+    /**
+     * Get Post
+     *
+     * @return array
+     */
+    public function getPost()
+    {
+        return $this->post;
     }
 
     /**

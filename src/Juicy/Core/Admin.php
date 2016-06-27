@@ -11,7 +11,6 @@ class Admin
     public function __construct()
     {
         //Login page customisations
-        add_action('login_enqueue_scripts', array($this, 'login_css'), 10);
         add_filter('login_headerurl', array($this, 'login_url'));
         add_filter('login_headertitle', array($this, 'login_title'));
 
@@ -28,10 +27,6 @@ class Admin
         // customise WYSIWYG
         add_filter('mce_buttons_2', array($this, 'customise_wysiwyg'));
         add_filter('tiny_mce_before_init', array($this, 'add_styles_to_wysiwyg'));
-        add_action('after_setup_theme', array($this, 'add_wysiwyg_stylesheet'));
-
-        // Create default pages
-        add_action( 'after_setup_theme', array( $this, 'add_default_pages' ) );
     }
 
     public function options_pages()
@@ -61,12 +56,6 @@ class Admin
     public function custom_admin_footer()
     {
         _e('<span id="footer-thankyou">Developed by <a href="http://juicebox.com.au" target="_blank">Juicebox</a></span>.', 'wordpress');
-    }
-
-    //Login page CSS
-    public function login_css()
-    {
-        wp_enqueue_style('jb_login_css', get_template_directory_uri() . '/css/login.css', false );
     }
 
     // changing the logo link from wordpress.org to your site
@@ -108,46 +97,5 @@ class Admin
         $init_array['style_formats'] = json_encode( $style_formats );
 
         return $init_array;
-    }
-
-    public function add_wysiwyg_stylesheet()
-    {
-        add_editor_style('css/editor-style.css');
-    }
-
-    public function add_default_pages()
-    {
-        $pattern = dirname(dirname(__DIR__)).'/pages/*.txt';
-
-        $search = array(
-            '{{clientName}}',
-            '{{clientEmail}}',
-            '{{clientAddress}}'
-        );
-
-        $replace = array(
-            'Juicy Creative',
-            'info@juciebox.com.au',
-            '91 Brisbane St, Perth WA'
-        );
-
-        foreach (glob($pattern) as $page) {
-            $title = basename($page, '.txt');
-
-            // If the page doesn't exist, create it
-            if (! get_page_by_title($title)) {
-                $content = file_get_contents($page);
-                $content = str_replace($search, $replace, $content);
-
-                $insert = array(
-                    'post_title'    => $title,
-                    'post_content'  => $content,
-                    'post_status'   => 'publish',
-                    'post_type'     => 'page'
-                );
-
-                wp_insert_post($insert);
-            }
-        }
     }
 }

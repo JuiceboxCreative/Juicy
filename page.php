@@ -22,7 +22,9 @@
  */
 
 $context = Timber::get_context();
+
 $post = new Juicy\Core\Post();
+
 $context['post'] = $post;
-$post->init_post();
+
 Timber::render(array('page-' . $post->post_name . '.twig', 'page.twig'), $context);

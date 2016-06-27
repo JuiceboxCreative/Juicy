@@ -24,10 +24,10 @@ class Post extends TimberPost
 
     public function get_thumbnail($fallback = false)
     {
-        $img = parent::get_thumbnail();
+        $tid = get_post_thumbnail_id($this->ID);
 
-        if ($img !== null) {
-            return $img;
+        if ( $tid ) {
+            return new $this->ImageClass((int) $tid);
         }
 
         if ($fallback) {
@@ -77,7 +77,7 @@ class Post extends TimberPost
             $namespace = implode('', $parts);
             $fqcn = '\\'.$namespace.'\\Module';
 
-            $moduleProcessor = new $fqcn($module);
+            $moduleProcessor = new $fqcn($module, $name, $this);
             $module = $moduleProcessor->getModule();
 
             $module['template'] = $namespace.'/template.twig';

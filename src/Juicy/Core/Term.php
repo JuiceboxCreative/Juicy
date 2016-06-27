@@ -86,7 +86,7 @@ class Term extends TimberTerm {
 
             $module['template'] = $namespace.'/template.twig';
 
-            $moduleProcessor = new $fqcn($module, $name);
+            $moduleProcessor = new $fqcn($module, $name, $this);
             $processedModules[] = $moduleProcessor->getModule();
         }
 

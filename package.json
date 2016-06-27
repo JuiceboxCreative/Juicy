@@ -18,9 +18,7 @@
       "folder": "scss",
       "ext": ".scss",
       "files": {
-        "css/main.css": "scss/main.scss",
-        "css/login.css": "scss/login.scss",
-        "css/editor-style.css": "scss/editor-style.scss"
+        "css/main.css": "scss/main.scss"
       }
     },
     "js": {
@@ -33,9 +31,7 @@
     },
     "css": {
       "files": [
-        "css/main.css",
-        "css/login.css",
-        "scss/editor-style.css"
+        "css/main.css"
       ]
     }
   }
