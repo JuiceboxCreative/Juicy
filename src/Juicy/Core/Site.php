@@ -83,15 +83,6 @@ class Site extends TimberSite
         return preg_replace('/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(<\/a>)?\s*<\/p>/iU', '\1\2\3', $content);
     }
 
-    // add ie media query shim to header
-    public function add_ie_html5_shim()
-    {
-        echo '<!--[if lt IE 9]>';
-        echo '<script src="'.get_template_directory_uri() . '/js/respond.min.js"></script>';
-        echo '<script src="'.get_template_directory_uri() . '/js/selectivizr.js"></script>';
-        echo '<![endif]-->';
-    }
-
     public function schema_breadcrumbs()
     {
         if (function_exists('yoast_breadcrumb')) {

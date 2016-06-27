@@ -28,20 +28,8 @@ class Assets
     {
         // Register the filter
         add_filter($filter, function () {
-
             // CSS
             wp_enqueue_style('juicy_styles', get_template_directory_uri() . "/css/main.css", array(), static::$stylesheetVersion);
-
-            // JS
-            wp_enqueue_script('juicy_modernizr', get_template_directory_uri() . "/js/modernizr.js", array(), static::$scriptVersion);
-            wp_enqueue_script('juicy_script', get_template_directory_uri() . "/js/main.js", array('jquery'), static::$scriptVersion, true);
-
-            wp_localize_script('juicy_script', 'themeData', array(
-                'themeDir' => get_template_directory_uri()
-            ));
-
-            wp_enqueue_script('juicy_script');
-
         }, $priority);
     }
 }
