@@ -76,8 +76,8 @@ class Plugins {
         array(
             'name'      => 'Google Analytics Dashboard for WP',
             'slug'      => 'google-analytics-dashboard-for-wp',
-            'required'  => true,
-            'force_activation'   => true,
+            'required'  => false,
+            'force_activation'   => false,
         ),
         array(
             'name'      => 'W3 Total Cache',
