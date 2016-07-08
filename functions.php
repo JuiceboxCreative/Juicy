@@ -2,6 +2,8 @@
 //Include composer autoloader
 include dirname(ABSPATH) . "/vendor/autoload.php";
 
+$timber = new \Timber\Timber();
+
 use Juicy\Config\Shortcodes;
 use Juicy\Config\Plugins;
 use Juicy\Config\ThemeSupport;
