@@ -86,8 +86,14 @@ class Plugins {
             'force_activation'   => false,
         ),
         array(
-            'name'      => 'Redirection',
-            'slug'      => 'redirection',
+            'name'      => 'Simple 301 Redirects',
+            'slug'      => 'simple-301-redirects',
+            'required'  => false,
+            'force_activation'   => false,
+        ),
+        array(
+            'name'      => 'Simple 301 Redirects Addon Bulk Uploader',
+            'slug'      => 'simple-301-redirects-addon-bulk-uploader',
             'required'  => false,
             'force_activation'   => false,
         ),
