@@ -1,11 +1,7 @@
-{% block beforeNavItem %}{% endblock %}
 <li id="menu-item-{{item.ID}}" class="{{item.class}}">
-    {% block beforeLink %}{% endblock %}
-    {% block link %}<a href="{{item.link}}">{{item.title}}</a>{% endblock %}
-    {% block afterLink %}{% endblock %}
+    <a href="{{item.link}}">{{item.title}}</a>
 
     {% if item.children is not empty %}
-        {% block beforeSubmenu %}{% endblock %}
         <ul class="submenu">
             {% for child in item.children %}
                 {%
@@ -15,7 +11,5 @@
                 %}
             {% endfor %}
         </ul>
-        {% block beforeSubmenu %}{% endblock %}
     {% endif %}
 </li>
-{% block beforeNavItem %}{% endblock %}
