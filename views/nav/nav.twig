@@ -1,0 +1,11 @@
+{% block beforeNavUL %}{% endblock %}
+<ul class="{% block navClasses %}{{ navClass }}{% endblock %}">
+    {% block beforeNavItems %}{% endblock %}
+    {% for item in nav.items %}
+        {% include 'Nav/nav-item.twig' with {
+            item: item
+        } only %}
+    {% endfor %}
+    {% block afterNavItems %}{% endblock %}
+</ul>
+{% block afterNavUL %}{% endblock %}

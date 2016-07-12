@@ -24,14 +24,14 @@ class Assets
             // CSS
             if ( static::$css !== array() ) {
                 foreach ( static::$css as $css ) {
-                    wp_enqueue_style( $css['handle'] , $css['src'], $css['deps'], filemtime($css['src']));
+                    wp_enqueue_style( $css['handle'] , $css['src'], $css['deps'], filemtime($css['location']));
                 }
             }
 
             // JS
             if ( static::$js !== array() ) {
                 foreach ( static::$js as $js ) {
-                    wp_enqueue_script( $js['handle'] , $js['src'], $js['deps'], filemtime($js['src']), $js['in_footer']);
+                    wp_enqueue_script( $js['handle'] , $js['src'], $js['deps'], filemtime($js['location']), $js['in_footer']);
                 }
             }
 

@@ -3,7 +3,8 @@
     <div class="{% block containerClasses %}container-fluid{% endblock %}">
         {% block beforeRow %}{% endblock %}
         <div class="{% block rowClasses %}row{% endblock %}">
-            {% block innerRow %}
+            {% block beforeRowContent %}{% endblock %}
+            {% block rowContent %}
                  <a href="{{ function('home_url', '/') }}" rel="home">
                     <img src="{{TimberImage(options.logo).src}}" alt="Site Logo" />
                 </a>
@@ -13,12 +14,15 @@
                     </span>
                 </button>
                 <nav class="main-navigation" role="navigation">
-                    {% include 'partials/nav.twig' with {
-                        nav: menus.header_menu,
-                        navClass: "nav nav-justified"
-                    } only %}
+                    {%
+                        include 'nav/nav.twig' with {
+                            nav: menus.header_menu,
+                            navClass: "nav nav-justified"
+                        } only
+                    %}
                 </nav>
             {% endblock %}
+            {% block afterRowContent %}{% endblock %}
         </div>
         {% block afterRow %}{% endblock %}
     </div>
