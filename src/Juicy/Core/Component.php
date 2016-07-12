@@ -127,10 +127,6 @@ abstract class Component
         if ( file_exists( $componentPath.'javascript.js' ) ) {
             wp_enqueue_script($name, $componentPath.'javascript.js', $this->jsDependencies, '0.0.1', true);
         }
-
-        if ( file_exists( $componentPath.'style.css' ) ) {
-            wp_enqueue_style($name, $componentPath.'style.css', $this->cssDependencies, '0.0.1');
-        }
     }
 
     protected function getNamespace()

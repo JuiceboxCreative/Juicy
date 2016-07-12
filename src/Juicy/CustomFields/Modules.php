@@ -76,7 +76,7 @@ class Modules extends CustomField
             return false;
         }
 
-        $class = "{$filename}\\Module";
+        $class = "Juicy\\Modules\\{$filename}\\Module";
         // fields[0] is the layouts array
         static::$fields['fields'][0]['layouts'][] = $class::$layout;
 

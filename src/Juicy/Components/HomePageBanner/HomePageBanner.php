@@ -121,9 +121,9 @@ class HomePageBanner extends Component
      * @param  array $module
      * @return array
      */
-    public function processModule()
+    public function processComponent()
     {
-        parent::processModule();
+        parent::processComponent();
 
         foreach ( $this->module as $key => $slide ) {
             $slide['image'] = new \Juicy\Core\Image($slide['image']);
