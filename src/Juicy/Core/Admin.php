@@ -27,6 +27,7 @@ class Admin
         // customise WYSIWYG
         add_filter('mce_buttons_2', array($this, 'customise_wysiwyg'));
         add_filter('tiny_mce_before_init', array($this, 'add_styles_to_wysiwyg'));
+        add_action('after_setup_theme', array($this, 'add_wysiwyg_stylesheet'));
     }
 
     public function options_pages()
@@ -88,14 +89,19 @@ class Admin
             // Each array child is a format with it's own settings
             array(
                 'title' => 'Large Paragraph',
-                'block' => 'span',
+                'selector' => 'p',
                 'classes' => 'lead',
-                'wrapper' => true,
             )
         );
+
         // Insert the array, JSON ENCODED, into 'style_formats'
         $init_array['style_formats'] = json_encode( $style_formats );
 
         return $init_array;
+    }
+
+    public function add_wysiwyg_stylesheet()
+    {
+        add_editor_style('css/editor-style.css');
     }
 }

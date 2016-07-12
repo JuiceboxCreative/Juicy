@@ -121,7 +121,9 @@ abstract class Module
         $themeDir = get_template_directory_uri();
         $modulePath = $themeDir.'/modules/'.$this->getNamespace().'/';
 
-        wp_enqueue_script($name, $modulePath.'javascript.js', $this->jsDependencies, '0.0.1', true);
+        if ( file_exists( $modulePath.'javascript.js' ) ) {
+            wp_enqueue_script($name, $modulePath.'javascript.js', $this->jsDependencies, '0.0.1', true);
+        }
     }
 
     protected function getNamespace()
