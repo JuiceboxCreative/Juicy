@@ -60,26 +60,16 @@ class Modules extends CustomField
         $dir = new \DirectoryIterator(get_template_directory() . '/src/Juicy/Modules');
         foreach ($dir as $dirinfo) {
             if (!$dirinfo->isDot() && $dir->isDir()) {
-                static::addModule( $dirinfo->getFilename() );
+                $filename = $dirinfo->getFilename();
+
+                if ( in_array( $filename, static::$excludeModules ) ) {
+                    continue;
+                }
+
+                $class = "Juicy\\Modules\\{$filename}\\Module";
+                // fields[0] is the layouts array
+                static::$fields['fields'][0]['layouts'][] = $class::$layout;
             }
         }
-    }
-
-    /**
-     * Adds modules to the loop. Handles the excludion of modules.
-     * @param String $filename The module namespace
-     * @return boolean true|false Returns false if the module was excluded, true if it was added
-     */
-    private static function addModule( $filename )
-    {
-        if ( in_array( $filename, static::$excludeModules ) ) {
-            return false;
-        }
-
-        $class = "Juicy\\Modules\\{$filename}\\Module";
-        // fields[0] is the layouts array
-        static::$fields['fields'][0]['layouts'][] = $class::$layout;
-
-        return true;
     }
 }

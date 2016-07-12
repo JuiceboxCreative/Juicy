@@ -5,7 +5,7 @@ namespace Juicy\Modules\ImageGrid;
 use Juicy\Core\Module as JBModule;
 use Timber;
 
-class ImageGrid extends JBModule
+class Module extends JBModule
 {
     public static $layout = array(
         'key' => 'module_jb_image_grid',
