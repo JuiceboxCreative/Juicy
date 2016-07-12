@@ -57,7 +57,7 @@ class Modules extends CustomField
 
     public static function register()
     {
-        $dir = new \DirectoryIterator(get_template_directory() . '/modules');
+        $dir = new \DirectoryIterator(get_template_directory() . '/src/Juicy/Modules');
         foreach ($dir as $dirinfo) {
             if (!$dirinfo->isDot() && $dir->isDir()) {
                 static::addModule( $dirinfo->getFilename() );

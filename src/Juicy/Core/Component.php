@@ -2,48 +2,48 @@
 
 namespace Juicy\Core;
 
-abstract class Module
+abstract class Component
 {
-    protected $module = null;
+    protected $component = null;
     protected $jsDependencies = array('jquery');
     protected $cssDependencies = array();
     protected $name;
     protected $post;
 
     /**
-     * Returns processed module
+     * Returns processed component
      *
-     * @param array $module
+     * @param array $component
      */
-    public function __construct($module, $name, $post)
+    public function __construct($component, $name, $post)
     {
-        $this->setModule($module);
+        $this->setComponent($component);
         $this->setName($name);
         $this->setPost($post);
-        $this->processModule();
+        $this->processComponent();
     }
 
     /**
-     * Set Module
+     * Set Component
      *
-     * @param array $module
-     * @return Juicy\Module
+     * @param array $component
+     * @return Juicy\Component
      */
-    public function setModule($module)
+    public function setComponent($component)
     {
-        $this->module = $module;
+        $this->component = $component;
 
         return $this;
     }
 
     /**
-     * Get Module
+     * Get Component
      *
      * @return array
      */
-    public function getModule()
+    public function getComponent()
     {
-        return $this->module;
+        return $this->component;
     }
 
     /**
@@ -93,12 +93,12 @@ abstract class Module
     }
 
     /**
-     * Does any processing for this module
+     * Does any processing for this component
      *
-     * @param  array $module
+     * @param  array $component
      * @return array
      */
-    public function processModule()
+    public function processComponent()
     {
         $this->addAssets();
     }
@@ -111,23 +111,25 @@ abstract class Module
     {
         $context = Timber::get_context();
 
-        $context['module'] = $this->getModule();
+        $context['component'] = $this->getComponent();
+
+        $this->processComponent();
 
         return Timber::compile($this->getNamespace() . "/template.twig", $context);
     }
 
     protected function addAssets()
     {
-        $name = 'module_'.implode('_', explode(' ', strtolower($this->name)));
+        $name = 'component_'.implode('_', explode(' ', strtolower($this->name)));
         $themeDir = get_template_directory_uri();
-        $modulePath = $themeDir.'/src/Juicy/Modules/'.$this->getNamespace().'/';
+        $componentPath = $themeDir.'/src/Juicy/Components/'.$this->getNamespace().'/';
 
-        if ( file_exists( $modulePath.'javascript.js' ) ) {
-            wp_enqueue_script($name, $modulePath.'javascript.js', $this->jsDependencies, '0.0.1', true);
+        if ( file_exists( $componentPath.'javascript.js' ) ) {
+            wp_enqueue_script($name, $componentPath.'javascript.js', $this->jsDependencies, '0.0.1', true);
         }
 
-        if ( file_exists( $modulePath.'style.css' ) ) {
-            wp_enqueue_style($name, $modulePath.'style.css', $this->cssDependencies, '0.0.1');
+        if ( file_exists( $componentPath.'style.css' ) ) {
+            wp_enqueue_style($name, $componentPath.'style.css', $this->cssDependencies, '0.0.1');
         }
     }
 
@@ -136,5 +138,12 @@ abstract class Module
         $reflector = new \ReflectionClass($this);
 
         return $reflector->getNamespaceName();
+    }
+
+    public static function register()
+    {
+        if ( function_exists('acf_add_local_field_group') ) {
+            acf_add_local_field_group(static::$fields);
+        }
     }
 }
