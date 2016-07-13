@@ -27,7 +27,7 @@ class Components
             return false;
         }
 
-        $class = "\\Juicy\\Components\\{$filename}\\Components";
+        $class = "\\Juicy\\Components\\{$filename}\\Component";
 
         $class::register();
 

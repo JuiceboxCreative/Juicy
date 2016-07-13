@@ -1,0 +1,21 @@
+<section class="module cta-boxes cta-boxes-{{random(range(1, 12))}} rel">
+    <div class="container rel">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>{{ module.heading }}</h3>
+            </div>
+        </div>
+
+        <div class="row flex-wrapper">
+            {% for item in module.items %}
+                {% set post = TimberPost(item, '\\Juicebox\\Core\\Post') %}
+
+                {% include 'tease.twig' with {
+                    post: post,
+                    columns: 4
+                } only %}
+
+            {% endfor %}
+        </div>
+    </div>
+</section>

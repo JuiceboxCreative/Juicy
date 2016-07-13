@@ -2,10 +2,10 @@
 
 namespace Juicy\Components\HomePageBanner;
 
-use Juicy\Core\Component as Component;
+use Juicy\Core\Component as JBComponent;
 use Timber;
 
-class HomePageBanner extends Component
+class Component extends JBComponent
 {
     public static $fields = array(
         'key' => 'group_572ab881bdc50',
@@ -125,9 +125,17 @@ class HomePageBanner extends Component
     {
         parent::processComponent();
 
-        foreach ( $this->module as $key => $slide ) {
+        foreach ( $this->component['slides'] as $key => $slide ) {
             $slide['image'] = new \Juicy\Core\Image($slide['image']);
-            $this->module[$key] = $slide;
+            $this->component['slides'][$key] = $slide;
+        }
+
+        if ( !isset($this->component['aspectRatio']) ) {
+            $this->component['aspectRatio'] = 0.35;
+        }
+
+        if ( !isset($this->component['mAspectRatio']) ) {
+            $this->component['aspectRatio'] = 1;
         }
     }
 

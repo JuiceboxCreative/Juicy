@@ -43,7 +43,7 @@ abstract class Module
      */
     public function getModule()
     {
-        return $this->module;
+        return apply_filter("jb_module_{$this->name}_data", $this->module);
     }
 
     /**
@@ -92,6 +92,11 @@ abstract class Module
         return $this->post;
     }
 
+    public function getTemplate()
+    {
+        return apply_filter("jb_module_{$this->name}_template", $this->getNamespace() . '/template.twig');
+    }
+
     /**
      * Does any processing for this module
      *
@@ -124,6 +129,10 @@ abstract class Module
 
         if ( file_exists( $modulePath.'javascript.js' ) ) {
             wp_enqueue_script($name, $modulePath.'javascript.js', $this->jsDependencies, '0.0.1', true);
+        }
+
+        if ( file_exists( $modulePath.'style.css' ) ) {
+            wp_enqueue_style($name, $modulePath.'style.css', $this->cssDependencies, '0.0.1');
         }
     }
 

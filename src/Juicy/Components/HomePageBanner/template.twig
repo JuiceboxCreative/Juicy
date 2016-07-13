@@ -3,13 +3,13 @@
         <a href="javascript:;" class="banner-home__nav prev trans-defaul hidden-xs hidden-sm abs">{{iconbox('arrow-right')}}</a>
         <a href="javascript:;" class="banner-home__nav next trans-defaul hidden-xs hidden-sm abs">{{iconbox('arrow-right')}}</a>
     {% endif %}
-    {% for item in module %}
+    {% for item in module.slides %}
         <article class="banner-home__slide banner-home__slide-{{loop.index}}">
             <div class="banner-home__overlay rel">
                 <picture class="banner-home__picture">
-                    <source srcset="{{item.image|resize(768, 237, 'center')}} 768w,{{item.image|resize(980, 302, 'center')}} 980w,{{item.image|resize(1366, 421, 'center')}} 1366w,{{item.image|resize(1600, 493, 'center')}} 1600w,{{item.image|resize(1920, 592, 'center')}} 1920w" sizes="100vw" media="(min-width: 601px)">
-                    <source srcset="{{item.image|resize(600, 370, 'center')}} 400w" sizes="100vw" media="(max-width: 600px)">
-                    <img src="{{item.image|resize(1600, 493, 'center')}}" alt="" >
+                    <source srcset="{{item.image|resize(768, (aspectRatio * 768), 'center')}} 768w,{{item.image|resize(980, (aspectRatio * 980), 'center')}} 980w,{{item.image|resize(1366, (aspectRatio * 1366), 'center')}} 1366w,{{item.image|resize(1600, (aspectRatio * 1600), 'center')}} 1600w,{{item.image|resize(1920, (aspectRatio * 1920), 'center')}} 1920w" sizes="100vw" media="(min-width: 601px)">
+                    <source srcset="{{item.image|resize(600, (mAspectRatio * 600), 'center')}} 400w" sizes="100vw" media="(max-width: 600px)">
+                    <img src="{{item.image|resize(1600, (aspectRatio * 1600), 'center')}}" alt="" >
                 </picture>
 
                 <div class="postitioning abs">
@@ -20,10 +20,9 @@
                             </div>
                             <div class="col-xs-12 col-md-2 banner-home__cta-holder">
                                 {% if item.link is not empty %}
-                                    {% include 'partials/button.twig' with {
-                                        item: item.link,
-                                        btnType: 'btn-default'
-                                    } only %}
+                                    <a href="{{item.link.url}}" class="btn btn-default"{{item.link.target ? ' target="_blank"' : ''}}>
+                                        {{item.link.title}}
+                                    </a>
                                 {% endif %}
                             </div>
                         </div>

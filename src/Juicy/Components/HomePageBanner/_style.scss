@@ -5,22 +5,6 @@
         display: block;
     }
 
-    &__overlay {
-        &:before {
-            @include square(100%);
-            content: '';
-            position: absolute;
-            z-index: 5;
-            top: 0;
-            left: 0;
-            display: block;
-            background: {
-                image: url('../img/overlay.png');
-                size: auto 100%;
-            }
-        }
-    }
-
     &__slide {
         position: absolute;
         top: 0;

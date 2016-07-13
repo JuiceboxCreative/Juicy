@@ -80,7 +80,7 @@ class Post extends TimberPost
             $moduleProcessor = new $fqcn($module, $name, $this);
             $module = $moduleProcessor->getModule();
 
-            $module['template'] = $namespace.'/template.twig';
+            $module['template'] = $moduleProcessor->getTemplate();
             $module['fqcn'] = $fqcn;
             $module['index'] = $index;
             $module['name'] = $name;
