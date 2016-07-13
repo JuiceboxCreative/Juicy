@@ -43,6 +43,7 @@ abstract class Module
      */
     public function getModule()
     {
+        return $this->module;
         return apply_filter("jb_module_{$this->name}_data", $this->module);
     }
 
@@ -94,6 +95,7 @@ abstract class Module
 
     public function getTemplate()
     {
+        return $this->getNamespace() . '/template.twig';
         return apply_filter("jb_module_{$this->name}_template", $this->getNamespace() . '/template.twig');
     }
 
@@ -124,15 +126,20 @@ abstract class Module
     protected function addAssets()
     {
         $name = 'module_'.implode('_', explode(' ', strtolower($this->name)));
-        $themeDir = get_template_directory_uri();
-        $modulePath = $themeDir.'/src/Juicy/Modules/'.$this->getNamespace().'/';
+        $themeDir = get_template_directory();
+        $themeDirUri = get_template_directory_uri();
+        $modulePath = $themeDir.'/src/'.$this->getNamespace().'/';
+        $modulePathUri = $themeDirUri.'/src/'.$this->getNamespace().'/';
+
+        $modulePath = str_replace( "\\", "/", $modulePath );
+        $modulePathUri = str_replace( "\\", "/", $modulePathUri );
 
         if ( file_exists( $modulePath.'javascript.js' ) ) {
-            wp_enqueue_script($name, $modulePath.'javascript.js', $this->jsDependencies, '0.0.1', true);
+            wp_enqueue_script($name, $modulePathUri.'javascript.js', $this->jsDependencies, '0.0.1', true);
         }
 
         if ( file_exists( $modulePath.'style.css' ) ) {
-            wp_enqueue_style($name, $modulePath.'style.css', $this->cssDependencies, '0.0.1');
+            wp_enqueue_style($name, $modulePathUri.'style.css', $this->cssDependencies, '0.0.1');
         }
     }
 

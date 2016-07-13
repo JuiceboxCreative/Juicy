@@ -42,8 +42,8 @@ class Site extends TimberSite
 
         // Set additional Timber twig directories.
         Timber::$locations = array(
-            get_template_directory() . '/modules',
-            get_stylesheet_directory() . '/modules',
+            get_template_directory() . '/src/',
+            get_stylesheet_directory() . '/src/',
         );
 
         parent::__construct();

@@ -121,11 +121,16 @@ abstract class Component
     protected function addAssets()
     {
         $name = 'component_'.implode('_', explode(' ', strtolower($this->name)));
-        $themeDir = get_template_directory_uri();
-        $componentPath = $themeDir.'/src/Juicy/Components/'.$this->getNamespace().'/';
+        $themeDir = get_template_directory();
+        $themeDirUri = get_template_directory_uri();
+        $componentPath = $themeDir.'/src/'.$this->getNamespace().'/';
+        $componentPathUri = $themeDirUri.'/src/'.$this->getNamespace().'/';
+
+        $componentPath = str_replace( "\\", "/", $componentPath );
+        $componentPathUri = str_replace( "\\", "/", $componentPathUri );
 
         if ( file_exists( $componentPath.'javascript.js' ) ) {
-            wp_enqueue_script($name, $componentPath.'javascript.js', $this->jsDependencies, '0.0.1', true);
+            wp_enqueue_script($name, $componentPathUri.'javascript.js', $this->jsDependencies, '0.0.1', true);
         }
     }
 
