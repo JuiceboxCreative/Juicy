@@ -1,6 +1,6 @@
 <?php
 
-namespace CallToActionBoxes;
+namespace Juicy\Modules\ContextualLinks;
 
 use Juicy\Core\Module as JBModule;
 use Timber;
@@ -83,7 +83,15 @@ class Module extends JBModule
                 'type' => 'relationship',
                 'instructions' => '',
                 'required' => 0,
-                'conditional_logic' => 0,
+                'conditional_logic' => array (
+                    array (
+                        array (
+                            'field' => 'module_cta_boxes_post_selection',
+                            'operator' => '==',
+                            'value' => 'custom',
+                        ),
+                    ),
+                ),
                 'wrapper' => array (
                     'width' => '',
                     'class' => '',
@@ -120,7 +128,7 @@ class Module extends JBModule
                         'post_parent'       => $this->post->post_parent,
                         'post__not_in'      => array( $this->post->ID ),
                         'posts_per_page'    => 12
-                    )
+                    ),
                     "\\Juicy\\Core\\Post"
                 );
 
@@ -138,7 +146,7 @@ class Module extends JBModule
                             'posts_per_page'    => 10,
                             'orderby'           => 'rand',
                             'post_type'         => 'page'
-                        )
+                        ),
                         "\\Juicy\\Core\\Post"
                     );
 
@@ -176,7 +184,7 @@ class Module extends JBModule
                             'posts_per_page'    => 10,
                             'orderby'           => 'rand',
                             'post_type'         => 'page'
-                        )
+                        ),
                         "\\Juicy\\Core\\Post"
                     );
 
@@ -194,7 +202,7 @@ class Module extends JBModule
                         'posts_per_page'    => $this->module['carousel'] ? 9 : 3,
                         'orderby'           => 'rand',
                         'post_type'         => 'page'
-                    )
+                    ),
                     "\\Juicy\\Core\\Post"
                 );
                 break;

@@ -1,20 +1,19 @@
-<section class="module cta-boxes cta-boxes-{{random(range(1, 12))}} rel">
+<section class="module module-cta-boxes{{module.carousel ? ' carousel' : ''}} rel">
     <div class="container rel">
         <div class="row">
             <div class="col-sm-12">
-                <h3>{{ module.heading }}</h3>
+                <h2 class="module-cta-boxes__title">{{ module.heading }}</h2>
             </div>
         </div>
 
-        <div class="row flex-wrapper">
+        <div class="row flex-wrapper module-cta-boxes__post-wrapper">
             {% for item in module.items %}
-                {% set post = TimberPost(item, '\\Juicebox\\Core\\Post') %}
-
-                {% include 'tease.twig' with {
-                    post: post,
-                    columns: 4
+                <div class="col-sm-4">
+                {% include ["tease-#{module.name}.twig", 'tease-post.twig', 'tease.twig'] with {
+                    post: item,
+                    loop: loop
                 } only %}
-
+                </div>
             {% endfor %}
         </div>
     </div>
