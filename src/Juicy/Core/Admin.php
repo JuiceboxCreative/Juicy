@@ -7,6 +7,20 @@ use Twig_SimpleFunction;
 
 class Admin
 {
+    public $defaultPlugins = array(
+        'advanced-custom-fields-pro/acf.php',
+        'acf-link/acf-link.php',
+        'amazon-web-services/amazon-web-services.php',
+        'enable-media-replace/enable-media-replace.php',
+        'gravityforms/gravityforms.php',
+        'iconbox/iconbox.php',
+        'wp-nested-pages/nestedpages.php',
+        'amazon-s3-and-cloudfront-pro/amazon-s3-and-cloudfront-pro.php',
+        'amazon-s3-and-cloudfront-enable-media-replace/amazon-s3-and-cloudfront-enable-media-replace.php',
+        'wordpress-seo/wp-seo.php',
+        'ithemes-security-pro/ithemes-security-pro.php',
+        'wp-migrate-db/wp-migrate-db.php'
+    );
 
     public function __construct()
     {
@@ -27,6 +41,36 @@ class Admin
         // customise WYSIWYG
         add_filter('mce_buttons_2', array($this, 'customise_wysiwyg'));
         add_filter('tiny_mce_before_init', array($this, 'add_styles_to_wysiwyg'));
+        add_action('after_setup_theme', array($this, 'add_wysiwyg_stylesheet'));
+
+        // Remove options for clients to deactivate plugins
+        add_filter( 'plugin_action_links', array($this, 'jb_remove_deactivate'), 10, 4 );
+
+        // Auto activate plugins
+        add_action( 'admin_init', array($this, 'jb_activate_plugins') );
+    }
+
+    // Automatically activate required plugins.
+    public function jb_activate_plugins()
+    {
+        $current_plugins = get_option('active_plugins'); // get active plugins
+
+        foreach ( $this->defaultPlugins as $plugin ) {
+            // If the plugin isnt currently active
+            if ( ! in_array( $plugin, $current_plugins ) ) {
+                activate_plugin($plugin);
+            }
+        }
+    }
+
+    // Removes the ability for core plugins to be deactivated.
+    public function jb_remove_deactivate( $actions, $plugin_file, $plugin_data, $context )
+    {
+        if ( in_array( $plugin_file, $this->defaultPlugins ) && isset($actions['deactivate']) ) {
+            unset($actions['deactivate']);
+        }
+
+        return $actions;
     }
 
     public function options_pages()
@@ -88,14 +132,19 @@ class Admin
             // Each array child is a format with it's own settings
             array(
                 'title' => 'Large Paragraph',
-                'block' => 'span',
+                'selector' => 'p',
                 'classes' => 'lead',
-                'wrapper' => true,
             )
         );
+
         // Insert the array, JSON ENCODED, into 'style_formats'
         $init_array['style_formats'] = json_encode( $style_formats );
 
         return $init_array;
+    }
+
+    public function add_wysiwyg_stylesheet()
+    {
+        add_editor_style('css/editor-style.css');
     }
 }

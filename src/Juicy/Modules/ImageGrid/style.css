@@ -1,0 +1,10 @@
+.module-image-grid {
+  text-align: center; }
+  .module-image-grid__items {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; }
+  .module-image-grid__item {
+    flex: 1 0 auto; }
+
+/*# sourceMappingURL=style.css.map */

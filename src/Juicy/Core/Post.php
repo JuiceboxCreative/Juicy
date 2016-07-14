@@ -75,12 +75,12 @@ class Post extends TimberPost
                 return ucfirst($word);
             }, $parts);
             $namespace = implode('', $parts);
-            $fqcn = '\\'.$namespace.'\\Module';
+            $fqcn = '\\Juicy\\Modules\\'.$namespace.'\\Module';
 
             $moduleProcessor = new $fqcn($module, $name, $this);
             $module = $moduleProcessor->getModule();
 
-            $module['template'] = $namespace.'/template.twig';
+            $module['template'] = $moduleProcessor->getTemplate();
             $module['fqcn'] = $fqcn;
             $module['index'] = $index;
             $module['name'] = $name;

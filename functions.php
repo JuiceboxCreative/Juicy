@@ -5,7 +5,6 @@ include dirname(ABSPATH) . "/vendor/autoload.php";
 $timber = new \Timber\Timber();
 
 use Juicy\Config\Shortcodes;
-use Juicy\Config\Plugins;
 use Juicy\Config\ThemeSupport;
 use Juicy\Config\CustomPostTypes;
 use Juicy\Config\CustomTaxonomies;
@@ -24,8 +23,6 @@ Shortcodes::register();
  * Config
  * ------------------
  */
-// Required plugins
-Plugins::register();
 
 // Register support of certain theme features
 ThemeSupport::register();

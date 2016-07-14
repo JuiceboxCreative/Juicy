@@ -1,26 +1,7 @@
 {% extends "page.twig" %}
 
-{% block beforeContentContainer %}
-<div class="post-meta">
-    <time datetime="{{post.date|date('Y-m-d H:i:s')}}">{{post.date|date}}</time>
-</div>
-{% endblock %}
-
-{% block afterContentContainer %}
-<div class="comments">
-	<div class="respond">
-		{{ comment_form }}
-	</div>
-    {% set comments = post.get_comments() %}
-    {% if comments|length > 0 %}
-        <div class="comment-amount">
-        {{comments|length}} Comment{{comments|length == 1 ? '' : 's'}}
-        </div>
-    	<div class="responses">
-    		{% for cmt in comments %}
-    			{% include "comment.twig" with {comment:cmt} %}
-    		{% endfor %}
-    	</div>
-    {% endif %}
-</div>
+{% block beforePostContent %}
+    <div class="post-meta">
+        <time class="post-meta__item post-meta__date" datetime="{{ post.post_date|date('Y-m-d') }}">{{ post.post_date|date }}</time>
+    </div>
 {% endblock %}

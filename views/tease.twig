@@ -1,10 +1,21 @@
-<article class="tease tease-{{post.post_type}}" id="tease-{{post.ID}}">
-    {% block content %}
-        <h2 class="h2"><a href="{{post.link}}">{{post.title}}</a></h2>
-        <p>{{post.get_preview}}</p>
+<a href="{{post.link}}" class="{% block classList %}tease tease-{{post.post_type}}{% endblock %}">
+    {% block beforeImageWrapper %}{% endblock %}
+    <div class="tease__image-wrapper tease-{{post.post_type}}__image-wrapper">
+        {% block beforeImage %}{% endblock %}
+        {% block image %}
+                <img src="{{post.thumbnail.src}}" alt="{{post.thumbnail.alt}}" class="tease__image tease-{{post.post_type}}__image" />
+        {% endblock %}
+        {% block afterImage %}{% endblock %}
+    </div>
+    {% block afterImageWrapper %}{% endblock %}
 
-        {% if post.get_thumbnail %}
-            <img src="{{post.thumbnail.src}}" />
-        {% endif %}
-    {% endblock %}
-</article>
+    {% block beforeContentWrapper %}{% endblock %}
+    <div class="tease__content-wrapper tease-{{post.post_type}}__content-wrapper">
+        {% block beforeContent %}{% endblock %}
+        {% block content %}
+            <p class="tease__title tease-{{post.post_type}}__title">{{post.title}}</p>
+        {% endblock %}
+        {% block afterContent %}{% endblock %}
+    </div>
+    {% block afterContentWrapper %}{% endblock %}
+</a>

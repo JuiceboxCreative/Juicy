@@ -4,6 +4,8 @@ namespace Juicy\CustomFields;
 
 class Modules extends CustomField
 {
+    public static $excludeModules = array();
+
     public static $fields = array(
         'key' => 'group_modules',
         'title' => 'Modules',
@@ -55,11 +57,16 @@ class Modules extends CustomField
 
     public static function register()
     {
-        $dir = new \DirectoryIterator(get_template_directory() . '/modules');
+        $dir = new \DirectoryIterator(get_template_directory() . '/src/Juicy/Modules');
         foreach ($dir as $dirinfo) {
             if (!$dirinfo->isDot() && $dir->isDir()) {
-                $class = $dirinfo->getFilename() . '\\Module';
+                $filename = $dirinfo->getFilename();
 
+                if ( in_array( $filename, static::$excludeModules ) ) {
+                    continue;
+                }
+
+                $class = "Juicy\\Modules\\{$filename}\\Module";
                 // fields[0] is the layouts array
                 static::$fields['fields'][0]['layouts'][] = $class::$layout;
             }

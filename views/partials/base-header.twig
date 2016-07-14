@@ -1,0 +1,30 @@
+<header class="{% block sectionClasses %}header header-primary{% endblock %}">
+    {% block beforeContainer %}{% endblock %}
+    <div class="{% block containerClasses %}container-fluid{% endblock %}">
+        {% block beforeRow %}{% endblock %}
+        <div class="{% block rowClasses %}row{% endblock %}">
+            {% block beforeRowContent %}{% endblock %}
+            {% block rowContent %}
+                 <a href="{{ function('home_url', '/') }}" rel="home">
+                    <img src="{{TimberImage(options.logo).src}}" alt="Site Logo" />
+                </a>
+                <button class="hamburger hamburger--collapse" type="button">
+                    <span class="hamburger-box">
+                        <span class="hamburger-inner"></span>
+                    </span>
+                </button>
+                <nav class="main-navigation" role="navigation">
+                    {%
+                        include 'nav/nav.twig' with {
+                            nav: menus.header_menu,
+                            navClass: "nav nav-justified"
+                        } only
+                    %}
+                </nav>
+            {% endblock %}
+            {% block afterRowContent %}{% endblock %}
+        </div>
+        {% block afterRow %}{% endblock %}
+    </div>
+    {% block afterContainer %}{% endblock %}
+</header>

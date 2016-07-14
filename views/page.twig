@@ -5,14 +5,14 @@
 {% endif %}
 
 {% block main %}
-    <section class="section section-main">
+    <section class="{% block sectionClasses %}section section-main{% endblock %}">
         {% block beforeContentContainer %}{% endblock %}
-        <div class="container">
-            <div class="row">
+        <div class="{% block containerClasses %}container-fluid{% endblock %}">
+            <div class="{% block rowClasses %}row{% endblock %}">
             {% block beforeContent %}{% endblock %}
 
             {% block content %}
-                <article class="article-content article-content-{{ post.post_type }} {{ contentClass }}">
+                <article class="{% block articleClasses %}article-content article-content-{{ post.post_type }} {{ contentClass }}{% endblock %}">
                     {{ post.content }}
                 </article>
             {% endblock %}
@@ -27,3 +27,4 @@
 {% block afterMain %}
     {% include 'partials/modules.twig' %}
 {% endblock %}
+

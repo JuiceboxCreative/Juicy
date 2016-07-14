@@ -6,6 +6,7 @@ abstract class Module
 {
     protected $module = null;
     protected $jsDependencies = array('jquery');
+    protected $cssDependencies = array();
     protected $name;
     protected $post;
 
@@ -36,13 +37,12 @@ abstract class Module
     }
 
     /**
-     * Get Module
-     *
+     * Returns proccessed module data, filter has been applied here to allow the data to be manipulated before it is rendered out.
      * @return array
      */
     public function getModule()
     {
-        return $this->module;
+        return apply_filters("jb_module_{$this->name}_data", $this->module);
     }
 
     /**
@@ -92,6 +92,15 @@ abstract class Module
     }
 
     /**
+     * There is a filter applied here to allow the template to be overrriden.
+     * @return String the template for twig to call
+     */
+    public function getTemplate()
+    {
+        return apply_filters("jb_module_{$this->name}_template", $this->getNamespace() . '/template.twig');
+    }
+
+    /**
      * Does any processing for this module
      *
      * @param  array $module
@@ -118,10 +127,21 @@ abstract class Module
     protected function addAssets()
     {
         $name = 'module_'.implode('_', explode(' ', strtolower($this->name)));
-        $themeDir = get_template_directory_uri();
-        $modulePath = $themeDir.'/modules/'.$this->getNamespace().'/';
+        $themeDir = get_template_directory();
+        $themeDirUri = get_template_directory_uri();
+        $modulePath = $themeDir.'/src/'.$this->getNamespace().'/';
+        $modulePathUri = $themeDirUri.'/src/'.$this->getNamespace().'/';
 
-        wp_enqueue_script($name, $modulePath.'javascript.js', $this->jsDependencies, '0.0.1', true);
+        $modulePath = str_replace( "\\", "/", $modulePath );
+        $modulePathUri = str_replace( "\\", "/", $modulePathUri );
+
+        if ( file_exists( $modulePath.'javascript.js' ) ) {
+            wp_enqueue_script($name, $modulePathUri.'javascript.js', $this->jsDependencies, '0.0.1', true);
+        }
+
+        if ( file_exists( $modulePath.'style.css' ) ) {
+            wp_enqueue_style($name, $modulePathUri.'style.css', $this->cssDependencies, '0.0.1');
+        }
     }
 
     protected function getNamespace()
