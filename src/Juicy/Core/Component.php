@@ -2,7 +2,7 @@
 
 namespace Juicy\Core;
 
-abstract class Component
+abstract class Component extends Module
 {
     protected $component = null;
     protected $jsDependencies = array('jquery');
@@ -47,52 +47,6 @@ abstract class Component
     }
 
     /**
-     * Set Name
-     *
-     * @param array $name
-     * @return Juicy\Name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get Name
-     *
-     * @return array
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set Post
-     *
-     * @param array $post
-     * @return Juicy\Post
-     */
-    public function setPost($post)
-    {
-        $this->post = $post;
-
-        return $this;
-    }
-
-    /**
-     * Get Post
-     *
-     * @return array
-     */
-    public function getPost()
-    {
-        return $this->post;
-    }
-
-    /**
      * Does any processing for this component
      *
      * @param  array $component
@@ -132,13 +86,6 @@ abstract class Component
         if ( file_exists( $componentPath.'javascript.js' ) ) {
             wp_enqueue_script($name, $componentPathUri.'javascript.js', $this->jsDependencies, '0.0.1', true);
         }
-    }
-
-    protected function getNamespace()
-    {
-        $reflector = new \ReflectionClass($this);
-
-        return $reflector->getNamespaceName();
     }
 
     public static function register()

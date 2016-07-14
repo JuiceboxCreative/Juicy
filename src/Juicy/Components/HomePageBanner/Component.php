@@ -116,9 +116,9 @@ class Component extends JBComponent
     );
 
     /**
-     * Does any processing for this module
+     * Does any processing for this component
      *
-     * @param  array $module
+     * @param  array $component
      * @return array
      */
     public function processComponent()

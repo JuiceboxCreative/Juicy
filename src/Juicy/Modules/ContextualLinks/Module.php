@@ -166,12 +166,12 @@ class Module extends JBModule
                 break;
             case 'custom':
                 foreach ( $this->module['items'] as $key => $item ) {
-                    $this->module['items'][$key] = new Post($item);
+                    $this->module['items'][$key] = new \Juicy\Core\Post($item);
                 }
 
                 $items = $this->module['carousel'] ? 9 : 3;
 
-                if ( size( $this->module['items'] ) < $items ) {
+                if ( count( $this->module['items'] ) < $items ) {
                     $ids = array_map(function( $p ){
                         return $p->ID;
                     }, $this->module['items']);

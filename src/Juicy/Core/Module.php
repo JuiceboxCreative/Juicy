@@ -37,14 +37,12 @@ abstract class Module
     }
 
     /**
-     * Get Module
-     *
+     * Returns proccessed module data, filter has been applied here to allow the data to be manipulated before it is rendered out.
      * @return array
      */
     public function getModule()
     {
-        return $this->module;
-        return apply_filter("jb_module_{$this->name}_data", $this->module);
+        return apply_filters("jb_module_{$this->name}_data", $this->module);
     }
 
     /**
@@ -93,10 +91,13 @@ abstract class Module
         return $this->post;
     }
 
+    /**
+     * There is a filter applied here to allow the template to be overrriden.
+     * @return String the template for twig to call
+     */
     public function getTemplate()
     {
-        return $this->getNamespace() . '/template.twig';
-        return apply_filter("jb_module_{$this->name}_template", $this->getNamespace() . '/template.twig');
+        return apply_filters("jb_module_{$this->name}_template", $this->getNamespace() . '/template.twig');
     }
 
     /**
