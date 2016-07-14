@@ -1,6 +1,6 @@
 <ul class="{{ navClass }}">
     {% for item in nav.items %}
-        {% include 'vav/nav-item.twig' with {
+        {% include 'nav/nav-item.twig' with {
             item: item
         } only %}
     {% endfor %}

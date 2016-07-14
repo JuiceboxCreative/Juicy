@@ -50,7 +50,7 @@ class Admin
         add_action( 'admin_init', array($this, 'jb_activate_plugins') );
     }
 
-    // Automatiaclly actiavted default plugins
+    // Automatically activate required plugins.
     public function jb_activate_plugins()
     {
         $current_plugins = get_option('active_plugins'); // get active plugins
@@ -66,8 +66,6 @@ class Admin
     // Removes the ability for core plugins to be deactivated.
     public function jb_remove_deactivate( $actions, $plugin_file, $plugin_data, $context )
     {
-        // var_dump($plugin_file);
-
         if ( in_array( $plugin_file, $this->defaultPlugins ) && isset($actions['deactivate']) ) {
             unset($actions['deactivate']);
         }
