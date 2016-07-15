@@ -17,9 +17,9 @@ class Components
     }
 
     /**
-     * Adds modules to the loop. Handles the excludion of modules.
-     * @param String $filename The module namespace
-     * @return boolean true|false Returns false if the module was excluded, true if it was added
+     * Adds components to the loop. Handles the exclusion of components.
+     * @param String $filename The component namespace
+     * @return boolean true|false Returns false if the component was excluded, true if it was added
      */
     private static function addComponent( $filename )
     {

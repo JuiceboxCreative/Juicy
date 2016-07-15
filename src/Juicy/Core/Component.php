@@ -27,7 +27,7 @@ abstract class Component extends Module
      * Set Component
      *
      * @param array $component
-     * @return Juicy\Component
+     * @return Juicy\Core\Component
      */
     public function setComponent($component)
     {
