@@ -38,7 +38,10 @@ class Site extends TimberSite
         //Add IE only shims
         add_action('wp_head', array($this, 'add_ie_html5_shim'));
 
-        add_action( 'after_setup_theme', array($this, 'schema_breadcrumbs') );
+        // Prevent iconbox files from going to S3.
+        add_filter('as3cf_pre_update_attachment_metadata', array($this, 'pre_update_attachment_metadata'), 10, 3);
+
+        add_action('after_setup_theme', array($this, 'schema_breadcrumbs'));
 
         // Set additional Timber twig directories.
         Timber::$locations = array(
@@ -88,5 +91,14 @@ class Site extends TimberSite
         if (function_exists('yoast_breadcrumb')) {
             new SchemaOrgBreadcrumbs();
         }
+    }
+
+    public function pre_update_attachment_metadata( $pre_update, $data, $post_id )
+    {
+        if ( false !== strpos( $data['file'], 'iconbox' ) ) {
+            return true; // Abort the upload
+        }
+
+        return false;
     }
 }
