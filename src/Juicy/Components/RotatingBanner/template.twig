@@ -1,12 +1,12 @@
-<section class="banner-home{{module|length > 1 ? ' banner-home-slideshow' : ''}} rel">
-    {% if module|length > 1 %}
-        <a href="javascript:;" class="banner-home__nav prev trans-defaul hidden-xs hidden-sm abs">{{iconbox('arrow-right')}}</a>
-        <a href="javascript:;" class="banner-home__nav next trans-defaul hidden-xs hidden-sm abs">{{iconbox('arrow-right')}}</a>
+<section class="rotating-banner{{component|length > 1 ? ' rotating-banner--slideshow' : ''}} rel">
+    {% if component|length > 1 %}
+        <a href="javascript:;" class="rotating-banner__nav prev trans-default hidden-xs hidden-sm abs">{{iconbox('arrow-right')}}</a>
+        <a href="javascript:;" class="rotating-banner__nav next trans-default hidden-xs hidden-sm abs">{{iconbox('arrow-right')}}</a>
     {% endif %}
-    {% for item in module.slides %}
-        <article class="banner-home__slide banner-home__slide-{{loop.index}}">
-            <div class="banner-home__overlay rel">
-                <picture class="banner-home__picture">
+    {% for item in component.slides %}
+        <article class="rotating-banner__slide rotating-banner__slide-{{loop.index}}">
+            <div class="rotating-banner__overlay rel">
+                <picture class="rotating-banner__picture">
                     <source srcset="{{item.image|resize(768, (aspectRatio * 768), 'center')}} 768w,{{item.image|resize(980, (aspectRatio * 980), 'center')}} 980w,{{item.image|resize(1366, (aspectRatio * 1366), 'center')}} 1366w,{{item.image|resize(1600, (aspectRatio * 1600), 'center')}} 1600w,{{item.image|resize(1920, (aspectRatio * 1920), 'center')}} 1920w" sizes="100vw" media="(min-width: 601px)">
                     <source srcset="{{item.image|resize(600, (mAspectRatio * 600), 'center')}} 400w" sizes="100vw" media="(max-width: 600px)">
                     <img src="{{item.image|resize(1600, (aspectRatio * 1600), 'center')}}" alt="" >
@@ -15,10 +15,10 @@
                 <div class="postitioning abs">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-xs-12 col-md-6 col-md-offset-2 banner-home__title-holder">
-                                <p class="h1 banner-home__title">{{item.title}}</p>
+                            <div class="col-xs-12 col-md-6 col-md-offset-2 rotating-banner__title-holder">
+                                <p class="h1 rotating-banner__title">{{item.title}}</p>
                             </div>
-                            <div class="col-xs-12 col-md-2 banner-home__cta-holder">
+                            <div class="col-xs-12 col-md-2 rotating-banner__cta-holder">
                                 {% if item.link is not empty %}
                                     <a href="{{item.link.url}}" class="btn btn-default"{{item.link.target ? ' target="_blank"' : ''}}>
                                         {{item.link.title}}

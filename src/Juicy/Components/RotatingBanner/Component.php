@@ -1,20 +1,23 @@
 <?php
 
-namespace Juicy\Components\HomePageBanner;
+namespace Juicy\Components\RotatingBanner;
 
 use Juicy\Core\Component as JBComponent;
 use Timber;
 
 class Component extends JBComponent
 {
+    public static $defaultAspectRatio = 0.35;
+    public static $defaultMobileAspectRatio = 1;
+
     public static $fields = array(
         'key' => 'group_572ab881bdc50',
         'title' => 'Home Page Banner',
         'fields' => array(
             array(
                 'key' => 'field_572ab8a215a7c',
-                'label' => 'Banner',
-                'name' => 'banner',
+                'label' => 'Slides',
+                'name' => 'slides',
                 'type' => 'repeater',
                 'instructions' => '',
                 'required' => 0,
@@ -117,9 +120,6 @@ class Component extends JBComponent
 
     /**
      * Does any processing for this component
-     *
-     * @param  array $component
-     * @return array
      */
     public function processComponent()
     {
@@ -131,11 +131,11 @@ class Component extends JBComponent
         }
 
         if ( !isset($this->component['aspectRatio']) ) {
-            $this->component['aspectRatio'] = 0.35;
+            $this->component['aspectRatio'] = self::$defaultAspectRatio;
         }
 
         if ( !isset($this->component['mAspectRatio']) ) {
-            $this->component['aspectRatio'] = 1;
+            $this->component['mAspectRatio'] = self::$defaultMobileAspectRatio;
         }
     }
 
