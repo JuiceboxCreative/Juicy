@@ -1,6 +1,6 @@
 <?php
 
-namespace Juicy\Components\HomePageBanner;
+namespace Juicy\Components\RotatingBanner;
 
 use Juicy\Core\Component as JBComponent;
 use Timber;
