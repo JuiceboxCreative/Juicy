@@ -37,7 +37,7 @@ class SchemaOrgBreadcrumbs
         if (isset($link['url']) && substr_count($link_output, 'rel="v:url"') > 0) {
             $output .= '<a href="' . esc_attr( $link['url'] ) . '" itemprop="url"><span itemprop="title">' . $link['text'] . '</span></a>';
         } else {
-            $opt = get_wpseo_options();
+            $opt = \WPSEO_Options::get_all();
             $tag = isset($opt['breadcrumbs-boldlast']) && $opt['breadcrumbs-boldlast'] ? 'strong' : 'span';
             $output .= '<'.$tag.' class="breadcrumb_last" itemprop="title">' . $link['text'] . '</'.$tag.'>';
         }
