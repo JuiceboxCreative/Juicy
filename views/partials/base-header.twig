@@ -1,3 +1,4 @@
+{% block beforeHeader %}{% endblock %}
 <header class="{% block sectionClasses %}header header-primary{% endblock %}">
     {% block beforeContainer %}{% endblock %}
     <div class="{% block containerClasses %}container-fluid{% endblock %}">
@@ -28,3 +29,4 @@
     </div>
     {% block afterContainer %}{% endblock %}
 </header>
+{% block afterHeader %}{% endblock %}

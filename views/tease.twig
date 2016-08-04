@@ -1,9 +1,10 @@
 <a href="{{post.link}}" class="{% block classList %}tease tease-{{post.post_type}}{% endblock %}">
+    <div class="tease__inner tease-{{post.post_type}}__inner">
     {% block beforeImageWrapper %}{% endblock %}
     <div class="tease__image-wrapper tease-{{post.post_type}}__image-wrapper">
         {% block beforeImage %}{% endblock %}
         {% block image %}
-                <img src="{{post.thumbnail.src}}" alt="{{post.thumbnail.alt}}" class="tease__image tease-{{post.post_type}}__image" />
+            <img src="{{post.thumbnail.src}}" alt="{{post.thumbnail.alt}}" class="tease__image tease-{{post.post_type}}__image" />
         {% endblock %}
         {% block afterImage %}{% endblock %}
     </div>
@@ -18,4 +19,5 @@
         {% block afterContent %}{% endblock %}
     </div>
     {% block afterContentWrapper %}{% endblock %}
+    </div>
 </a>

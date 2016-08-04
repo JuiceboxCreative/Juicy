@@ -159,9 +159,16 @@ class Module extends JBModule
             $args['category__not_in'] = $this->module['exclude_categories'];
         }
 
+        $args = apply_filters("jb_module_{$this->name}_query_data", $args);
+
         $this->module['posts'] = Timber::get_posts($args, '\\Juicy\\Core\\Post');
 
-        $this->module['posts'] = array_splice($this->module['posts'], 0, 3);
+        $splice = [0, 3];
 
+        $splice = apply_filters("jb_module_{$this->name}_splice", $splice);
+
+        if ( $splice !== false ) {
+            $this->module['posts'] = array_splice($this->module['posts'], $splice[0], $splice[1]);
+        }
     }
 }

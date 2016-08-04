@@ -45,7 +45,7 @@ class Module extends JBModule
 
         $context = Timber::get_context();
 
-        $this->crawlMenu($context['menus']['header_menu']->items, $this->post->ID);
+        $this->crawlMenu($context['menus']['main_menu']->items, $this->post->ID);
     }
 
     private function crawlMenu( $menu, $id )
@@ -81,16 +81,11 @@ class Module extends JBModule
                 case 'post_type_archive':
                     $options = getOptionByPrefix($child->object);
 
-                    // TODO: Make class for this....
-                    $images = get_field('placeholder', 'option');
-                    $rand_key = array_rand($images);
-                    $image = $images[$rand_key]['placeholder_image'];
-
                     $this->module['pages'][] = array(
                         'link'      => $child->url,
                         'title'     => $child->name,
                         'post_type' => 'page',
-                        'thumbnail' => new \JuiceBox\Core\Image( $options['feature_image'] ? $options['feature_image'] : $image ),
+                        'thumbnail' => get_field('placeholder_image', 'option'),
                     );
                     break;
                 default:

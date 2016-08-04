@@ -31,9 +31,14 @@ class Post extends TimberPost
         }
 
         if ($fallback) {
-            $default = get_field('placeholder_image', 'option');
+            $default = get_field($fallback, 'option');
 
-            if (! empty($default)) {
+            if (! empty($default) ) {
+
+                if ($default instanceof $this->ImageClass) {
+                    return $default;
+                }
+
                 return new $this->ImageClass($default);
             }
         }
