@@ -75,7 +75,8 @@ class Post extends TimberPost
                 return ucfirst($word);
             }, $parts);
             $namespace = implode('', $parts);
-            $fqcn = '\\Juicy\\Modules\\'.$namespace.'\\Module';
+            $fqcn = '\\Juicy\\Modules\\' . $namespace.'\\Module';
+            $fqcn = class_exists($fqcn) ? $fqcn : '\\JuiceBox\\Modules\\'.$namespace.'\\Module';
 
             $moduleProcessor = new $fqcn($module, $name, $this);
             $module = $moduleProcessor->getModule();
