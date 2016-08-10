@@ -5,7 +5,7 @@
             {% for item in module.items %}
                 <div class="module-image-grid__item" style="{% if module.item_width %}width:{{ module.item_width }}{% endif %}">
                     {% set image = TimberImage(item.image, '\\Juicy\\Core\\Image') %}
-                    <img src="{{ image.src }}" class="module-image-grid__item-image" />
+                    <img src="{{ image.src }}" class="module-image-grid__item-image" alt="{{ item.text }}" />
                     <div class="module-image-grid__item-text">{{ item.text }}</div>
                 </div>
             {% endfor %}
