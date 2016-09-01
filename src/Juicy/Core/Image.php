@@ -44,13 +44,13 @@ class Image extends TimberImage {
     {
         $alt = parent::alt();
         // Check if alt is set
-        if ( $alt != '' ) {
+        if ( $alt !== '' ) {
             return $alt;
         }
         // Otherwise we check for image title
         $alt = parent::title();
 
-        if ( $alt != '' ) {
+        if ( $alt !== '' ) {
             return $alt;
         }
         // Lastly fall back to post title
