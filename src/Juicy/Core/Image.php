@@ -48,7 +48,7 @@ class Image extends TimberImage {
             return $alt;
         }
         // Otherwise we check for image title
-        $alt = parent::title;
+        $alt = parent::title();
 
         if ( $alt != '' ) {
             return $alt;
