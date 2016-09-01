@@ -43,6 +43,10 @@ class Site extends TimberSite
 
         add_action('after_setup_theme', array($this, 'schema_breadcrumbs'));
 
+        add_filter('acf/format_value/type=post_object', array($this, 'field_to_jb_post'), 99, 3);
+
+        add_filter('acf/format_value/type=image', array($this, 'field_to_jb_image'), 99, 3);
+
         // Set additional Timber twig directories.
         Timber::$locations = array(
             get_template_directory() . '/src/',
@@ -100,5 +104,29 @@ class Site extends TimberSite
         }
 
         return false;
+    }
+
+    /**
+     * If post field is set to return an ID turn it into an Post class.
+     */
+    public function field_to_jb_post( $value, $post_id, $field )
+    {
+        if ( $field['return_format'] == 'id' && $value !== false ) {
+            return new Post( $value );
+        }
+
+        return $value;
+    }
+
+    /**
+     * If image field is set to return an ID turn it into an Image class.
+     */
+    public function field_to_jb_image( $value, $post_id, $field )
+    {
+        if ( $field['return_format'] == 'id' && $value !== false ) {
+            return new Image( $value );
+        }
+
+        return $value;
     }
 }
