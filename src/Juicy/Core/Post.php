@@ -53,7 +53,7 @@ class Post extends TimberPost
 
     public function get_fb_share_link()
     {
-        return 'http://www.facebook.com/sharer/sharer.php?u='.$this->permalink;
+        return 'http://www.facebook.com/sharer/sharer.php?u='.$this->link;
     }
 
     public function get_twitter_share_link()

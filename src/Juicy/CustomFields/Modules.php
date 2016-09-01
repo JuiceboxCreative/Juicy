@@ -23,7 +23,7 @@ class Modules extends CustomField
                     'class' => '',
                     'id' => '',
                 ),
-                'button_label' => 'Add Layout',
+                'button_label' => 'Add Module',
                 'min' => '',
                 'max' => '',
                 'layouts' => array(),
