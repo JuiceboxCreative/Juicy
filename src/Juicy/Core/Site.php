@@ -9,16 +9,6 @@ use Juicy\Config\Menus;
 
 class Site extends TimberSite
 {
-    /**
-     * Menus to initialize
-     * @var array
-     */
-    private $menus = array(
-        'main_nav' => 'The Main Menu',   // main nav in header
-        'footer_links' => 'Footer Links', // secondary nav in footer
-        'legal_links' => 'Legal Links' // secondary nav in footer
-    );
-
     protected $MenuClass = '\\Juicy\\Core\\Menu';
 
     public function __construct()
