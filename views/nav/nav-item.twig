@@ -2,6 +2,13 @@
     <a href="{{item.link}}">{{item.title}}</a>
 
     {% if item.children is not empty %}
+
+        {% block submenuToggle %}
+            <button class="visible-xs submenu-toggle">
+                &#9660;
+            </button>
+        {% endblock %}
+
         <ul class="submenu">
             {% for child in item.children %}
                 {%
