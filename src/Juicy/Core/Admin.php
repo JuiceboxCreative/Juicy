@@ -7,20 +7,7 @@ use Twig_SimpleFunction;
 
 class Admin
 {
-    public $defaultPlugins = array(
-        'advanced-custom-fields-pro/acf.php',
-        'acf-link/acf-link.php',
-        'amazon-web-services/amazon-web-services.php',
-        'enable-media-replace/enable-media-replace.php',
-        'gravityforms/gravityforms.php',
-        'iconbox/iconbox.php',
-        'wp-nested-pages/nestedpages.php',
-        'amazon-s3-and-cloudfront-pro/amazon-s3-and-cloudfront-pro.php',
-        'amazon-s3-and-cloudfront-enable-media-replace/amazon-s3-and-cloudfront-enable-media-replace.php',
-        'wordpress-seo/wp-seo.php',
-        'ithemes-security-pro/ithemes-security-pro.php',
-        'wp-migrate-db/wp-migrate-db.php'
-    );
+    protected $defaultPlugins = array();
 
     public function __construct()
     {
