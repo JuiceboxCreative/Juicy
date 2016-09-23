@@ -133,7 +133,7 @@ class Module extends JBModule
                 );
 
                 // If we don't have enough post get some random ones
-                if ( size($siblings) < 3 ) {
+                if ( count($siblings) < 3 ) {
                     $ids = array_map(function( $p ){
                         return $p->ID;
                     }, $siblings);
