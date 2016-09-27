@@ -25,14 +25,16 @@
             {% endblock %}
 
             {% block afterHeader %}{% endblock %}
+            <div class="content-wrap">
 
-            {% block beforeMain %}{% endblock %}
+                {% block beforeMain %}{% endblock %}
 
-            {% block main %}{% endblock %}
+                {% block main %}{% endblock %}
 
-            {% block afterMain %}{% endblock %}
+                {% block afterMain %}{% endblock %}
 
-            {% block beforeFooter %}{% endblock %}
+                {% block beforeFooter %}{% endblock %}
+            </div>
 
             {% block footer %}
                 {% include 'partials/footer.twig' %}
