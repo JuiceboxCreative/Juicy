@@ -37,6 +37,9 @@ class Site extends TimberSite
 
         add_filter('acf/format_value/type=image', array($this, 'field_to_jb_image'), 99, 3);
 
+        // Check if post needs a password here, removes it from page.php/single.php
+        add_filter('timber_render_file', array($this, 'maybe_load_password_template'));
+
         // Set additional Timber twig directories.
         Timber::$locations = array(
             get_template_directory() . '/src/',
@@ -118,5 +121,21 @@ class Site extends TimberSite
         }
 
         return $value;
+    }
+
+    /**
+     * If post needs a password load the correct template.
+     * @param  string $file
+     * @return string
+     */
+    public function maybe_load_password_template( $file )
+    {
+        global $post;
+
+        if ( post_password_required($post->ID) ) {
+            $file = 'password.twig';
+        }
+
+        return $file;
     }
 }
