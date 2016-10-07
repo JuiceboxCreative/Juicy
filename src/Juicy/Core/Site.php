@@ -10,6 +10,8 @@ use Juicy\Config\Menus;
 class Site extends TimberSite
 {
     protected $MenuClass = '\\Juicy\\Core\\Menu';
+    protected $PostClass = '\\Juicy\\Core\\Post';
+    protected $ImageClass = '\\Juicy\\Core\\Image';
 
     public function __construct()
     {
@@ -105,7 +107,7 @@ class Site extends TimberSite
     public function field_to_jb_post( $value, $post_id, $field )
     {
         if ( $field['return_format'] == 'id' && $value !== false ) {
-            return new Post( $value );
+            return new $this->PostClass( $value );
         }
 
         return $value;
@@ -117,7 +119,7 @@ class Site extends TimberSite
     public function field_to_jb_image( $value, $post_id, $field )
     {
         if ( $field['return_format'] == 'id' && $value !== false ) {
-            return new Image( $value );
+            return new $this->ImageClass( $value );
         }
 
         return $value;
