@@ -8,12 +8,12 @@ namespace Juicy\Core;
 class Helpers
 {
     /**
-     * Are we in dev? Is WP_DEBUG set and does it equal true?
+     * Are we in dev?
      * @return boolean
      */
     public static function is_dev()
     {
-        return (defined('WP_DEBUG') && WP_DEBUG === true);
+        return (defined('ENV') && ENV === 'development');
     }
 
     /**
