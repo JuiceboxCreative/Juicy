@@ -7,7 +7,7 @@
             {% block beforeRowContent %}{% endblock %}
             {% block rowContent %}
                  <a href="{{ function('home_url', '/') }}" rel="home">
-                    <img src="{{TimberImage(options.logo).src}}" alt="Site Logo" />
+                    <img src="{{options.logo.src}}" alt="Site Logo" />
                 </a>
                 <button class="hamburger hamburger--collapse" type="button">
                     <span class="hamburger-box">
