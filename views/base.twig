@@ -17,6 +17,10 @@
 </head>
 {% endblock %}
     <body class="{{body_class}}">
+        {% block keyboardNav %}
+            {% include 'partials/keyboard-nav.twig' %}
+        {% endblock %}
+
         <div class="page-wrap">
             {% block beforeHeader %}{% endblock %}
 
