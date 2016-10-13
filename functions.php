@@ -1,6 +1,6 @@
 <?php
 //Include composer autoloader
-include dirname(ABSPATH) . "/vendor/autoload.php";
+include dirname(dirname(ABSPATH)) . "/vendor/autoload.php";
 
 $timber = new \Timber\Timber();
 

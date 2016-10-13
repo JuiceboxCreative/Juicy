@@ -31,6 +31,10 @@ class Assets
             // JS
             if ( static::$js !== array() ) {
                 foreach ( static::$js as $js ) {
+                    if ( isset($js['test']) && call_user_func($js['test']) === false ) {
+                        continue;
+                    }
+
                     wp_enqueue_script( $js['handle'] , $js['src'], $js['deps'], filemtime($js['location']), $js['in_footer']);
                 }
             }
@@ -38,6 +42,10 @@ class Assets
             // JS data
             if ( static::$jsData !== array() ) {
                 foreach ( static::$jsData as $jsData ) {
+                    if ( isset($jsData['test']) && call_user_func($jsData['test']) === false ) {
+                        continue;
+                    }
+
                     wp_localize_script($jsData['handle'], $jsData['name'], $jsData['data']);
 
                     wp_enqueue_script($jsData['handle']);
