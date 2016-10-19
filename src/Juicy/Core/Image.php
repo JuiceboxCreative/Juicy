@@ -47,15 +47,52 @@ class Image extends TimberImage {
         if ( $alt !== '' ) {
             return $alt;
         }
-        // Otherwise we check for image title
-        $alt = parent::title();
 
-        if ( $alt !== '' ) {
-            return $alt;
+        // Fall back to page description if it is set.
+        $alt = $this->getPostMeta( 'metadesc' );
+
+        // Otherwise we will use the site name and tagline(if set)
+        if ( empty($alt) ) {
+            $alt = $this->getSiteName();
         }
-        // Lastly fall back to post title
+
+        return $alt;
+    }
+
+    public function title()
+    {
+        $title = parent::title();
+        // Check if alt is set
+        if ( $title !== '' ) {
+            return $title;
+        }
+
+        // Fall back to page title if it is set.
+        $title = $this->getPostMeta( 'title' );
+
+        // Otherwise we will use the site name and tagline(if set)
+        if ( empty($title) ) {
+            $title = $this->getSiteName();
+        }
+
+        return $title;
+    }
+
+    private function getPostMeta( $type = 'title' )
+    {
         global $post;
-        // post_title because global $post will be WP_Post
-        return $post->post_title;
+        return get_post_meta( $post->ID, "_yoast_wpseo_{$type}", true );
+    }
+
+    private function getSiteName()
+    {
+        $ret = get_bloginfo('name');
+        $extra = get_bloginfo('description');
+
+        if ( $extra !== '' ) {
+            $ret .= " - {$extra}";
+        }
+
+        return $ret;
     }
 }
