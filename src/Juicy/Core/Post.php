@@ -8,18 +8,14 @@ class Post extends TimberPost
 {
     public $PostClass = '\\Juicy\\Core\\Post';
     public $ImageClass = '\\Juicy\\Core\\Image';
-    public $subnav = null;
     public $modules = null;
 
-    public function get_subnav()
+    /**
+     * @return PostPreview
+     */
+    public function preview()
     {
-        if ($this->subnav !== null) {
-            return $this->subnav;
-        }
-
-        $this->subnav = new Subnav($this);
-
-        return $this->subnav;
+        return new PostPreview($this);
     }
 
     public function get_thumbnail($fallback = false)
