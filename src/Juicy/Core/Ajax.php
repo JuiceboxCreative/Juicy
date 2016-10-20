@@ -8,11 +8,6 @@ namespace Juicy\Core;
 
 class Ajax
 {
-    public function __construct()
-    {
-
-    }
-
     private function sendResponse( $response, $error = false )
     {
         return $error ? wp_send_json_error( $response ) : wp_send_json_success( $response );
@@ -26,7 +21,7 @@ class Ajax
 
         if ( !wp_verify_nonce( $_POST['nonce'], $action ) ) {
             $response = array(
-                'message'   => 'Sorry there has been an authorising your request.'
+                'message'   => 'Sorry there has been an error authorising your request.'
             );
 
             $this->sendResponse( $response, true );

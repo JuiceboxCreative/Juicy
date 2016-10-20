@@ -9,6 +9,7 @@ class Post extends TimberPost
     public $PostClass = '\\Juicy\\Core\\Post';
     public $ImageClass = '\\Juicy\\Core\\Image';
     public $modules = null;
+    public $subnav = null;
 
     /**
      * @return PostPreview
@@ -16,6 +17,18 @@ class Post extends TimberPost
     public function preview()
     {
         return new PostPreview($this);
+    }
+
+    public function get_subnav()
+    {
+        if ($this->subnav !== null) {
+            return $this->subnav;
+        }
+
+        $this->subnav = new Subnav($this);
+
+        return $this->subnav;
+
     }
 
     public function get_thumbnail($fallback = false)
