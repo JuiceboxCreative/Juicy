@@ -35,6 +35,15 @@ abstract class Module
     }
 
     /**
+     * Returns processed module data, filter has been applied here to allow the data to be manipulated before it is rendered out.
+     * @return array
+     */
+    public function getModule()
+    {
+        return apply_filters("jb_module_{$this->name}_data", $this->module);
+    }
+
+    /**
      * Set Name
      *
      * @param array $name
