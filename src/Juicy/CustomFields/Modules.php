@@ -54,22 +54,4 @@ class Modules extends CustomField
         'active' => 1,
         'description' => '',
     );
-
-    public static function register()
-    {
-        $dir = new \DirectoryIterator(get_template_directory() . '/src/Juicy/Modules');
-        foreach ($dir as $dirinfo) {
-            if (!$dirinfo->isDot() && $dir->isDir()) {
-                $filename = $dirinfo->getFilename();
-
-                if ( in_array( $filename, static::$excludeModules ) ) {
-                    continue;
-                }
-
-                $class = "Juicy\\Modules\\{$filename}\\Module";
-                // fields[0] is the layouts array
-                static::$fields['fields'][0]['layouts'][] = $class::$layout;
-            }
-        }
-    }
 }
