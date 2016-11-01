@@ -44,11 +44,14 @@ abstract class Module
     }
 
     /**
-     * Set Name
-     *
-     * @param array $name
-     * @return \Juicy\Core\Module
+     * There is a filter applied here to allow the template to be overrriden.
+     * @return String the template for twig to call
      */
+    public function getTemplate()
+    {
+        return apply_filters("jb_module_{$this->name}_template", $this->getNamespace() . '/template.twig');
+    }
+
     public function setName($name)
     {
         $this->name = $name;
