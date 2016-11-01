@@ -55,7 +55,7 @@ class Modules extends CustomField
         'description' => '',
     );
 
-    public function register() {
-        
+    public static function register() {
+
     }
 }
