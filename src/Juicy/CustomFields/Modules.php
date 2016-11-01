@@ -54,4 +54,8 @@ class Modules extends CustomField
         'active' => 1,
         'description' => '',
     );
+
+    public function register() {
+        
+    }
 }
