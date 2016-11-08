@@ -132,6 +132,11 @@ class Admin
 
     public function add_wysiwyg_stylesheet()
     {
-        add_editor_style('css/editor-style.css');
+        if (file_exists(get_stylesheet_directory() . '/css/editor-style.min.css')) {
+            add_editor_style('css/editor-style.min.css');
+        }
+        else {
+            add_editor_style('css/editor-style.css');
+        }
     }
 }
