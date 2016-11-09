@@ -81,6 +81,11 @@ class Post extends TimberPost
         $processedModules = array();
 
         foreach ($modules as $index => $module) {
+            if (!isset($module['acf_fc_layout'])) {
+                var_dump($module);
+                throw new \Exception('Module is missing the acf_fc_layout key.');
+            }
+
             $name = $module['acf_fc_layout'];
 
             // Module processor namespace is PascalCase. Convert from underscore name in ACF

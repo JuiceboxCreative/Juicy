@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 {% block html_head_container %}
-<!--[if IE 8]>    <html class="no-js lt-ie10 lt-ie9" lang="en"> <![endif]-->
-<!--[if IE 9]>      <html class="no-js lt-ie10" lang="en"> <![endif]-->
-<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<html class="no-js" lang="en">
 <head>
     <meta charset="{{site.charset}}" />
 
@@ -22,29 +20,31 @@
         {% endblock %}
 
         <div class="page-wrap">
-            {% block beforeHeader %}{% endblock %}
+            {% block page %}
+                {% block beforeHeader %}{% endblock %}
 
-            {% block header %}
-                {% include 'partials/header.twig' %}
+                {% block header %}
+                    {% include 'partials/header.twig' %}
+                {% endblock %}
+
+                {% block afterHeader %}{% endblock %}
+                <div class="content-wrap">
+
+                    {% block beforeMain %}{% endblock %}
+
+                    {% block main %}{% endblock %}
+
+                    {% block afterMain %}{% endblock %}
+
+                </div>
+                {% block beforeFooter %}{% endblock %}
+
+                {% block footer %}
+                    {% include 'partials/footer.twig' %}
+                {% endblock %}
+
+                {% block afterFooter %}{% endblock %}
             {% endblock %}
-
-            {% block afterHeader %}{% endblock %}
-            <div class="content-wrap">
-
-                {% block beforeMain %}{% endblock %}
-
-                {% block main %}{% endblock %}
-
-                {% block afterMain %}{% endblock %}
-
-            </div>
-            {% block beforeFooter %}{% endblock %}
-
-            {% block footer %}
-                {% include 'partials/footer.twig' %}
-            {% endblock %}
-
-            {% block afterFooter %}{% endblock %}
         </div>
         {{ function('wp_footer') }}
     </body>

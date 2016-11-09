@@ -134,7 +134,7 @@ class Site extends TimberSite
     {
         global $post;
 
-        if ( post_password_required($post->ID) ) {
+        if ( isset($post->ID) && post_password_required($post->ID) ) {
             $file = 'password.twig';
         }
 

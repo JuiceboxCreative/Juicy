@@ -8,12 +8,12 @@ namespace Juicy\Core;
 class Helpers
 {
     /**
-     * Are we in dev? Is WP_DEBUG set and does it equal true?
+     * Are we in dev?
      * @return boolean
      */
     public static function is_dev()
     {
-        return (defined('WP_DEBUG') && WP_DEBUG === true);
+        return (defined('ENV') && ENV === 'development');
     }
 
     /**
@@ -21,10 +21,10 @@ class Helpers
      * @param  string $prefix the prefix of the option, e.g. error
      * @return array         An associative array of option, with the prefix removed
      */
-    public static function option_by_prefix( $prefix )
+    public static function field_by_prefix( $prefix, $field = 'option' )
     {
         // Get all options
-        $fields = get_fields('option');
+        $fields = get_fields($field);
         // Init array
         $return = array();
         // Loop through each option, we will test the key against the prefix passed in
