@@ -12,6 +12,7 @@ class Site extends TimberSite
     protected $MenuClass = '\\Juicy\\Core\\Menu';
     protected $PostClass = '\\Juicy\\Core\\Post';
     protected $ImageClass = '\\Juicy\\Core\\Image';
+    protected $TermClass = '\\Juicy\\Core\\Term';
 
     public function __construct()
     {
@@ -36,6 +37,8 @@ class Site extends TimberSite
         add_action('after_setup_theme', array($this, 'schema_breadcrumbs'));
 
         add_filter('acf/format_value/type=post_object', array($this, 'field_to_jb_post'), 99, 3);
+
+        add_filter('acf/format_value/type=taxonomy', array($this, 'field_to_jb_term'), 99, 3);
 
         add_filter('acf/format_value/type=image', array($this, 'field_to_jb_image'), 99, 3);
 
@@ -120,6 +123,18 @@ class Site extends TimberSite
     {
         if ( $field['return_format'] == 'id' && $value !== false ) {
             return new $this->ImageClass( $value );
+        }
+
+        return $value;
+    }
+
+    /**
+     * If term field is set to return an ID turn it into an Term class.
+     */
+    public function field_to_jb_term( $value, $term_id, $field )
+    {
+        if ( $field['return_format'] == 'id' && $value !== false ) {
+            return new $this->TermClass( $value );
         }
 
         return $value;
