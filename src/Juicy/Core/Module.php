@@ -49,7 +49,21 @@ abstract class Module
      */
     public function getTemplate()
     {
-        return apply_filters("jb_module_{$this->name}_template", $this->getNamespace() . '/template.twig');
+        return apply_filters("jb_module_{$this->name}_template", $this->getPath() . '/template.twig');
+    }
+
+    public function getPath()
+    {
+        $themeDir = get_stylesheet_directory();
+        $modulePath = $themeDir . '/src/' . $this->getNamespace();
+        return str_replace( "\\", "/", $modulePath );
+    }
+
+    public function getUri()
+    {
+        $themeDirUri = get_stylesheet_directory_uri();
+        $modulePathUri = $themeDirUri . '/src/' . $this->getNamespace();
+        return str_replace( "\\", "/", $modulePathUri );
     }
 
     public function setName($name)
