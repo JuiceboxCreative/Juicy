@@ -14,6 +14,8 @@ class Site extends TimberSite
     protected $ImageClass = '\\Juicy\\Core\\Image';
     protected $TermClass = '\\Juicy\\Core\\Term';
 
+    protected $google_api_key = false;
+
     public function __construct()
     {
         //Add global variables to twig
@@ -54,6 +56,12 @@ class Site extends TimberSite
                 Timber::$locations[] = get_stylesheet_directory() . '/src/JuiceBox/Modules/' . $filename;
             }
         }
+
+        add_action('acf/init', function() {
+            if ( $this->google_api_key !== false ) {
+                acf_update_setting('google_api_key', $this->google_api_key);
+            }
+        });
 
         parent::__construct();
     }
