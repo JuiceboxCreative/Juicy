@@ -155,6 +155,7 @@ class Admin
      */
     public function add_bcc( $args, $message_format, $notification )
     {
+        // Bail out if we are in dev
         if ( Helpers::is_dev() ) {
             return $args;
         }
