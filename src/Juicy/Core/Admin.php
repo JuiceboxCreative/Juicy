@@ -9,32 +9,41 @@ class Admin
 {
     protected $defaultPlugins = array();
 
+    /**
+     * Email(s) for Gravity form submissions to BCC
+     * @var string
+     */
+    private $bccEmail = 'marketing-emails@juicebox.com.au';
+
     public function __construct()
     {
         //Login page customisations
-        add_filter('login_headerurl', array($this, 'login_url'));
-        add_filter('login_headertitle', array($this, 'login_title'));
+        add_filter('login_headerurl',           array($this, 'login_url'));
+        add_filter('login_headertitle',         array($this, 'login_title'));
 
         // adding it to the admin area
-        add_filter('admin_footer_text', array($this, 'custom_admin_footer'));
+        add_filter('admin_footer_text',         array($this, 'custom_admin_footer'));
+
+        //Add custom functions to twig
+        add_filter('get_twig',                  array($this, 'add_to_twig'));
+
+        // customise WYSIWYG
+        add_filter('mce_buttons_2',             array($this, 'customise_wysiwyg'));
+        add_filter('tiny_mce_before_init',      array($this, 'add_styles_to_wysiwyg'));
+        add_action('after_setup_theme',         array($this, 'add_wysiwyg_stylesheet'));
+
+        // Remove options for clients to deactivate plugins
+        add_filter( 'plugin_action_links',      array($this, 'jb_remove_deactivate'), 10, 4 );
+
+        // Auto activate plugins
+        add_action( 'admin_init',               array($this, 'jb_activate_plugins') );
+
+        // Before Gravity forms sends an email, add our BCC
+        add_action( 'gform_pre_send_email',     array($this, 'add_bcc'), 99, 3 );
 
         if (function_exists('acf_add_options_page')) {
             $this->options_pages();
         }
-
-        //Add custom functions to twig
-        add_filter('get_twig', array($this, 'add_to_twig'));
-
-        // customise WYSIWYG
-        add_filter('mce_buttons_2', array($this, 'customise_wysiwyg'));
-        add_filter('tiny_mce_before_init', array($this, 'add_styles_to_wysiwyg'));
-        add_action('after_setup_theme', array($this, 'add_wysiwyg_stylesheet'));
-
-        // Remove options for clients to deactivate plugins
-        add_filter( 'plugin_action_links', array($this, 'jb_remove_deactivate'), 10, 4 );
-
-        // Auto activate plugins
-        add_action( 'admin_init', array($this, 'jb_activate_plugins') );
     }
 
     // Automatically activate required plugins.
@@ -138,5 +147,26 @@ class Admin
         else {
             add_editor_style('css/editor-style.css');
         }
+    }
+
+    /**
+     * Add BCC to all GF emails
+     * @param array $args
+     */
+    public function add_bcc( $args, $message_format, $notification )
+    {
+        // Bail out if we are in dev
+        if ( Helpers::is_dev() ) {
+            return $args;
+        }
+
+        // If there is already a BCC and if $this->bccEmail isn't already present then add it
+        if ( isset($args['headers']['Bcc']) && ! Helpers::string_exists( $this->bccEmail, $args['headers']['Bcc'] ) ) {
+            $args['headers']['Bcc'] .= ", {$this->bccEmail}";
+        } else {
+            $args['headers']['Bcc'] = "Bcc: {$this->bccEmail}";
+        }
+
+        return $args;
     }
 }
