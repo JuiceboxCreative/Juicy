@@ -39,4 +39,9 @@ class Helpers
 
         return $return;
     }
+
+    public static string_exists( $needle, $haystack )
+    {
+        return (strpos($haystack, $needle) !== false);
+    }
 }
