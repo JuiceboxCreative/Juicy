@@ -49,7 +49,7 @@ abstract class Module
      */
     public function getTemplate()
     {
-        return apply_filters("jb_module_{$this->name}_template", $this->getPath() . '/template.twig');
+        return apply_filters("jb_module_{$this->name}_template", $this->getTemplatePath());
     }
 
     public function getPath()
@@ -123,7 +123,16 @@ abstract class Module
 
         $context['module'] = $this->getModule();
 
-        return Timber::compile($this->getNamespace() . "/template.twig", $context);
+        return Timber::compile($this->getTemplatePath(), $context);
+    }
+
+    protected function getTemplatePath()
+    {
+        $base = $this->getNamespace();
+
+        $base = str_replace( "JuiceBox\\Modules\\", "", $base );
+
+        return "{$base}/template.twig";
     }
 
     protected function getNamespace()
