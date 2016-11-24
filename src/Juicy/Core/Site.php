@@ -51,6 +51,7 @@ class Site extends TimberSite
         Timber::$locations = array(
             get_template_directory() . '/src/',
             get_stylesheet_directory() . '/src/',
+            get_stylesheet_directory() . '/src/JuiceBox/Modules/',
         );
 
         add_action('acf/init', function() {
