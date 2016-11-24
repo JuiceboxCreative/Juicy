@@ -40,7 +40,7 @@ class Helpers
         return $return;
     }
 
-    public static string_exists( $needle, $haystack )
+    public static function string_exists( $needle, $haystack )
     {
         return (strpos($haystack, $needle) !== false);
     }
