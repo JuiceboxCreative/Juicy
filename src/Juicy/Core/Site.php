@@ -47,15 +47,11 @@ class Site extends TimberSite
         // Check if post needs a password here, removes it from page.php/single.php
         add_filter('timber_render_file', array($this, 'maybe_load_password_template'));
 
-        // Search inside module folders for templates.
-        Timber::$locations = array();
-        $dir = new \DirectoryIterator(get_stylesheet_directory() . '/src/JuiceBox/Modules');
-        foreach ($dir as $dirinfo) {
-            if (!$dirinfo->isDot() && $dir->isDir()) {
-                $filename = $dir->getFilename();
-                Timber::$locations[] = get_stylesheet_directory() . '/src/JuiceBox/Modules/' . $filename;
-            }
-        }
+        // Set additional Timber twig directories.
+        Timber::$locations = array(
+            get_template_directory() . '/src/',
+            get_stylesheet_directory() . '/src/',
+        );
 
         add_action('acf/init', function() {
             if ( $this->google_api_key !== false ) {
