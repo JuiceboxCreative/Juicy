@@ -33,6 +33,9 @@ class Site extends TimberSite
         //Add IE only shims
         add_action('wp_head', array($this, 'add_ie_html5_shim'));
 
+        // Create typography page if it doesn't exist.
+        add_action('init', array($this, 'add_typography_page'));
+
         // Prevent iconbox files from going to S3.
         add_filter('as3cf_pre_update_attachment_metadata', array($this, 'pre_update_attachment_metadata'), 10, 3);
 
@@ -163,5 +166,24 @@ class Site extends TimberSite
         }
 
         return $file;
+    }
+
+    public function add_typography_page()
+    {
+        $this->create_page_if_null('Typography');
+    }
+
+    private function create_page_if_null($title) {
+        if( get_page_by_title($title) == NULL ) {
+            $page = array(
+                'post_title'    => $title,
+                'post_content'  => '',
+                'post_status'   => 'publish',
+                'post_author'   => 1,
+                'post_type'     => 'page',
+            );
+
+            wp_insert_post( $page );
+        }
     }
 }
