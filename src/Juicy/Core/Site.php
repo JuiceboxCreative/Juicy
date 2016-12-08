@@ -171,6 +171,7 @@ class Site extends TimberSite
     public function add_typography_page()
     {
         $this->create_page_if_null('Typography');
+        $this->create_page_if_null('Grid');
     }
 
     private function create_page_if_null($title) {
