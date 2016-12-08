@@ -64,12 +64,12 @@
 {% block main %}
     <div>
         <header class="container hero">
-            <div class="row flex-justify-center">
+            <div class="row justify-center">
                 <div class="col xs-6">
                     <h1 class="hero-headline">Flexbox Grid</h1>
                 </div>
             </div>
-            <div class="row flex-justify-center">
+            <div class="row justify-center">
                 <div class="col xs-6">
                     <p class="hero-copy">A grid system based on the <a
                                 href="http://caniuse.com/#search=flexbox"><code class="inline-anchor">flex</code></a>
@@ -345,11 +345,11 @@
             <section class="page-section"><h2>Alignment</h2>
                 <p>Add classes to align elements to the start or end of a row as well as the top, bottom, or center of a
                     column</p>
-                <h3><code>.flex-justify-flex-start</code></h3>
+                <h3><code>.justify-flex-start</code></h3>
                 <div class="row">
                     <div class="col xs-12">
                         <div class="box box-container">
-                            <div class="row flex-justify-flex-start">
+                            <div class="row justify-flex-start">
                                 <div class="col xs-6">
                                     <div class="box-nested"></div>
                                 </div>
@@ -357,7 +357,7 @@
                         </div>
                     </div>
                 </div>
-                <pre><code>&lt;div class="row flex-justify-flex-start">
+                <pre><code>&lt;div class="row justify-flex-start">
     &lt;div class="col xs-6">
         &lt;div class="box">
             start
@@ -365,11 +365,11 @@
     &lt;/div>
 &lt;/div>
 </code></pre>
-                <h3><code>.flex-justify-center</code></h3>
+                <h3><code>.justify-center</code></h3>
                 <div class="row">
                     <div class="col xs-12">
                         <div class="box box-container">
-                            <div class="row flex-justify-center">
+                            <div class="row justify-center">
                                 <div class="col xs-6">
                                     <div class="box-nested"></div>
                                 </div>
@@ -377,7 +377,7 @@
                         </div>
                     </div>
                 </div>
-                <pre><code>&lt;div class="row flex-justify-center">
+                <pre><code>&lt;div class="row justify-center">
     &lt;div class="col xs-6">
         &lt;div class="box">
             center
@@ -385,11 +385,11 @@
     &lt;/div>
 &lt;/div>
 </code></pre>
-                <h3><code>.flex-justify-flex-end</code></h3>
+                <h3><code>.justify-flex-end</code></h3>
                 <div class="row">
                     <div class="col xs-12">
                         <div class="box box-container">
-                            <div class="row flex-justify-flex-end">
+                            <div class="row justify-flex-end">
                                 <div class="col xs-6">
                                     <div class="box-nested"></div>
                                 </div>
@@ -397,7 +397,7 @@
                         </div>
                     </div>
                 </div>
-                <pre><code>&lt;div class="row flex-justify-flex-end">
+                <pre><code>&lt;div class="row justify-flex-end">
     &lt;div class="col xs-6">
         &lt;div class="box">
             end
@@ -410,7 +410,7 @@
                 <div class="row">
                     <div class="col xs-12">
                         <div class="box box-container">
-                            <div class="row flex-justify-center flex-justify-flex-end-sm flex-justify-flex-start-lg">
+                            <div class="row justify-center justify-flex-end-sm justify-flex-start-lg">
                                 <div class="col xs-6">
                                     <div class="box-nested"></div>
                                 </div>
@@ -419,7 +419,7 @@
                     </div>
                 </div>
                 Example
-                <pre><code>&lt;div class="row flex-justify-center flex-justify-flex-end-sm flex-justify-flex-start-lg">
+                <pre><code>&lt;div class="row justify-center justify-flex-end-sm justify-flex-start-lg">
     &lt;div class="col xs-6">
         &lt;div class="box">
             All together now
@@ -427,8 +427,8 @@
     &lt;/div>
 &lt;/div>
 </code></pre>
-                <h3><code>.flex-align-items-flex-start</code></h3>
-                <div class="row flex-align-items-flex-start">
+                <h3><code>.align-items-flex-start</code></h3>
+                <div class="row align-items-flex-start">
                     <div class="col xs-6">
                         <div class="box-large"></div>
                     </div>
@@ -436,7 +436,7 @@
                         <div class="box"></div>
                     </div>
                 </div>
-                <pre><code>&lt;div class="row flex-align-items-flex-start">
+                <pre><code>&lt;div class="row align-items-flex-start">
     &lt;div class="col xs-6">
         &lt;div class="box">
             top
@@ -444,8 +444,8 @@
     &lt;/div>
 &lt;/div>
 </code></pre>
-                <h3><code>.flex-align-items-center</code></h3>
-                <div class="row flex-align-items-center">
+                <h3><code>.align-items-center</code></h3>
+                <div class="row align-items-center">
                     <div class="col xs-6">
                         <div class="box-large"></div>
                     </div>
@@ -453,7 +453,7 @@
                         <div class="box"></div>
                     </div>
                 </div>
-                <pre><code>&lt;div class="row flex-align-items-center">
+                <pre><code>&lt;div class="row align-items-center">
     &lt;div class="col xs-6">
         &lt;div class="box">
             center
@@ -461,8 +461,8 @@
     &lt;/div>
 &lt;/div>
 </code></pre>
-                <h3><code>.flex-align-items-flex-end</code></h3>
-                <div class="row flex-align-items-flex-end">
+                <h3><code>.align-items-flex-end</code></h3>
+                <div class="row align-items-flex-end">
                     <div class="col xs-6">
                         <div class="box-large"></div>
                     </div>
@@ -470,7 +470,7 @@
                         <div class="box"></div>
                     </div>
                 </div>
-                <pre><code>&lt;div class="row flex-align-items-flex-end">
+                <pre><code>&lt;div class="row align-items-flex-end">
     &lt;div class="col xs-6">
         &lt;div class="box">
             bottom
@@ -482,11 +482,11 @@
             <a name="distribution"></a>
             <section class="page-section"><h2>Distribution</h2>
                 <p>Add classes to distribute the contents of a row or column.</p>
-                <h3><code>.flex-justify-space-around</code></h3>
+                <h3><code>.justify-space-around</code></h3>
                 <div class="row">
                     <div class="col xs-12">
                         <div class="box box-container">
-                            <div class="row flex-justify-space-around">
+                            <div class="row justify-space-around">
                                 <div class="col xs-2">
                                     <div class="box-nested"></div>
                                 </div>
@@ -500,7 +500,7 @@
                         </div>
                     </div>
                 </div>
-                <pre><code>&lt;div class="row flex-justify-space-around">
+                <pre><code>&lt;div class="row justify-space-around">
     &lt;div class="col xs-2">
         &lt;div class="box">
             around
@@ -518,11 +518,11 @@
     &lt;/div>
 &lt;/div>
 </code></pre>
-                <h3><code>.flex-justify-space-between</code></h3>
+                <h3><code>.justify-space-between</code></h3>
                 <div class="row">
                     <div class="col xs-12">
                         <div class="box box-container">
-                            <div class="row flex-justify-space-between">
+                            <div class="row justify-space-between">
                                 <div class="col xs-2">
                                     <div class="box-nested"></div>
                                 </div>
@@ -536,7 +536,7 @@
                         </div>
                     </div>
                 </div>
-                <pre><code>&lt;div class="row flex-justify-space-between">
+                <pre><code>&lt;div class="row justify-space-between">
     &lt;div class="col xs-2">
         &lt;div class="box">
             between
