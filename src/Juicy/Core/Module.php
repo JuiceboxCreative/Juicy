@@ -117,13 +117,21 @@ abstract class Module
     /**
      * To String
      */
-    public function _toString()
+    public function __toString()
     {
         $context = Timber::get_context();
 
         $context['module'] = $this->getModule();
 
         return Timber::compile($this->getTemplatePath(), $context);
+    }
+
+    /**
+     * @deprecated
+     */
+    public function _toString()
+    {
+        return $this->__toString();
     }
 
     protected function getTemplatePath()
