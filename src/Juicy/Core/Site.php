@@ -179,7 +179,7 @@ class Site extends TimberSite
             $page = array(
                 'post_title'    => $title,
                 'post_content'  => '',
-                'post_status'   => 'publish',
+                'post_status'   => 'draft',
                 'post_author'   => 1,
                 'post_type'     => 'page',
             );
