@@ -116,4 +116,56 @@ class Post extends TimberPost
         $children = $this->get_children();
         return (is_array($children) && count($children) > 0);
     }
+
+    /**
+     * Gets the Yoast primary term for the post,
+     * or the first one defined if an error.
+     *
+     * @return array|bool containing the following:
+     *      'id' => the category id
+     *      'display' => the category name
+     *      'link' => link to the category page
+     *      or FALSE if post has no category assigned.
+     */
+    public function get_primary_term($taxonomy = 'category')
+    {
+        $category = get_the_terms($this->ID, $taxonomy);
+        if (!$category) {
+            return false;
+        }
+
+        $return = array(
+            'id' => $category[0]->term_id,
+            'display' => $category[0]->name,
+            'link' => get_term_link($category[0]->term_id, $taxonomy),
+        );
+
+        if (class_exists('\WPSEO_Primary_Term')) {
+            // Show the post's 'Primary' category, if this Yoast feature is available, & one is set
+            $wpseo_primary_term = new \WPSEO_Primary_Term($taxonomy, $this->ID);
+            $wpseo_primary_term = $wpseo_primary_term->get_primary_term();
+            $term = get_term($wpseo_primary_term);
+            if (!is_wp_error($term)) {
+                // Yoast Primary category
+                $category_display = $term->name;
+                $return['id'] = $term->term_id;
+                $category_link = get_term_link($term->term_id, $taxonomy);
+            }
+        }
+
+        // Return category data.
+        if (!empty($category_display)) {
+            if (!empty($category_link)) {
+                $return['link'] = '<a href="' . $category_link . '">' . htmlspecialchars($category_display) . '</a>';
+            }
+
+            $return['display'] = htmlspecialchars($category_display);
+        }
+
+        return $return;
+    }
+
+    public function get_primary_category() {
+        return $this->get_primary_term('category');
+    }
 }
