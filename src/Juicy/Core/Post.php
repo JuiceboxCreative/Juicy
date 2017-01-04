@@ -70,6 +70,11 @@ class Post extends TimberPost
         return 'http://twitter.com/share?text='.urlencode(html_entity_decode($this->title . " - ". get_bloginfo('name'), ENT_COMPAT, 'UTF-8'))."&amp;url=" . get_bloginfo('url') . "?p=" . $this->ID;
     }
 
+    public function get_linkedin_share_link()
+    {
+        return 'https://www.linkedin.com/shareArticle?mini=true&url=' . $this->link .  '&amp;title=' . urlencode(html_entity_decode($this->title . " - ". get_bloginfo('name'), ENT_COMPAT, 'UTF-8'));
+    }
+
     public function get_modules()
     {
         $modules = get_field('modules', $this->ID);
