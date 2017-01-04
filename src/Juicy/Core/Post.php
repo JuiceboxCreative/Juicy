@@ -156,7 +156,7 @@ class Post extends TimberPost
         // Return category data.
         if (!empty($category_display)) {
             if (!empty($category_link)) {
-                $return['link'] = '<a href="' . $category_link . '">' . htmlspecialchars($category_display) . '</a>';
+                $return['link'] = $category_link;
             }
 
             $return['display'] = htmlspecialchars($category_display);
