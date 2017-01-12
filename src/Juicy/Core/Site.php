@@ -63,7 +63,27 @@ class Site extends TimberSite
             }
         });
 
+        // Add GA on production
+        if ( defined('WP_ENV') && WP_ENV == 'production' ) {
+            // If GA_ID isset otherwise spit out error
+            if ( defined('GA_ID') && GA_ID !== false ) {
+                add_action( 'wp_head', array( $this, 'tracking_code' ), 99 );
+            } else {
+                add_action( 'admin_notices', array($this, 'no_GA') );
+            }
+        }
+
         parent::__construct();
+    }
+
+    public function no_GA()
+    {
+        echo Timber::compile('partials/notice/error.twig', [ 'message' => 'Please enable Google Analytics by setting the Tracking ID within the .env file.' ]);
+    }
+
+    public function tracking_code()
+    {
+        echo Timber::compile('partials/ga.twig', [ 'code' => env('GA_ID') ]);
     }
 
     public function add_to_context($context)
