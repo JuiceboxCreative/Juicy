@@ -64,9 +64,9 @@ class Site extends TimberSite
         });
 
         // Add GA on production
-        if ( defined('WP_ENV') && WP_ENV == 'production' ) {
+        if ( !empty(env('WP_ENV')) && env('WP_ENV') == 'production' ) {
             // If GA_ID isset otherwise spit out error
-            if ( defined('GA_ID') && GA_ID !== false ) {
+            if ( env('GA_ID', false) && !empty(env('GA_ID')) && env('GA_ID') !== 'UA-XXXXXXXX-XX' ) {
                 add_action( 'wp_head', array( $this, 'tracking_code' ), 99 );
             } else {
                 add_action( 'admin_notices', array($this, 'no_GA') );
