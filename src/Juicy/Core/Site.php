@@ -57,19 +57,21 @@ class Site extends TimberSite
             get_stylesheet_directory() . '/src/JuiceBox/Modules/',
         );
 
-        add_action('acf/init', function() {
-            if ( $this->google_api_key !== false ) {
+        add_action('acf/init', function () {
+            if ($this->google_api_key !== false) {
                 acf_update_setting('google_api_key', $this->google_api_key);
             }
         });
 
         // Add GA on production
-        if ( !empty(env('WP_ENV')) && env('WP_ENV') == 'production' ) {
+        if (!empty(env('WP_ENV')) && env('WP_ENV') == 'production') {
             // If GA_ID isset otherwise spit out error
-            if ( env('GA_ID', false) && !empty(env('GA_ID')) && env('GA_ID') !== 'UA-XXXXXXXX-XX' ) {
-                add_action( 'wp_head', array( $this, 'tracking_code' ), 99 );
-            } else {
-                add_action( 'admin_notices', array($this, 'no_GA') );
+            if (env('GA_ID', false)) {
+                if (!empty(env('GA_ID')) && env('GA_ID') !== 'UA-XXXXXXXX-XX') {
+                    add_action('wp_head', array($this, 'tracking_code'), 99);
+                } else {
+                    add_action('admin_notices', array($this, 'no_GA'));
+                }
             }
         }
 
@@ -78,12 +80,12 @@ class Site extends TimberSite
 
     public function no_GA()
     {
-        echo Timber::compile('partials/notice/error.twig', [ 'message' => 'Please enable Google Analytics by setting the Tracking ID within the .env file.' ]);
+        echo Timber::compile('partials/notice/error.twig', ['message' => 'Please enable Google Analytics by setting the Tracking ID within the .env file.']);
     }
 
     public function tracking_code()
     {
-        echo Timber::compile('partials/ga.twig', [ 'code' => env('GA_ID') ]);
+        echo Timber::compile('partials/ga.twig', ['code' => env('GA_ID')]);
     }
 
     public function add_to_context($context)
@@ -127,9 +129,9 @@ class Site extends TimberSite
         }
     }
 
-    public function pre_update_attachment_metadata( $pre_update, $data, $post_id )
+    public function pre_update_attachment_metadata($pre_update, $data, $post_id)
     {
-        if ( false !== strpos( $data['file'], 'iconbox' ) ) {
+        if (false !== strpos($data['file'], 'iconbox')) {
             return true; // Abort the upload
         }
 
@@ -139,10 +141,10 @@ class Site extends TimberSite
     /**
      * If post field is set to return an ID turn it into an Post class.
      */
-    public function field_to_jb_post( $value, $post_id, $field )
+    public function field_to_jb_post($value, $post_id, $field)
     {
-        if ( $field['return_format'] == 'id' && $value !== false ) {
-            return new $this->PostClass( $value );
+        if ($field['return_format'] == 'id' && $value !== false) {
+            return new $this->PostClass($value);
         }
 
         return $value;
@@ -151,10 +153,10 @@ class Site extends TimberSite
     /**
      * If image field is set to return an ID turn it into an Image class.
      */
-    public function field_to_jb_image( $value, $post_id, $field )
+    public function field_to_jb_image($value, $post_id, $field)
     {
-        if ( $field['return_format'] == 'id' && $value !== false ) {
-            return new $this->ImageClass( $value );
+        if ($field['return_format'] == 'id' && $value !== false) {
+            return new $this->ImageClass($value);
         }
 
         return $value;
@@ -163,10 +165,10 @@ class Site extends TimberSite
     /**
      * If term field is set to return an ID turn it into an Term class.
      */
-    public function field_to_jb_term( $value, $term_id, $field )
+    public function field_to_jb_term($value, $term_id, $field)
     {
-        if ( $field['return_format'] == 'id' && $value !== false ) {
-            return new $this->TermClass( $value );
+        if ($field['return_format'] == 'id' && $value !== false) {
+            return new $this->TermClass($value);
         }
 
         return $value;
@@ -177,11 +179,11 @@ class Site extends TimberSite
      * @param  string $file
      * @return string
      */
-    public function maybe_load_password_template( $file )
+    public function maybe_load_password_template($file)
     {
         global $post;
 
-        if ( isset($post->ID) && post_password_required($post->ID) ) {
+        if (isset($post->ID) && post_password_required($post->ID)) {
             $file = 'password.twig';
         }
 
@@ -194,17 +196,18 @@ class Site extends TimberSite
         $this->create_page_if_null('Grid');
     }
 
-    private function create_page_if_null($title) {
-        if( get_page_by_title($title) == NULL ) {
+    private function create_page_if_null($title)
+    {
+        if (get_page_by_title($title) == NULL) {
             $page = array(
-                'post_title'    => $title,
-                'post_content'  => '',
-                'post_status'   => 'draft',
-                'post_author'   => 1,
-                'post_type'     => 'page',
+                'post_title' => $title,
+                'post_content' => '',
+                'post_status' => 'draft',
+                'post_author' => 1,
+                'post_type' => 'page',
             );
 
-            wp_insert_post( $page );
+            wp_insert_post($page);
         }
     }
 }
