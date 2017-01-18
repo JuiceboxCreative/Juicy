@@ -10,6 +10,8 @@ class GravityForms
 
     public $btn_class = 'btn btn-default';
 
+    public $include_styles = false;
+
     public function __construct()
     {
         add_filter( 'gform_enable_credit_card_field', '__return_true', 11 );
@@ -22,6 +24,8 @@ class GravityForms
 
         add_action( 'gform_editor_js', array($this, 'field_settings_js') );
 
+        add_action('gform_enqueue_scripts', array($this, 'remove_gravityforms_style'));
+
         add_filter( 'gform_field_content', array($this, 'edit_markup_input'), 99, 5 );
 
         add_filter( 'gform_field_container', array($this, 'edit_markup_container'), 99, 6 );
@@ -29,6 +33,18 @@ class GravityForms
         add_filter( 'gform_get_form_filter', array($this, 'edit_form_markup'), 99, 2);
 
         add_filter( 'gform_submit_button', array($this, 'form_create_btns_submit'), 10, 2 );
+    }
+
+    /**
+     * Removes gravity forms styles
+     */
+     function remove_gravityforms_style() {
+        if(!$include_styles) {
+            wp_deregister_style("gforms_formsmain_css");    
+            wp_deregister_style("gforms_reset_css");
+            wp_deregister_style("gforms_ready_class_css");
+            wp_deregister_style("gforms_browsers_css");
+        }
     }
 
     public function form_create_btns_submit( $button, $form )
