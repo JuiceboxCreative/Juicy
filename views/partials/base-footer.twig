@@ -5,7 +5,7 @@
         <div class="{% block rowClasses %}row{% endblock %}">
             {% block beforeRowContent %}{% endblock %}
             {% block rowContent %}
-                <a href="http://www.juicebox.com.au" class="footer-primary__jb">Site by JuiceBox</a>
+                <a href="http://www.juicebox.com.au" class="footer-primary__jb">Website by JuiceBox</a>
                 <nav class="footer-primary__navigation">
                     {%
                         include 'nav/nav.twig' with {
@@ -14,6 +14,7 @@
                         } only
                     %}
                 </nav>
+                <p class="footer-primary__copy">&copy; {{ 'now'|date('Y') }} {{ site.name }}</p>
             {% endblock %}
             {% block afterRowContent %}{% endblock %}
         </div>
