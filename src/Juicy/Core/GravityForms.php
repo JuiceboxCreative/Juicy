@@ -39,7 +39,7 @@ class GravityForms
      * Removes gravity forms styles
      */
      function remove_gravityforms_style() {
-        if(!$include_styles) {
+        if(!$this->include_styles) {
             wp_deregister_style("gforms_formsmain_css");    
             wp_deregister_style("gforms_reset_css");
             wp_deregister_style("gforms_ready_class_css");
