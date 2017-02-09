@@ -73,7 +73,7 @@ class Term extends TimberTerm {
 
         $processedModules = array();
 
-        foreach ($modules as $module) {
+        foreach ($modules as $index => $module) {
             $name = $module['acf_fc_layout'];
 
             // Module processor namespace is PascalCase. Convert from underscore name in ACF
@@ -82,12 +82,18 @@ class Term extends TimberTerm {
                 return ucfirst($word);
             }, $parts);
             $namespace = implode('', $parts);
-            $fqcn = '\\'.$namespace.'\\Module';
-
-            $module['template'] = $namespace.'/template.twig';
+            $fqcn = '\\Juicy\\Modules\\' . $namespace.'\\Module';
+            $fqcn = class_exists($fqcn) ? $fqcn : '\\JuiceBox\\Modules\\'.$namespace.'\\Module';
 
             $moduleProcessor = new $fqcn($module, $name, $this);
-            $processedModules[] = $moduleProcessor->getModule();
+            $module = $moduleProcessor->getModule();
+
+            $module['template'] = $moduleProcessor->getTemplate();
+            $module['fqcn'] = $fqcn;
+            $module['index'] = $index;
+            $module['name'] = $name;
+
+            $processedModules[] = $module;
         }
 
         return $processedModules;
