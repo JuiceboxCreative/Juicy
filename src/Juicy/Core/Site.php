@@ -85,6 +85,7 @@ class Site extends TimberSite
 
     public function tracking_code()
     {
+        wp_enqueue_script( 'jb_analytics', get_stylesheet_directory_uri() . '/js/jb_analytics.js', array( 'jquery' ), '', true );
         echo Timber::compile('partials/ga.twig', ['code' => env('GA_ID')]);
     }
 
