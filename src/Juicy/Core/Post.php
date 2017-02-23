@@ -109,7 +109,6 @@ class Post extends TimberPost
             $module['fqcn'] = $fqcn;
             $module['index'] = $index;
             $module['name'] = $name;
-            $module['key'] = $fqcn::$layout['key'];
 
             $processedModules[] = $module;
         }
