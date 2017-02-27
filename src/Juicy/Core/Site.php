@@ -43,6 +43,8 @@ class Site extends TimberSite
 
         add_filter('acf/format_value/type=post_object', array($this, 'field_to_jb_post'), 99, 3);
 
+        add_filter('acf/format_value/type=relationship', array($this, 'field_to_jb_post'), 99, 3);
+
         add_filter('acf/format_value/type=taxonomy', array($this, 'field_to_jb_term'), 99, 3);
 
         add_filter('acf/format_value/type=image', array($this, 'field_to_jb_image'), 99, 3);
@@ -144,7 +146,13 @@ class Site extends TimberSite
     public function field_to_jb_post($value, $post_id, $field)
     {
         if ($field['return_format'] == 'id' && $value !== false) {
-            return new $this->PostClass($value);
+            if ( !is_array($value) ) {
+                return new $this->PostClass($value);
+            } else {
+                foreach ( $value as &$val ) {
+                    $val = new $this->PostClass($val);
+                }
+            }
         }
 
         return $value;
