@@ -1,13 +1,13 @@
 <?php
 
-namespace JuiceBox\Core;
+namespace Juicy\Core;
 
 class ACFJson
 {
     protected $json_location;
     protected $module_location;
     protected $module_key;
-    protected $tempalte_dir = '__template';
+    protected $template_dir = '__template';
 
     public function __construct()
     {
@@ -184,7 +184,7 @@ class ACFJson
         // Create folder
         mkdir("{$path}/{$namespace}/", 0775, true);
 
-        $dir = new \DirectoryIterator("{$path}/{$this->tempalte_dir}");
+        $dir = new \DirectoryIterator("{$path}/{$this->template_dir}");
 
         $replace = [
             '__MODULENAME__' => $namespace
