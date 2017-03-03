@@ -7,6 +7,7 @@ class ACFJson
     protected $json_location;
     protected $module_location;
     protected $module_key;
+    protected $template_dir = '__template';
 
     public function __construct()
     {
@@ -77,8 +78,8 @@ class ACFJson
             $json = json_decode($json, true);
 
             // Load module fields
-            if ( $json['key'] == $this->module_key ) {
-                $json['fields'][0]['layouts'] = $this->include_module_fields();
+            if ( in_array($json['key'], $this->module_key) ) {
+                $json['fields'][0]['layouts'] = $this->include_module_fields($json['key']);
             }
 
             // add local
@@ -125,13 +126,13 @@ class ACFJson
         $field_group = acf_prepare_field_group_for_export( $field_group );
 
         // If we are processing modules...
-        if ( $field_group['key'] === $this->module_key ) {
+        if ( in_array($field_group['key'], $this->module_key) ) {
             // Extract layouts
             $layouts = $field_group['fields'][0]['layouts'];
             // Set layouts to empty array
             $field_group['fields'][0]['layouts'] = [];
 
-            $this->save_module_json($layouts);
+            $this->save_module_json($layouts, $field_group['key']);
         }
 
         // add modified time
@@ -147,7 +148,7 @@ class ACFJson
 
     }
 
-    private function save_module_json($layouts)
+    private function save_module_json($layouts, $id)
     {
         $path = $this->module_location;
 
@@ -159,14 +160,15 @@ class ACFJson
                 continue;
             }
 
+            $layout['group'] = $id;
+
             $namespace = $this->to_pascal_case($layout['name']);
 
             $file = "{$namespace}/fields.json";
 
-            // Skip this module if folder doesn't exists or folder is not writable
+            // Create the folder and copy template files in
             if( !is_writable("{$path}/{$namespace}/") ) {
-                add_action( 'admin_notices', [$this, 'admin_notice_error__module_folder'] );
-                continue;
+                $this->setup_folder_structure($path, $namespace);
             }
 
             $f = fopen("{$path}/{$file}", 'w');
@@ -177,7 +179,32 @@ class ACFJson
         return true;
     }
 
-    private function include_module_fields()
+    private function setup_folder_structure($path, $namespace)
+    {
+        // Create folder
+        mkdir("{$path}/{$namespace}/", 0775, true);
+
+        $dir = new \DirectoryIterator("{$path}/{$this->template_dir}");
+
+        $replace = [
+            '__MODULENAME__' => $namespace
+        ];
+
+        foreach ($dir as $fileinfo) {
+            // Not .  or  ..
+            if (!$fileinfo->isDot()) {
+                $fileName = "{$path}/{$namespace}/".$fileinfo->getFilename();
+
+                $file = file_get_contents( $fileinfo->getPathname() );
+                $file = str_replace(array_keys($replace), array_values($replace), $file);
+
+                file_put_contents($fileName, $file);
+                chmod($fileName, 0664);
+            }
+        }
+    }
+
+    private function include_module_fields($id)
     {
         // vars
         $path = $this->module_location;
@@ -195,7 +222,7 @@ class ACFJson
         $return = [];
 
         while(false !== ( $folder = readdir($dir)) ) {
-            if ( !is_dir("{$path}/{$folder}") || !file_exists("{$path}/{$folder}/fields.json") ) {
+            if ( !is_dir("{$path}/{$folder}") || !file_exists("{$path}/{$folder}/fields.json") || substr($folder, 0, 2) === '__' ) {
                 continue;
             }
 
@@ -207,7 +234,15 @@ class ACFJson
                 continue;
             }
 
-            $return[] = json_decode($json, true);
+            $json = json_decode($json, true);
+
+            if ( isset($json['group']) && $json['group'] != $id ) {
+                continue;
+            }
+
+            unset($json['group']);
+
+            $return[] = $json;
         }
 
         return $return;
