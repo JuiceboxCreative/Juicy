@@ -204,16 +204,20 @@ class Site extends TimberSite
         $this->create_page_if_null('Grid');
     }
 
-    private function create_page_if_null($title)
+    private function create_page_if_null($title, $status = 'draft', $template = null)
     {
         if (get_page_by_title($title) == NULL) {
             $page = array(
                 'post_title' => $title,
                 'post_content' => '',
-                'post_status' => 'draft',
+                'post_status' => $status,
                 'post_author' => 1,
                 'post_type' => 'page',
             );
+
+            if ( $template ) {
+                $page['page_template'] = $template;
+            }
 
             wp_insert_post($page);
         }
