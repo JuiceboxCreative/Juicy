@@ -204,7 +204,7 @@ class Site extends TimberSite
         $this->create_page_if_null('Grid');
     }
 
-    private function create_page_if_null($title, $status = 'draft', $template = null)
+    public function create_page_if_null($title, $status = 'draft', $template = null)
     {
         if (get_page_by_title($title) == NULL) {
             $page = array(
