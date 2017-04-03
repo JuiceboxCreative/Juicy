@@ -34,7 +34,7 @@ class Site extends TimberSite
         add_action('wp_head', array($this, 'add_ie_html5_shim'));
 
         // Create typography page if it doesn't exist.
-        add_action('init', array($this, 'add_typography_page'));
+        add_action('init', array($this, 'add_default_pages'));
 
         // Prevent iconbox files from going to S3.
         add_filter('as3cf_pre_update_attachment_metadata', array($this, 'pre_update_attachment_metadata'), 10, 3);
@@ -65,17 +65,17 @@ class Site extends TimberSite
             }
         });
 
-        // Add GA on production
-        if (!empty(env('WP_ENV')) && env('WP_ENV') == 'production') {
-            // If GA_ID isset otherwise spit out error
-            if (env('GA_ID', false)) {
-                if (!empty(env('GA_ID')) && env('GA_ID') !== 'UA-XXXXXXXX-XX') {
-                    add_action('wp_head', array($this, 'tracking_code'), 99);
-                } else {
-                    add_action('admin_notices', array($this, 'no_GA'));
-                }
-            }
-        }
+        // Add responsive wrapper around oEmbed elements and tables
+        add_filter('embed_oembed_html', [$this, 'wrap_embed'], 10, 1);
+        add_filter('the_content', array($this, 'add_div_to_tables'), 99);
+
+        // Error fix
+        remove_action( 'wp_head', 'rest_output_link_wp_head', 10, 0 );
+
+        // Move 'Yoast' to the bottom of the page
+        add_filter( 'wpseo_metabox_prio', function(){
+            return 'low';
+        });
 
         parent::__construct();
     }
@@ -198,10 +198,12 @@ class Site extends TimberSite
         return $file;
     }
 
-    public function add_typography_page()
+    public function add_default_pages()
     {
         $this->create_page_if_null('Typography');
         $this->create_page_if_null('Grid');
+        $this->create_page_if_null('Home Page', 'publish', 'page--home-page.php');
+        $this->create_page_if_null('Contact', 'publish', 'page--contact.php');
     }
 
     public function create_page_if_null($title, $status = 'draft', $template = null)
@@ -221,5 +223,29 @@ class Site extends TimberSite
 
             wp_insert_post($page);
         }
+    }
+
+    /**
+     * Filter for adding wrappers around oEmbeds
+     */
+    public function wrap_embed($html)
+    {
+        $html = preg_replace('/(width|height)="\d*"\s/', "", $html); // Strip width and height #1
+
+        return '<div class="embed-responsive">' . $html . '</div>'; // Wrap in div element and return #3 and #4
+    }
+
+    public function add_div_to_tables($content)
+    {
+        $replace = array(
+            '<table' => '<div class="table-responsive"><table',
+            '</table>' => '</table></div>'
+        );
+
+        return str_replace(
+            array_keys($replace),
+            array_values($replace),
+            $content
+        );
     }
 }
