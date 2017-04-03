@@ -24,8 +24,6 @@ class Newsletter
 
     public function register()
     {
-        add_action('wp_enqueue_scripts', [$this, 'add_assets']);
-
         add_shortcode('newsletter_field', [$this, 'newsletter_field']);
 
         add_shortcode('newsletter_signup', [$this, 'newsletter_signup']);
@@ -33,11 +31,6 @@ class Newsletter
         // Handle newsletter signups
         add_action( 'wp_ajax_newsletter_signup', array( $this, 'add_to_list' ) );
         add_action( 'wp_ajax_nopriv_newsletter_signup', array( $this, 'add_to_list' ) );
-    }
-
-    public function add_assets()
-    {
-        wp_register_script('jb_newsletter', get_stylesheet_directory_uri() . '/js/newsletter.js', ['jquery'], filemtime(get_stylesheet_directory() . '/js/newsletter.js'), true);
     }
 
     public function newsletter_signup($atts, $content)
@@ -50,9 +43,6 @@ class Newsletter
 
         // We will use this for build form and field ID's
         $data['instance'] = $this->newsletter_instance;
-
-        // Enqueue script that was registered earlier
-        wp_enqueue_script('jb_newsletter');
 
         // Add data from js script
         wp_localize_script(
