@@ -18,44 +18,44 @@ class Admin
     public function __construct()
     {
         //remove comments link from admin menu, remove this filter if your site uses WP comments
-        add_action('admin_menu', [$this, 'remove_menu_items'], 99);
-        add_filter('admin_menu', array($this, 'remove_from_menu'), 10, 0);
-        add_action( 'admin_menu', array($this, 'update_menu'), 99 );
-        add_filter('parent_file', array($this, 'parent_file'), 99);
+        add_action('admin_menu',                [$this, 'remove_menu_items'], 99);
+        add_action('admin_menu',                [$this, 'update_menu'], 99 );
+        add_filter('parent_file',               [$this, 'parent_file'], 99);
 
         //Login page customisations
-        add_filter('login_headerurl',           array($this, 'login_url'), 999);
-        add_filter('login_headertitle',         array($this, 'login_title'), 999);
+        add_filter('login_headerurl',           [$this, 'login_url'], 999);
+        add_filter('login_headertitle',         [$this, 'login_title'], 999);
 
         // adding it to the admin area
-        add_filter('admin_footer_text',         array($this, 'custom_admin_footer'));
+        add_filter('admin_footer_text',         [$this, 'custom_admin_footer']);
 
         //Add custom functions to twig
-        add_filter('get_twig',                  array($this, 'add_to_twig'));
+        add_filter('get_twig',                  [$this, 'add_to_twig']);
 
         // customise WYSIWYG
-        add_filter('mce_buttons_2',             array($this, 'customise_wysiwyg'));
-        add_filter('tiny_mce_before_init',      array($this, 'add_styles_to_wysiwyg'));
-        add_action('after_setup_theme',         array($this, 'add_wysiwyg_stylesheet'));
+        add_filter('mce_buttons_2',             [$this, 'customise_wysiwyg']);
+        add_filter('tiny_mce_before_init',      [$this, 'add_styles_to_wysiwyg']);
+        add_action('after_setup_theme',         [$this, 'add_wysiwyg_stylesheet']);
 
         // Remove options for clients to deactivate plugins
-        add_filter( 'plugin_action_links',      array($this, 'jb_remove_deactivate'), 10, 4 );
+        add_filter('plugin_action_links',       [$this, 'jb_remove_deactivate'], 10, 4 );
 
         // Auto activate plugins
-        add_action( 'admin_init',               array($this, 'jb_activate_plugins') );
+        add_action('admin_init',                [$this, 'jb_activate_plugins'] );
 
         // Before Gravity forms sends an email, add our BCC
-        add_action( 'gform_pre_send_email',     array($this, 'add_bcc'), 99, 3 );
+        add_action('gform_pre_send_email',      [$this, 'add_bcc'], 99, 3 );
+
+        add_action('admin_head',                [$this, 'admin_css'], 1);
+        add_action('login_enqueue_scripts',     [$this, 'login_css']);
+
+        add_action('admin_enqueue_scripts',     [$this, 'add_admin_scripts']);
+
 
         add_filter( 'tiny_mce_before_init', function ( $mce ) {
             $mce['body_class'] .= ' article-content';
             return $mce;
         });
-
-        add_action('admin_head', array($this, 'admin_css'), 1);
-        add_action('login_enqueue_scripts', array($this, 'login_css'));
-
-        add_action('admin_enqueue_scripts', [$this, 'add_admin_scripts']);
 
         if (function_exists('acf_add_options_page')) {
             $this->options_pages();
