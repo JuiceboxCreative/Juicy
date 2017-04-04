@@ -215,6 +215,7 @@ class Site extends TimberSite
                 'post_status' => $status,
                 'post_author' => 1,
                 'post_type' => 'page',
+                'post_name' => strtolower(str_replace(' ', '-', $title)),
             );
 
             if ( $template ) {
