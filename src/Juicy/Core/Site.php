@@ -77,6 +77,9 @@ class Site extends TimberSite
             return 'low';
         });
 
+        // prevent robots crawling dev domains.
+        add_filter('robots_txt', [$this, 'dev_robots_disallow'], 10, 2);
+
         parent::__construct();
     }
 
@@ -248,5 +251,15 @@ class Site extends TimberSite
             array_values($replace),
             $content
         );
+    }
+
+    public function dev_robots_disallow( $output, $public ) {
+        if (preg_match('/.+\.box$/', $_SERVER['HTTP_HOST'])
+            || preg_match('/.+\.dev.juicebox.com.au$/', $_SERVER['HTTP_HOST'])
+            || preg_match('/.+\.cloudsites.net.au$/', $_SERVER['HTTP_HOST'])) {
+            $output = "User-agent: *\nDisallow: /";
+        }
+
+        return $output;
     }
 }
