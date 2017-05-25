@@ -133,7 +133,12 @@ class GravityForms
         }
         $classes = array();
 
+        if( !empty($field['cssClass']) ) {
+            $classes[] = $field['cssClass'];
+        }
+
         $classes[] = 'input-wrapper';
+        $classes[] = $field['type'];
         $classes[] = ( $this->grid_system == 'flex' ? "col {$this->breakpoint}-" : "col-{$this->breakpoint}-" ) . ($field->columns == '' ? '12' : $field->columns);
         $classes[] = 'form-group';
 
