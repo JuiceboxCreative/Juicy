@@ -80,20 +80,7 @@ class Site extends TimberSite
         // prevent robots crawling dev domains.
         add_filter('robots_txt', [$this, 'dev_robots_disallow'], 10, 2);
 
-        add_action('admin_bar_menu', [$this, 'add_env_to_admin_bar']);
-
         parent::__construct();
-    }
-
-    public function add_env_to_admin_bar( \WP_Admin_Bar $admin_bar )
-    {
-        $dashicon = $this->env == 'production' ? 'site' : 'generic';
-
-        $admin_bar->add_menu([
-                'title' => '<span class="wpadmin-env__dashicon dashicons dashicons-admin-' . $dashicon . '"></span>' . ucwords($this->env) . '</span>',
-                'meta'   => [ 'class' => 'wpadmin-env wpadmin-env--' . $this->env ]
-            ]
-        );
     }
 
     public function no_GA()
