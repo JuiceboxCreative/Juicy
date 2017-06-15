@@ -73,7 +73,7 @@ class Admin
 
         $admin_bar->add_menu([
                 'title' => '<span class="wpadmin-env__dashicon dashicons dashicons-admin-' . $dashicon . '"></span>' . ucwords($env) . '</span>',
-                'meta'   => [ 'class' => 'wpadmin-env wpadmin-env--' . $this->env ]
+                'meta'   => [ 'class' => 'wpadmin-env wpadmin-env--' . $env ]
             ]
         );
     }
