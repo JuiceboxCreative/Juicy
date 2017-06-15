@@ -46,11 +46,15 @@ class Admin
         // Before Gravity forms sends an email, add our BCC
         add_action('gform_pre_send_email',      [$this, 'add_bcc'], 99, 3 );
 
-        add_action('admin_head',                [$this, 'admin_css'], 1);
+        if (is_user_logged_in()) {
+            add_action('wp_head',               [$this, 'admin_css'], 1);
+        }
+
         add_action('login_enqueue_scripts',     [$this, 'login_css']);
 
         add_action('admin_enqueue_scripts',     [$this, 'add_admin_scripts']);
 
+        add_action('admin_bar_menu', [$this, 'add_env_to_admin_bar']);
 
         add_filter( 'tiny_mce_before_init', function ( $mce ) {
             $mce['body_class'] .= ' article-content';
@@ -60,6 +64,18 @@ class Admin
         if (function_exists('acf_add_options_page')) {
             $this->options_pages();
         }
+    }
+
+    public function add_env_to_admin_bar( \WP_Admin_Bar $admin_bar )
+    {
+        $env = env('WP_ENV');
+        $dashicon = $env == 'production' ? 'site' : 'generic';
+
+        $admin_bar->add_menu([
+                'title' => '<span class="wpadmin-env__dashicon dashicons dashicons-admin-' . $dashicon . '"></span>' . ucwords($env) . '</span>',
+                'meta'   => [ 'class' => 'wpadmin-env wpadmin-env--' . $env ]
+            ]
+        );
     }
 
     public function add_admin_scripts()
