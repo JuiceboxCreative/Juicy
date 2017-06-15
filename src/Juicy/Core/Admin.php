@@ -7,7 +7,6 @@ use Twig_SimpleFunction;
 
 class Admin
 {
-    private $env;
     protected $defaultPlugins = array();
 
     /**
@@ -18,8 +17,6 @@ class Admin
 
     public function __construct()
     {
-        $this->env = env('WP_ENV', 'production');
-
         //remove comments link from admin menu, remove this filter if your site uses WP comments
         add_action('admin_menu',                [$this, 'remove_menu_items'], 99);
         add_action('admin_menu',                [$this, 'update_menu'], 99 );
@@ -71,10 +68,11 @@ class Admin
 
     public function add_env_to_admin_bar( \WP_Admin_Bar $admin_bar )
     {
-        $dashicon = $this->env == 'production' ? 'site' : 'generic';
+        $env = env('WP_ENV');
+        $dashicon = $env == 'production' ? 'site' : 'generic';
 
         $admin_bar->add_menu([
-                'title' => '<span class="wpadmin-env__dashicon dashicons dashicons-admin-' . $dashicon . '"></span>' . ucwords($this->env) . '</span>',
+                'title' => '<span class="wpadmin-env__dashicon dashicons dashicons-admin-' . $dashicon . '"></span>' . ucwords($env) . '</span>',
                 'meta'   => [ 'class' => 'wpadmin-env wpadmin-env--' . $this->env ]
             ]
         );
