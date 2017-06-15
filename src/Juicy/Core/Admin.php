@@ -46,7 +46,7 @@ class Admin
         // Before Gravity forms sends an email, add our BCC
         add_action('gform_pre_send_email',      [$this, 'add_bcc'], 99, 3 );
 
-        add_action('admin_head',                [$this, 'admin_css'], 1);
+        add_action('wp_head',                   [$this, 'admin_css'], 1);
         add_action('login_enqueue_scripts',     [$this, 'login_css']);
 
         add_action('admin_enqueue_scripts',     [$this, 'add_admin_scripts']);
