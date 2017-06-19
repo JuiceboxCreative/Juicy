@@ -72,6 +72,7 @@ class Admin
         $dashicon = $env == 'production' ? 'site' : 'generic';
 
         $admin_bar->add_menu([
+                'id' => 'wp-admin-env',
                 'title' => '<span class="wpadmin-env__dashicon dashicons dashicons-admin-' . $dashicon . '"></span>' . ucwords($env) . '</span>',
                 'meta'   => [ 'class' => 'wpadmin-env wpadmin-env--' . $env ]
             ]
