@@ -122,23 +122,25 @@ class Admin
     {
         global $submenu;
 
-        // remove menus from under appearance
-        foreach ( $submenu['themes.php'] as $key => $value ) {
-            if ( $value[2] == 'nav-menus.php' ) {
-                unset( $submenu['themes.php'][$key] );
+        // remove menus from under appearance if it's available to user
+        if (isset($submenu['themes.php'])) {
+            foreach ( $submenu['themes.php'] as $key => $value ) {
+                if ( $value[2] == 'nav-menus.php' ) {
+                    unset( $submenu['themes.php'][$key] );
+                }
             }
-        }
 
-        // add it to top level
-        add_menu_page(
-            'Menus',
-            'Menus',
-            'edit_theme_options',
-            'nav-menus.php',
-            '',
-            "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMCAyMC40IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAzMCAyMC40Ij48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZmlsbD0iIzk5OSIgZD0iTTEuOCAzLjZoMjYuNGMxIDAgMS44LS44IDEuOC0xLjhTMjkuMiAwIDI4LjIgMEgxLjhDLjggMCAwIC44IDAgMS44cy44IDEuOCAxLjggMS44em0yNi40IDQuOEgxLjhjLTEgMC0xLjguOC0xLjggMS44Uy44IDEyIDEuOCAxMmgyNi40YzEgMCAxLjgtLjggMS44LTEuOHMtLjgtMS44LTEuOC0xLjh6bTAgOC40SDEuOGMtMSAwLTEuOC44LTEuOCAxLjhzLjggMS44IDEuOCAxLjhoMjYuNGMxIDAgMS44LS44IDEuOC0xLjhzLS44LTEuOC0xLjgtMS44eiIvPjwvc3ZnPg==",
-            59
-        );
+            // add it to top level
+            add_menu_page(
+                'Menus',
+                'Menus',
+                'edit_theme_options',
+                'nav-menus.php',
+                '',
+                "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMCAyMC40IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAzMCAyMC40Ij48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZmlsbD0iIzk5OSIgZD0iTTEuOCAzLjZoMjYuNGMxIDAgMS44LS44IDEuOC0xLjhTMjkuMiAwIDI4LjIgMEgxLjhDLjggMCAwIC44IDAgMS44cy44IDEuOCAxLjggMS44em0yNi40IDQuOEgxLjhjLTEgMC0xLjguOC0xLjggMS44Uy44IDEyIDEuOCAxMmgyNi40YzEgMCAxLjgtLjggMS44LTEuOHMtLjgtMS44LTEuOC0xLjh6bTAgOC40SDEuOGMtMSAwLTEuOC44LTEuOCAxLjhzLjggMS44IDEuOCAxLjhoMjYuNGMxIDAgMS44LS44IDEuOC0xLjhzLS44LTEuOC0xLjgtMS44eiIvPjwvc3ZnPg==",
+                59
+            );
+        }
     }
 
     /**
