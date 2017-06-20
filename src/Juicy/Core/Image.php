@@ -48,21 +48,15 @@ class Image extends TimberImage {
             return $alt;
         }
 
-        // Fall back to page description if it is set.
-        $alt = $this->getPostMeta( 'metadesc' );
-
-        // Otherwise we will use the site name and tagline(if set)
-        if ( empty($alt) ) {
-            $alt = $this->getSiteName();
-        }
-
-        return $alt;
+        // Fall back to the title.
+        return $this->title();
     }
 
     public function title()
     {
         $title = parent::title();
-        // Check if alt is set
+
+        // Check if title is set
         if ( $title !== '' ) {
             return $title;
         }
