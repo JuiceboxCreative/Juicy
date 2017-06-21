@@ -83,16 +83,6 @@ class Site extends TimberSite
         parent::__construct();
     }
 
-    public function no_GA()
-    {
-        echo Timber::compile('partials/notice/error.twig', ['message' => 'Please enable Google Analytics by setting the Tracking ID within the .env file.']);
-    }
-
-    public function tracking_code()
-    {
-        echo Timber::compile('partials/ga.twig', ['code' => env('GA_ID')]);
-    }
-
     public function add_to_context($context)
     {
         $context['menus'] = array();

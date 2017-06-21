@@ -195,14 +195,7 @@ class Admin
 
     public function add_to_twig($twig)
     {
-        $twig->addFunction(new Twig_SimpleFunction('theme_option', array($this, 'get_theme_option')));
-
         return $twig;
-    }
-
-    public function get_theme_option($option)
-    {
-        return get_field($option, 'option');
     }
 
     // Custom Backend Footer
