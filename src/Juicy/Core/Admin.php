@@ -48,6 +48,7 @@ class Admin
 
         if (is_user_logged_in()) {
             add_action('wp_head',               [$this, 'admin_css'], 1);
+            add_action('admin_head',            [$this, 'admin_css'], 1);
         }
 
         add_action('login_enqueue_scripts',     [$this, 'login_css']);
