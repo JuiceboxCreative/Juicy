@@ -81,7 +81,7 @@ class Site extends TimberSite
         add_filter('robots_txt', [$this, 'dev_robots_disallow'], 10, 2);
 
         //Filter post update messages
-        add_filter('post_updated_messages', array($this, 'filter_post_update_msg'));
+        add_filter('post_updated_messages', [$this, 'filter_post_update_msg']);
 
         parent::__construct();
     }
@@ -257,7 +257,7 @@ class Site extends TimberSite
     }
 
     /* remove link from post update messages if post type is not publicly queryable */
-    function filter_post_update_msg( $messages ) {
+    public function filter_post_update_msg( $messages ) {
         $obj = get_post_type_object( get_post()->post_type ); 
 
         if( ! $obj->publicly_queryable ) {
