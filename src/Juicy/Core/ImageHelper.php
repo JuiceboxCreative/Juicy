@@ -10,6 +10,9 @@ class ImageHelper extends TimberImageHelper {
 
         if (!empty(env('CLOUDINARY_URL', ''))) {
             // Maintaining backwards compat.
+            if ($filters = 'c_fill,g_auto') {
+                $filters = 'center';
+            }
             $crop = $filters;
             return parent::resize($src, $w, $h, $crop);
         }
