@@ -109,7 +109,7 @@ class Site extends TimberSite
         }));
 
         // Override Timber resize with our own.
-        $twig->addFilter(new Twig_SimpleFilter('resize', array('JuiceBox\Core\ImageHelper', 'resize')));
+        $twig->addFilter(new Twig_SimpleFilter('resize', ['JuiceBox\Core\ImageHelper', 'resize']));
 
         return $twig;
     }
