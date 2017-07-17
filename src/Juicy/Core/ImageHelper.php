@@ -23,6 +23,10 @@ class ImageHelper extends TimberImageHelper {
         $base_filters = 'f_auto,dpr_auto';
 
         if (!empty($filters)) {
+            if ($filters == 'center') {
+                $filters = 'c_fill,g_auto';
+            }
+
             $filters .= ',' . $base_filters;
         }
         else {
