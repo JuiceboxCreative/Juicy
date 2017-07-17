@@ -80,6 +80,9 @@ class Site extends TimberSite
         // prevent robots crawling dev domains.
         add_filter('robots_txt', [$this, 'dev_robots_disallow'], 10, 2);
 
+        //Filter post update messages
+        add_filter('post_updated_messages', [$this, 'filter_post_update_msg']);
+
         parent::__construct();
     }
 
@@ -251,5 +254,20 @@ class Site extends TimberSite
         }
 
         return $output;
+    }
+
+    /* remove link from post update messages if post type is not publicly queryable */
+    public function filter_post_update_msg( $messages ) {
+        $obj = get_post_type_object( get_post()->post_type ); 
+
+        if( ! $obj->publicly_queryable ) {
+            foreach( $messages as &$message_type ) {
+                foreach( $message_type as &$message ) {
+                    $message = preg_replace('/<a[^>]*>.*<\/a>/','',$message);
+                }
+            }
+        }
+
+        return $messages;
     }
 }
