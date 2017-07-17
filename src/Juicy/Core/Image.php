@@ -26,8 +26,10 @@ class Image extends TimberImage {
      */
     public function src($size = 'full')
     {
-        $src = wp_get_attachment_image_src($this->iid, $size);
-        return $src[0];
+        $image = wp_get_attachment_image_src($this->iid, $size);
+        list($src) = $image;
+
+        return $src;
     }
 
     /**
