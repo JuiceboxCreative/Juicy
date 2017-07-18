@@ -10,6 +10,10 @@ use Juicy\Config\CustomPostTypes;
 use Juicy\Config\CustomTaxonomies;
 use Juicy\Config\Menus;
 use Juicy\Config\Assets;
+use Juicy\Core\Twig;
+
+// Override Timber registered filters.
+new Twig();
 
 /**
  * ------------------
