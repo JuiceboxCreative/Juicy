@@ -8,7 +8,7 @@ class ImageHelper extends TimberImageHelper {
 
     public static function resize( $src, $w = 0, $h = 0, $filters = 'c_fill,g_auto', $use_timber = false) {
 
-        if (!empty(env('CLOUDINARY_URL', '')) || $use_timber) {
+        if (empty(env('CLOUDINARY_URL', '')) || $use_timber) {
             // Maintaining backwards compat.
             if ($filters = 'c_fill,g_auto') {
                 $filters = 'center';
