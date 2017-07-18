@@ -7,6 +7,9 @@ use Timber\ImageHelper as TimberImageHelper;
 class ImageHelper extends TimberImageHelper {
 
     public static function resize( $src, $w = 0, $h = 0, $filters = 'c_fill,g_auto', $use_timber = false) {
+        if ($src instanceof Image) {
+            $src = $src->src();
+        }
 
         if (empty(env('CLOUDINARY_URL', '')) || $use_timber) {
             // Maintaining backwards compat.
