@@ -111,10 +111,6 @@ class Site extends TimberSite
     /* this is where you can add your own fuctions to twig */
     public function add_to_twig($twig)
     {
-        $twig->addFunction(new Twig_SimpleFunction('theme_option', function ($option) {
-            return get_field($option, 'option');
-        }));
-
         return $twig;
     }
 
