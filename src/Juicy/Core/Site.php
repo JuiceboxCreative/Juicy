@@ -293,9 +293,11 @@ class Site extends TimberSite
                     // Test for WordPress >= 4.7 WP_Hook class (https://make.wordpress.org/core/2016/09/08/wp_hook-next-generation-actions-and-filters/)
                     if( is_a( $wp_filter[$hook_name], 'WP_Hook' ) ) {
                         unset( $wp_filter[$hook_name]->callbacks[$priority][$unique_id] );
+                        break;
                     }
                     else {
                         unset($wp_filter[$hook_name][$priority][$unique_id]);
+                        break;
                     }
                 }
             }
