@@ -72,6 +72,8 @@ class Site extends TimberSite
 
         // Add responsive wrapper around oEmbed elements and tables
         add_filter('embed_oembed_html', [$this, 'wrap_embed'], 10, 1);
+        add_filter('acf/format_value/type=oembed', [$this, 'wrap_embed'], 10, 1);
+
         add_filter('the_content', array($this, 'add_div_to_tables'), 99);
 
         // Error fix
@@ -232,7 +234,8 @@ class Site extends TimberSite
      */
     public function wrap_embed($html)
     {
-        $html = preg_replace('/(width|height)="\d*"\s/', "", $html); // Strip width and height #1
+        $html = preg_replace('/(width|height|frameborder|scrolling)="[a-z0-9]*"\s/i', "", $html); // Strip width, height, frameborder, scrolling #1
+        $html = preg_replace('/(webkitallowfullscreen mozallowfullscreen)\s/i', "", $html); // Strip vendor attributes
 
         return '<div class="embed-responsive">' . $html . '</div>'; // Wrap in div element and return #3 and #4
     }
