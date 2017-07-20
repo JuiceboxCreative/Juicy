@@ -72,7 +72,7 @@ class Site extends TimberSite
 
         // Add responsive wrapper around oEmbed elements and tables
         add_filter('embed_oembed_html', [$this, 'wrap_embed'], 10, 1);
-        add_filter('acf/format_value/type=oembed', [$this, 'wrap_embed'], 10, 1);
+        add_filter('acf/format_value/type=oembed', [$this, 'wrap_embed'], 99, 1);
 
         add_filter('the_content', array($this, 'add_div_to_tables'), 99);
 
