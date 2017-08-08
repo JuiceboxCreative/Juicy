@@ -13,7 +13,7 @@ class ImageHelper extends TimberImageHelper {
 
         if (empty(env('CLOUDINARY_URL', '')) || $use_timber) {
             // Maintaining backwards compat.
-            if ($filters = 'c_fill,g_auto') {
+            if ($filters == 'c_fill,g_auto') {
                 $filters = 'center';
             }
             $crop = $filters;
