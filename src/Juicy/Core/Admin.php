@@ -145,8 +145,7 @@ class Admin
     }
 
     /**
-     * Remove menu items if not juicbox
-     * @return [type] [description]
+     * Remove menu items if not juicebox
      */
     public function remove_menu_items ()
     {
