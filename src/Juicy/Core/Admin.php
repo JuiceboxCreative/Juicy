@@ -145,14 +145,13 @@ class Admin
     }
 
     /**
-     * Remove menu items if not juicbox
-     * @return [type] [description]
+     * Remove menu items if not super admin
      */
     public function remove_menu_items ()
     {
         $user = wp_get_current_user();
 
-        if ( strtolower($user->data->user_login) !== 'juicebox' ) {
+        if ( strtolower($user->ID) === 1 ) {
             remove_menu_page( 'amazon-web-services' );
             remove_menu_page( 'tools.php' );
             remove_menu_page( 'edit-comments.php' );
