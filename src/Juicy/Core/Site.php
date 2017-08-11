@@ -76,7 +76,7 @@ class Site extends TimberSite
 
         add_filter('the_content', array($this, 'add_div_to_tables'), 99);
 
-        // Error fix
+        // W3C Validation fix.
         remove_action( 'wp_head', 'rest_output_link_wp_head', 10, 0 );
 
         // Move 'Yoast' to the bottom of the page
@@ -87,7 +87,7 @@ class Site extends TimberSite
         // prevent robots crawling dev domains.
         add_filter('robots_txt', [$this, 'dev_robots_disallow'], 10, 2);
 
-        //Filter post update messages
+        // Filter post update messages
         add_filter('post_updated_messages', [$this, 'filter_post_update_msg']);
 
         parent::__construct();
@@ -118,7 +118,15 @@ class Site extends TimberSite
             return get_field($option, 'option');
         }));
 
+        $twig->addFunction(new Twig_SimpleFunction('iconbox', [$this, 'get_icon']));
+        $twig->addFunction(new Twig_SimpleFunction('icon', [$this, 'get_icon']));
+
         return $twig;
+    }
+
+    public function get_icon($icon)
+    {
+        return "<i class=\"icon-${icon}\"></i>";
     }
 
     //Remove p tags from around images in content
