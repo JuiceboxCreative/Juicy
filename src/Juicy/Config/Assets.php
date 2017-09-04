@@ -2,13 +2,15 @@
 
 namespace Juicy\Config;
 
+use Timber\URLHelper;
+
 class Assets
 {
-    public static $css = array();
+    public static $css = [];
 
-    public static $js = array();
+    public static $js = [];
 
-    public static $jsData = array();
+    public static $async = [];
 
     /**
      * En-queue required assets
@@ -16,45 +18,20 @@ class Assets
      * @param  string  $filter   The name of the filter to hook into
      * @param  integer $priority The priority to attach the filter with
      */
-    public static function load($filter = 'wp_enqueue_scripts', $priority = 10)
+    public static function load()
     {
-        // Register the filter
-        add_filter($filter, function () {
+        add_filter('script_loader_tag', __CLASS__.'::add_async_tag', 10, 3);
 
-            // CSS
-            if ( static::$css !== array() ) {
-                foreach ( static::$css as $css ) {
-                    wp_enqueue_style( $css['handle'] , $css['src'], $css['deps'], filemtime($css['location']));
-                }
-            }
-
-            // JS
-            if ( static::$js !== array() ) {
-                foreach ( static::$js as $js ) {
-                    if ( isset($js['test']) && call_user_func($js['test']) === false ) {
-                        continue;
-                    }
-
-                    wp_enqueue_script( $js['handle'] , $js['src'], $js['deps'], filemtime($js['location']), $js['in_footer']);
-                }
-            }
-
-            // JS data
-            if ( static::$jsData !== array() ) {
-                foreach ( static::$jsData as $jsData ) {
-                    if ( isset($jsData['test']) && call_user_func($jsData['test']) === false ) {
-                        continue;
-                    }
-
-                    wp_localize_script($jsData['handle'], $jsData['name'], $jsData['data']);
-
-                    wp_enqueue_script($jsData['handle']);
-                }
-            }
-        }, $priority);
+        add_action('wp_enqueue_scripts', __CLASS__.'::register_files', 10);
     }
 
-    public static function add_css($config)
+    /**
+     * Register CSS
+     *
+     * @param [arrat] $config
+     * @return void
+     */
+    public static function add_css( $config )
     {   
         $defaults = [
             'handle'    => null,
@@ -66,6 +43,90 @@ class Assets
 
         $config = array_merge( $defaults, $config );
 
+        if ( !URLHelper::is_external_content($config['src']) ) {
+            // Set location
+            $config['src'] = get_stylesheet_directory_uri() . $config['src'];
+        }
+
+        // If version hasn't been passed in and the src isn't external(google fonts)
+        if ( !URLHelper::is_external_content($config['src']) && !$config['ver'] ) {
+            $config['ver'] = filemtime( get_stylesheet_directory() . "/{$defaults['src']}" );
+        }
+
         static::$css[] = $config;
+    }
+
+    /**
+     * Register JS
+     *
+     * @param [arrat] $config
+     * @return void
+     */
+    public static function add_js( $config )
+    {   
+        $defaults = [
+            'handle'    => null,
+            'src'       => null,
+            'deps'      => [],
+            'ver'       => false,
+            'footer'    => true,
+            'data'      => false,
+            'async'     => false
+        ];
+
+        $config = array_merge( $defaults, $config );
+
+        // Store async handles for later on
+        if ( $config['async'] ) {
+            static::$async[] = $config['handle'];
+        }
+        
+        if ( !URLHelper::is_external_content($config['src']) ) {
+            // Set location
+            $config['src'] = get_stylesheet_directory_uri() . $config['src'];
+        }
+
+        // If version hasn't been passed in and the src isn't external(google fonts)
+        if ( !$config['ver'] && !URLHelper::is_external_content($defaults['src']) ) {
+            $config['ver'] = filemtime( get_stylesheet_directory() . "/{$defaults['src']}" );
+        }
+
+        static::$js[] = $config;
+    }
+
+    public static function add_async_tag( $tag, $handle, $src )
+    {        
+        if ( !in_array($handle, static::$async) ) {
+            return $tag;
+        }
+
+        return str_replace( '<script', '<script async', $tag );
+    }
+
+    public static function register_files()
+    {
+        // CSS
+        if ( static::$css !== [] ) {
+            foreach ( static::$css as $css ) {
+                wp_enqueue_style( $css['handle'] , $css['src'], $css['deps'], $css['ver'], $css['media']);
+            }
+        }
+
+        // JS
+        if ( static::$js !== array() ) {
+            foreach ( static::$js as $js ) {
+                if ( isset($js['test']) && call_user_func($js['test']) === false ) {
+                    continue;
+                }
+
+                wp_enqueue_script( $js['handle'] , $js['src'], $js['deps'], $js['ver'], $js['footer']);
+
+                if ( $js['data'] ) {
+                    wp_localize_script($js['handle'], $js['data']['name'], $js['data']['config']);
+                    
+                    wp_enqueue_script($js['handle']);
+                }
+            }
+        }
     }
 }
