@@ -53,4 +53,19 @@ class Assets
             }
         }, $priority);
     }
+
+    public static function add_css($config)
+    {   
+        $defaults = [
+            'handle'    => null,
+            'src'       => null,
+            'deps'      => [],
+            'ver'       => false,
+            'media'     => 'all'
+        ];
+
+        $config = array_merge( $defaults, $config );
+
+        static::$css[] = $config;
+    }
 }
