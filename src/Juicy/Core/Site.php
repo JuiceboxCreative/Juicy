@@ -121,6 +121,28 @@ class Site extends TimberSite
         $twig->addFunction(new Twig_SimpleFunction('iconbox', [$this, 'get_icon']));
         $twig->addFunction(new Twig_SimpleFunction('icon', [$this, 'get_icon']));
 
+        if ( function_exists('d') ) {
+            $twig->addFunction(
+                new \Twig_SimpleFunction(
+                    'd',
+                    function ($var) {
+                        d($var);
+                    }
+                )
+            );
+        }
+
+        if ( function_exists('dd') ) {
+            $twig->addFunction(
+                new \Twig_SimpleFunction(
+                    'dd',
+                    function ($var) {
+                        dd($var);
+                    }
+                )
+            );
+        }
+
         return $twig;
     }
 
