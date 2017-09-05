@@ -16,6 +16,31 @@ class Shortcodes
         add_shortcode('site', array(__CLASS__, 'site'));
 
         add_shortcode('dummy-content', array(__CLASS__, 'dummy_content'));
+
+        add_shortcode('theme_option', array(__CLASS__, 'theme_option'));
+    }
+
+    public static function theme_option( $atts )
+    {
+        $atts = shortcode_atts([
+            'value' => ''
+        ], $atts);
+
+        if ( $atts['value'] == '' ) {
+            return new \WP_Error('Missing Value', 'Please Specify a value for this shortcode.', $atts);
+        }
+
+        if ( $atts['value'] == 'client_name' ) {
+            $option = get_option('blogname');
+        } else {
+            $option = get_field($atts['value'], 'option');
+        }
+
+        if ( empty($option) ) {
+            return new \WP_Error('Empty Field', "The value returned from your specified option (`{$atts['value']}`) is either empty or doesn't exist.", $atts);
+        }
+
+        return $option;
     }
 
     public static function html_sitemap()
@@ -43,24 +68,6 @@ class Shortcodes
         );
 
         return Timber::compile('partials/sitemap.twig', $context);
-    }
-
-    public function site($atts)
-    {
-        $atts = shortcode_atts(array(
-            'data' => 'name'
-        ), $atts, 'site');
-
-        //Try custom field first
-        $string = get_field($atts['data'], 'option');
-
-        //If custom field doesn't exist try get site info
-        if(empty($string)) {
-            $context = Timber::get_context();
-            $string = $context['site']->{$atts['data']};
-        }
-
-        return $string;
     }
 
     public function dummy_content()
