@@ -1,8 +1,8 @@
-This privacy policy sets out how <strong>{{clientName}}</strong> uses and protects any information that you give <strong>{{clientName}}</strong> when you use this website.
+This privacy policy sets out how <strong>[theme_option value="client_name"]</strong> uses and protects any information that you give <strong>[theme_option value="client_name"]</strong> when you use this website.
 
-<strong>{{clientName}}</strong> is committed to ensuring that your privacy is protected. Should we ask you to provide certain information by which you can be identified when using this website, then you can be assured that it will only be used in accordance with this privacy statement.
+<strong>[theme_option value="client_name"]</strong> is committed to ensuring that your privacy is protected. Should we ask you to provide certain information by which you can be identified when using this website, then you can be assured that it will only be used in accordance with this privacy statement.
 
-<strong>{{clientName}}</strong> may change this policy from time to time by updating this page. You should check this page from time to time to ensure that you are happy with any changes.
+<strong>[theme_option value="client_name"]</strong> may change this policy from time to time by updating this page. You should check this page from time to time to ensure that you are happy with any changes.
 <h2>What we collect</h2>
 <h3>We may collect the following information:</h3>
 <ul>
@@ -33,13 +33,13 @@ Our website may contain links to other websites of interest. However, once you h
 <h2>Controlling your personal information</h2>
 You may choose to restrict the collection or use of your personal information in the following ways:
 <ul>
-    <li>If you have previously agreed to us using your personal information for direct marketing purposes, you may change your mind at any time by writing to or emailing us at <strong><a href="mailto:{{clientEmail}}">{{clientEmail}}</a></strong></li>
+    <li>If you have previously agreed to us using your personal information for direct marketing purposes, you may change your mind at any time by writing to or emailing us at <strong><a href="mailto:[theme_option value="email"]">[theme_option value="email"]</a></strong></li>
     <li>Clicking on the unsubscribe link at the bottom of any direct marketing email you might receive.</li>
 </ul>
 We will not sell, distribute or lease your personal information to third parties unless we have your permission or are required by law to do so. We may use your personal information to send you promotional information about third parties which we think you may find interesting if you tell us that you wish this to happen.
 
 You may request details of personal information which we hold about you under the Data Protection Act 1998. A small fee will be payable. If you would like a copy of the information held on you please write to:
 
-{{clientAddress}}
+[theme_option value="address"]
 
 If you believe that any information we are holding on you is incorrect or incomplete, please write to or email us as soon as possible, at the above address. We will promptly correct any information found to be incorrect.
