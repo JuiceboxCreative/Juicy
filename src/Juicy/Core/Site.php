@@ -62,6 +62,7 @@ class Site extends TimberSite
             get_template_directory() . '/src/',
             get_stylesheet_directory() . '/src/',
             get_stylesheet_directory() . '/src/JuiceBox/Modules/',
+            get_stylesheet_directory() . '/src/JuiceBox/Components/'
         );
 
         add_action('acf/init', function () {
@@ -239,7 +240,7 @@ class Site extends TimberSite
         $this->create_page_if_null('Contact', '', 'publish', 'page--contact.php');
 
         $dir = new \DirectoryIterator(get_template_directory() . '/pages');
-        
+
         foreach ($dir as $dirinfo) {
 
             if (!$dirinfo->isDot()) {
@@ -308,7 +309,7 @@ class Site extends TimberSite
 
     /* remove link from post update messages if post type is not publicly queryable */
     public function filter_post_update_msg( $messages ) {
-        $obj = get_post_type_object( get_post()->post_type ); 
+        $obj = get_post_type_object( get_post()->post_type );
 
         if( ! $obj->publicly_queryable ) {
             foreach( $messages as &$message_type ) {
