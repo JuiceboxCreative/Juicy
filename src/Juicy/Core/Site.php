@@ -54,6 +54,8 @@ class Site extends TimberSite
 
         add_filter('acf/format_value/type=image', array($this, 'field_to_jb_image'), 99, 3);
 
+        add_filter('acf/format_value/type=swatch', array($this, 'colour_swatch_array_format'), 99, 3);
+
         // Check if post needs a password here, removes it from page.php/single.php
         add_filter('timber_render_file', array($this, 'maybe_load_password_template'));
 
@@ -211,6 +213,19 @@ class Site extends TimberSite
     {
         if ($field['return_format'] == 'id' && $value !== false) {
             return new $this->TermClass($value);
+        }
+
+        return $value;
+    }
+
+    /**
+     * Add some additional return values to color swatch fields.
+     */
+    public function colour_swatch_array_format($value, $post_id, $field)
+    {
+        if ($field['return_format'] == 'array' && $value !== false) {
+            $value['hex'] = $value['value'];
+            $value['class'] = str_slug($value['label']);
         }
 
         return $value;
