@@ -223,7 +223,7 @@ class Site extends TimberSite
      */
     public function colour_swatch_array_format($value, $post_id, $field)
     {
-        if ($field['return_format'] == 'array' && $value !== false) {
+        if ($field['return_format'] == 'array' && is_array($value)) {
             $value['hex'] = $value['value'];
             $value['class'] = str_slug($value['label']);
         }
