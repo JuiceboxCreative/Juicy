@@ -24,7 +24,7 @@ class GravityForms
 
         add_action( 'gform_editor_js', array($this, 'field_settings_js') );
 
-        add_action('gform_enqueue_scripts', array($this, 'remove_gravityforms_style'));
+        add_action('gform_enqueue_scripts', array($this, 'remove_gravityforms_style'), 99);
 
         add_filter( 'gform_field_content', array($this, 'edit_markup_input'), 99, 5 );
 
@@ -40,7 +40,7 @@ class GravityForms
      */
     public function remove_gravityforms_style() {
         if (!$this->include_styles) {
-            wp_deregister_style("gforms_formsmain_css");    
+            wp_deregister_style("gforms_formsmain_css");
             wp_deregister_style("gforms_reset_css");
             wp_deregister_style("gforms_ready_class_css");
             wp_deregister_style("gforms_browsers_css");
