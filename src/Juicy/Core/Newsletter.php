@@ -46,7 +46,7 @@ class Newsletter
 
         // Add data from js script
         wp_localize_script(
-            'jb_newsletter',
+            'jb_script',
             'newsletterData',
             [
                 'nonce'             => wp_create_nonce( 'newsletter_signup' ),
