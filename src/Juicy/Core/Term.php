@@ -7,6 +7,8 @@ use TimberTerm;
 
 class Term extends TimberTerm {
 
+    use HasModuleLoop;
+
     public $PostClass = '\\Juicy\\Core\\Post';
     public $TermClass = '\\Juicy\\Core\\Term';
     public $ImageClass = '\\Juicy\\Core\\Image';
@@ -61,41 +63,5 @@ class Term extends TimberTerm {
     public function thumbnail($fallback = false)
     {
         return $this->get_thumbnail($fallback);
-    }
-
-    public function get_modules()
-    {
-        $modules = $this->get_field('modules');
-
-        if ( empty($modules) ) {
-            return;
-        }
-
-        $processedModules = array();
-
-        foreach ($modules as $index => $module) {
-            $name = $module['acf_fc_layout'];
-
-            // Module processor namespace is PascalCase. Convert from underscore name in ACF
-            $parts = explode('_', $name);
-            $parts = array_map(function ($word) {
-                return ucfirst($word);
-            }, $parts);
-            $namespace = implode('', $parts);
-            $fqcn = '\\Juicy\\Modules\\' . $namespace.'\\Module';
-            $fqcn = class_exists($fqcn) ? $fqcn : '\\JuiceBox\\Modules\\'.$namespace.'\\Module';
-
-            $moduleProcessor = new $fqcn($module, $name, $this);
-            $module = $moduleProcessor->getModule();
-
-            $module['template'] = $moduleProcessor->getTemplate();
-            $module['fqcn'] = $fqcn;
-            $module['index'] = $index;
-            $module['name'] = $name;
-
-            $processedModules[] = $module;
-        }
-
-        return $processedModules;
     }
 }

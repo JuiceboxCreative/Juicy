@@ -1,7 +1,0 @@
-{% extends "base-page.twig" %}
-
-{% block beforePostContent %}
-    <div class="post-meta">
-        <time class="post-meta__item post-meta__date" datetime="{{ post.post_date|date('Y-m-d') }}">{{ post.post_date|date }}</time>
-    </div>
-{% endblock %}
