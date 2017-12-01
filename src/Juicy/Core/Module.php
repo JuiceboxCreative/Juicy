@@ -126,14 +126,6 @@ abstract class Module
         return \Timber::compile($this->getTemplatePath(), $context);
     }
 
-    /**
-     * @deprecated
-     */
-    public function _toString()
-    {
-        return $this->__toString();
-    }
-
     protected function getTemplatePath()
     {
         $base = $this->getNamespace();
