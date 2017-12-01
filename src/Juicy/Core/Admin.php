@@ -155,6 +155,11 @@ class Admin
             remove_menu_page( 'amazon-web-services' );
             remove_menu_page( 'tools.php' );
             remove_menu_page( 'edit-comments.php' );
+
+            remove_submenu_page( 'themes.php', 'themes.php' ); // hide the theme selection submenu
+            remove_submenu_page( 'themes.php', 'widgets.php' ); // hide the widgets submenu
+            remove_submenu_page( 'themes.php', 'customize.php?return=%2Fwp-admin%2Ftools.php' ); // hide the customizer submenu
+            remove_submenu_page( 'themes.php', 'customize.php?return=%2Fwp-admin%2Ftools.php&#038;autofocus%5Bcontrol%5D=background_image' ); // hide the background submenu
         }
     }
 

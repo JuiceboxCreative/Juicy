@@ -6,6 +6,8 @@ use TimberPost;
 
 class Post extends TimberPost
 {
+    use HasModuleLoop;
+
     public $PostClass = '\\Juicy\\Core\\Post';
     public $ImageClass = '\\Juicy\\Core\\Image';
     public $modules = null;
@@ -60,6 +62,11 @@ class Post extends TimberPost
         return $this->get_thumbnail($fallback);
     }
 
+    public function get_field($selector)
+    {
+        return get_field($selector, $this->ID);
+    }
+
     public function get_fb_share_link()
     {
         return 'http://www.facebook.com/sharer/sharer.php?u='.$this->link;
@@ -73,47 +80,6 @@ class Post extends TimberPost
     public function get_linkedin_share_link()
     {
         return 'https://www.linkedin.com/shareArticle?mini=true&url=' . $this->link .  '&amp;title=' . urlencode(html_entity_decode($this->title . " - ". get_bloginfo('name'), ENT_COMPAT, 'UTF-8'));
-    }
-
-    public function get_modules()
-    {
-        $modules = get_field('modules', $this->ID);
-
-        if (empty($modules)) {
-            return;
-        }
-
-        $processedModules = array();
-
-        foreach ($modules as $index => $module) {
-            if (!isset($module['acf_fc_layout'])) {
-                var_dump($module);
-                throw new \Exception('Module is missing the acf_fc_layout key.');
-            }
-
-            $name = $module['acf_fc_layout'];
-
-            // Module processor namespace is PascalCase. Convert from underscore name in ACF
-            $parts = explode('_', $name);
-            $parts = array_map(function ($word) {
-                return ucfirst($word);
-            }, $parts);
-            $namespace = implode('', $parts);
-            $fqcn = '\\Juicy\\Modules\\' . $namespace.'\\Module';
-            $fqcn = class_exists($fqcn) ? $fqcn : '\\JuiceBox\\Modules\\'.$namespace.'\\Module';
-
-            $moduleProcessor = new $fqcn($module, $name, $this);
-            $module = $moduleProcessor->getModule();
-
-            $module['template'] = $moduleProcessor->getTemplate();
-            $module['fqcn'] = $fqcn;
-            $module['index'] = $index;
-            $module['name'] = $name;
-
-            $processedModules[] = $module;
-        }
-
-        return $processedModules;
     }
 
     public function has_children() {
