@@ -141,7 +141,7 @@ class Site extends TimberSite
      */
     public function field_to_jb_post($value, $post_id, $field)
     {
-        if ($field['return_format'] == 'id' && $value !== false) {
+        if ($field['return_format'] == 'id' && $value !== false && !empty($value)) {
             if ( !is_array($value) ) {
                 return new $this->PostClass($value);
             } else {
