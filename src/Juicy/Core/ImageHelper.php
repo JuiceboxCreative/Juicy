@@ -6,6 +6,32 @@ use Timber\ImageHelper as TimberImageHelper;
 
 class ImageHelper extends TimberImageHelper {
 
+    public static function letterbox( $src, $w, $h, $color= false, $force= false) {
+        if ($src instanceof Image) {
+            $src = $src->src();
+        }
+
+        if (empty(env('CLOUDINARY_URL', '')) || $use_timber) {
+            return parent::letterbox($src, $w, $h, strpos($color, '#')  === 0 ? $color : '#' . $color, $force);
+        }
+
+        $base_url = env('CLOUDINARY_URL') . '/image/fetch/';
+
+        $base_filters = 'c_pad';
+
+        $filters = $base_filters . ',b_rgb:' . str_replace('#', '', $color);
+
+        if ($w && is_numeric($w)) {
+            $filters .= ',w_' . $w;
+        }
+
+        if ($h && is_numeric($h)) {
+            $filters .= ',h_' . $h;
+        }        
+
+        return $base_url . $filters . '/' . $src;
+    }    
+
     public static function resize( $src, $w = 0, $h = 0, $filters = 'c_fill,g_auto', $use_timber = false) {
         if ($src instanceof Image) {
             $src = $src->src();

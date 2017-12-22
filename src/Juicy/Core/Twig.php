@@ -18,6 +18,7 @@ class Twig extends \Timber\Twig {
      */
     public function add_timber_filters( $twig ) {
         $twig->addFilter(new \Twig_SimpleFilter('resize', array('Juicy\Core\ImageHelper', 'resize')));
+        $twig->addFilter(new \Twig_SimpleFilter('letterbox', array('Juicy\Core\ImageHelper', 'letterbox')));        
 
         /* debugging filters */
         $twig->addFilter(new \Twig_SimpleFilter('get_class', 'get_class'));
