@@ -6,7 +6,7 @@ use Timber\ImageHelper as TimberImageHelper;
 
 class ImageHelper extends TimberImageHelper {
 
-    public static function letterbox( $src, $w, $h, $color= false, $force= false) {
+    public static function letterbox( $src, $w, $h, $color = false, $force = false, $use_timber = false) {
         if ($src instanceof Image) {
             $src = $src->src();
         }
