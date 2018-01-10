@@ -32,7 +32,11 @@ class GravityForms
 
         add_filter( 'gform_get_form_filter', array($this, 'edit_form_markup'), 99, 2);
 
-        add_filter( 'gform_submit_button', array($this, 'form_create_btns_submit'), 10, 2 );
+        add_filter( 'gform_submit_button', array($this, 'form_create_btns'), 10, 2 );
+
+        add_filter( 'gform_next_button', array($this, 'form_create_btns'), 10, 2 );
+
+        add_filter( 'gform_prev_button', array($this, 'form_create_btns'), 10, 2 );
     }
 
     /**
@@ -47,15 +51,10 @@ class GravityForms
         }
     }
 
-    public function form_create_btns_submit( $button, $form )
-    {
-        return $this->form_create_btns( $button, $form, 'submit' );
-    }
-
     /**
      * Turns all inputs[type="button|submit"] into buttons
      */
-    public function form_create_btns( $button, $form, $dir = null )
+    public function form_create_btns( $button, $form )
     {
         $dom = new \DOMDocument();
         $dom->loadHTML( $button );
