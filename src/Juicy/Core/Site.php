@@ -148,7 +148,31 @@ class Site extends TimberSite
             );
         }
 
+        $twig->addFunction(new Twig_SimpleFunction('s3_svg', [$this, 's3_svg']));
+
         return $twig;
+    }
+
+    public function s3_svg($image)
+    {
+        if (! $image instanceof \JuiceBox\Core\Image) {
+            return $image;
+        }
+
+        $transient_name = 'file_' . $image->id . '_contents';
+        $transient_modified_name = $transient_name . '_modified';
+        $file_contents_set = (false !== ( $file_contents = get_transient($transient_name) ));
+        $file_modified_set = (false !== ( $file_modified = get_transient($transient_modified_name)));
+
+        if (! $file_contents_set || ! $file_modified_set || $file_modified != $image->post_modified) {
+            // S3 files are served gzipped, so we have to uncompress them.
+            $file_contents = file_get_contents('compress.zlib://' . $image->src());
+            $file_modified = $image->post_modified;
+            set_transient($transient_name, $file_contents);
+            set_transient($transient_modified_name, $file_modified);
+        }
+
+        return $file_contents;
     }
 
     public function get_icon($icon)

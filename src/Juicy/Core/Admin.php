@@ -158,7 +158,7 @@ class Admin
     /**
      * Remove menu items if not juicebox
      */
-    public function remove_menu_items ()
+    public function remove_menu_items()
     {
         $user = wp_get_current_user();
 
