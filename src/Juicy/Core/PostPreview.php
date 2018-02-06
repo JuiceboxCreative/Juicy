@@ -2,9 +2,9 @@
 
 namespace Juicy\Core;
 
-use Timber\Timber;
+use Timber\PostPreview as TimberPostPreview;
 
-class PostPreview extends PostPreview
+class PostPreview extends TimberPostPreview
 {
     protected $end = '&hellip;';
     protected $force = false;
