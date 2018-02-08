@@ -4,9 +4,19 @@ namespace Juicy\Core;
 
 trait HasModuleLoop {
 
-    public function get_modules()
+    public function get_modules($module_field = 'modules', $option = false)
     {
-        $modules = $this->get_field('modules');
+        if ($option) {
+            $modules = get_field($module_field, 'option');
+
+            if (empty($modules)) {
+                return;
+            }
+
+            $modules = $modules['modules'];
+        } else {
+            $modules = $this->get_field($module_field);
+        }
 
         if (empty($modules)) {
             return;
@@ -16,8 +26,13 @@ trait HasModuleLoop {
 
         foreach ($modules as $index => $module) {
             if (!isset($module['acf_fc_layout'])) {
-                var_dump($module);
-                throw new \Exception('Module is missing the acf_fc_layout key.');
+                if (WP_ENV !== 'production') {
+                    echo 'Module is missing the acf_fc_layout key.';
+                    var_dump($module);
+                    die();
+                }
+
+                continue;
             }
 
             $name = $module['acf_fc_layout'];
