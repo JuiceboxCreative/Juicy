@@ -56,7 +56,7 @@ class ImageHelper extends TimberImageHelper {
                 $filters = 'c_fill,g_auto';
             }
 
-            $filters .= ',' . $base_filters;
+            $filters .= ends_with($filters, '/') ? $base_filters : (',' . $base_filters);
         }
         else {
             $filters = $base_filters;
