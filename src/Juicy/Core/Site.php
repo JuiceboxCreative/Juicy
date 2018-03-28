@@ -237,8 +237,19 @@ class Site extends TimberSite
      */
     public function field_to_jb_term($value, $term_id, $field)
     {
-        if ($field['return_format'] == 'id' && $value !== false && !empty($value)) {
-            return new $this->TermClass($value);
+        if (is_array($value)) {
+            if ($field['return_format'] == 'id') {
+                $values = [];
+                foreach ($value as $val) {
+                    $values[] = new $this->TermClass($val);
+                }
+                return $values;
+            }
+        }
+        else {
+            if ($field['return_format'] == 'id' && $value !== false && !empty($value)) {
+                return new $this->TermClass($value);
+            }
         }
 
         return $value;
