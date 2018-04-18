@@ -56,7 +56,9 @@ trait HasModuleLoop {
 
                 $processedModules[] = $module;
             } else {
-                var_dump("Module: ${fqcn} does not exist");
+                if (WP_ENV !== 'production') {
+                    var_dump("Module: ${fqcn} does not exist");
+                }
             }
         }
 
