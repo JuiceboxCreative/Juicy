@@ -45,15 +45,19 @@ trait HasModuleLoop {
             $namespace = implode('', $parts);
             $fqcn = '\\JuiceBox\\Modules\\'.$namespace.'\\Module';
 
-            $moduleProcessor = new $fqcn($module, $name, $this);
-            $module = $moduleProcessor->getModule();
+            if( class_exists($fqcn) ) {
+                $moduleProcessor = new $fqcn($module, $name, $this);
+                $module = $moduleProcessor->getModule();
 
-            $module['template'] = $moduleProcessor->getTemplate();
-            $module['fqcn'] = $fqcn;
-            $module['index'] = $index;
-            $module['name'] = $name;
+                $module['template'] = $moduleProcessor->getTemplate();
+                $module['fqcn'] = $fqcn;
+                $module['index'] = $index;
+                $module['name'] = $name;
 
-            $processedModules[] = $module;
+                $processedModules[] = $module;
+            } else {
+                var_dump("Module: ${fqcn} does not exist");
+            }
         }
 
         return $processedModules;
