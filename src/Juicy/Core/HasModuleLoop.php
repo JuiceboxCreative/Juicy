@@ -29,7 +29,6 @@ trait HasModuleLoop {
                 if (WP_ENV !== 'production') {
                     echo 'Module is missing the acf_fc_layout key.';
                     var_dump($module);
-                    die();
                 }
 
                 continue;
@@ -45,15 +44,19 @@ trait HasModuleLoop {
             $namespace = implode('', $parts);
             $fqcn = '\\JuiceBox\\Modules\\'.$namespace.'\\Module';
 
-            $moduleProcessor = new $fqcn($module, $name, $this);
-            $module = $moduleProcessor->getModule();
+            if( class_exists($fqcn) ) {
+                $moduleProcessor = new $fqcn($module, $name, $this);
+                $module = $moduleProcessor->getModule();
 
-            $module['template'] = $moduleProcessor->getTemplate();
-            $module['fqcn'] = $fqcn;
-            $module['index'] = $index;
-            $module['name'] = $name;
+                $module['template'] = $moduleProcessor->getTemplate();
+                $module['fqcn'] = $fqcn;
+                $module['index'] = $index;
+                $module['name'] = $name;
 
-            $processedModules[] = $module;
+                $processedModules[] = $module;
+            } elseif (WP_ENV !== 'production') {
+                var_dump("Module: $fqcn does not exist");
+            }
         }
 
         return $processedModules;
