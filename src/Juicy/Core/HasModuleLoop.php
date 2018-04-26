@@ -29,7 +29,6 @@ trait HasModuleLoop {
                 if (WP_ENV !== 'production') {
                     echo 'Module is missing the acf_fc_layout key.';
                     var_dump($module);
-                    die();
                 }
 
                 continue;
@@ -55,10 +54,8 @@ trait HasModuleLoop {
                 $module['name'] = $name;
 
                 $processedModules[] = $module;
-            } else {
-                if (WP_ENV !== 'production') {
-                    var_dump("Module: ${fqcn} does not exist");
-                }
+            } elseif (WP_ENV !== 'production') {
+                var_dump("Module: $fqcn does not exist");
             }
         }
 
