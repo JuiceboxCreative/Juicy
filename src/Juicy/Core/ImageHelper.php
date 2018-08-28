@@ -3,6 +3,7 @@
 namespace Juicy\Core;
 
 use Timber\ImageHelper as TimberImageHelper;
+use Timber\URLHelper;
 
 class ImageHelper extends TimberImageHelper {
 
@@ -12,7 +13,28 @@ class ImageHelper extends TimberImageHelper {
         }
 
         if (empty(env('CLOUDINARY_URL', '')) || $use_timber) {
-            return parent::letterbox($src, $w, $h, strpos($color, '#')  === 0 ? $color : '#' . $color, $force);
+
+            // Fix images in month folders.
+            if (URLHelper::is_external_content($src)) {
+                // Fixes: external images are downloaded every month (#1098)
+                add_filter('upload_dir', array(__CLASS__, 'setUploadDir'));
+
+                // Fix sideload issue: uppercase image extensions (#829)
+                $fileLoc = self::get_sideloaded_file_loc($src);
+                $file = pathinfo($fileLoc);
+                $lowercaseExtension = self::getLowercaseExtension($fileLoc, $file['extension']);
+
+                if (file_exists($lowercaseExtension)) {
+                    // Return existing file URL
+                    $src = URLHelper::get_rel_path($lowercaseExtension);
+                }
+            }
+
+            $result = parent::letterbox($src, $w, $h, strpos($color, '#')  === 0 ? $color : '#' . $color, $force);
+
+            remove_filter('upload_dir', array(__CLASS__, 'setUploadDir'));
+
+            return $result;
         }
 
         $base_url = env('CLOUDINARY_URL') . '/image/fetch/';
@@ -27,10 +49,10 @@ class ImageHelper extends TimberImageHelper {
 
         if ($h && is_numeric($h)) {
             $filters .= ',h_' . $h;
-        }        
+        }
 
         return $base_url . $filters . '/' . $src;
-    }    
+    }
 
     public static function resize( $src, $w = 0, $h = 0, $filters = 'c_fill,g_auto', $use_timber = false) {
         if ($src instanceof Image) {
@@ -43,7 +65,28 @@ class ImageHelper extends TimberImageHelper {
                 $filters = 'center';
             }
             $crop = $filters;
-            return parent::resize($src, $w, $h, $crop);
+
+            // Fix images in month folders.
+            if (URLHelper::is_external_content($src)) {
+                // Fixes: external images are downloaded every month (#1098)
+                add_filter('upload_dir', array(__CLASS__, 'setUploadDir'));
+
+                // Fix sideload issue: uppercase image extensions (#829)
+                $fileLoc = self::get_sideloaded_file_loc($src);
+                $file = pathinfo($fileLoc);
+                $lowercaseExtension = self::getLowercaseExtension($fileLoc, $file['extension']);
+
+                if (file_exists($lowercaseExtension)) {
+                    // Return existing file URL
+                    $src = URLHelper::get_rel_path($lowercaseExtension);
+                }
+            }
+
+            $result =  parent::resize($src, $w, $h, $crop);
+
+            remove_filter('upload_dir', array(__CLASS__, 'setUploadDir'));
+
+            return $result;
         }
 
         $base_url = env('CLOUDINARY_URL') . '/image/fetch/';
@@ -71,5 +114,19 @@ class ImageHelper extends TimberImageHelper {
         }
 
         return $base_url . $filters . '/' . $src;
+    }
+
+    public static function setUploadDir($upload)
+    {
+        $upload['subdir'] = '/timber';
+        $upload['path'] = $upload['basedir'] . $upload['subdir'];
+        $upload['url'] = $upload['baseurl'] . $upload['subdir'];
+
+        return $upload;
+    }
+
+    private static function getLowercaseExtension($src, $extension)
+    {
+        return str_replace('.' . $extension, '.' . strtolower($extension), $src);
     }
 }
