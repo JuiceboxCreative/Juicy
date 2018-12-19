@@ -13,6 +13,12 @@ class ImageHelper extends TimberImageHelper {
         }
 
         if (empty(env('CLOUDINARY_URL', '')) || $use_timber) {
+            // Dont crop if its a gif as the servers don't have 
+            // libraries to support this
+            $ext = pathinfo($src, PATHINFO_EXTENSION);            
+            if($ext == 'gif') {
+                return $src;
+            }
 
             // Fix images in month folders.
             if (URLHelper::is_external_content($src)) {
@@ -60,6 +66,13 @@ class ImageHelper extends TimberImageHelper {
         }
 
         if (empty(env('CLOUDINARY_URL', '')) || $use_timber) {
+            // Dont crop if its a gif as the servers don't have 
+            // libraries to support this
+            $ext = pathinfo($src, PATHINFO_EXTENSION);            
+            if($ext == 'gif') {
+                return $src;
+            }
+            
             // Maintaining backwards compat.
             if ($filters == 'c_fill,g_auto') {
                 $filters = 'center';
