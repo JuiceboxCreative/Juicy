@@ -1,25 +1,32 @@
 {
-  "name": "juicebox/juicy",
-  "description": "The JuiceBox Wordpress starter theme",
-  "keywords": ["wordpress", "theme", "starter theme"],
-  "homepage": "http://juicebox.com.au",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "JuiceBox Creative",
-      "email": "web@juicebox.com.au",
-      "homepage": "http://juicebox.com.au"
+    "name": "juicebox/juicy",
+    "description": "The JuiceBox Wordpress starter theme",
+    "keywords": [
+        "wordpress",
+        "theme",
+        "starter theme"
+    ],
+    "homepage": "http://juicebox.com.au",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "JuiceBox Creative",
+            "email": "web@juicebox.com.au",
+            "homepage": "http://juicebox.com.au"
+        }
+    ],
+    "type": "wordpress-theme",
+    "require": {
+        "php": ">=7.0",
+        "composer/installers": "^1.0",
+        "illuminate/support": "^5.5",
+        "rappasoft/laravel-helpers": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "": [
+                "src"
+            ]
+        }
     }
-  ],
-  "type": "wordpress-theme",
-  "require": {
-    "php": ">=7.0",
-    "composer/installers": "^1.0",
-    "illuminate/support": "^5.5"
-  },
-  "autoload": {
-    "psr-4": {
-      "": ["src"]
-    }
-  }
 }
