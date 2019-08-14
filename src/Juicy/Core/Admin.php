@@ -69,7 +69,7 @@ class Admin
 
     public function add_env_to_admin_bar( \WP_Admin_Bar $admin_bar )
     {
-        $env = env('WP_ENV');
+        $env = WP_ENV;
         $dashicon = $env == 'production' ? 'site' : 'generic';
 
         $admin_bar->add_menu([

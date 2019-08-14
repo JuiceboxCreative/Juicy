@@ -112,7 +112,7 @@ class Newsletter
             exit;
         }
 
-        $service = env('NEWSLETTER_SERVICE', false);
+        $service = NEWSLETTER_SERVICE;
 
         if ( $service ) {
             $this->{"handle_$service"}($data);
@@ -133,9 +133,9 @@ class Newsletter
     private function handle_CM($data)
     {
         $cm = new \CS_REST_Subscribers(
-            env('NEWSLETTER_LIST'),
+            NEWSLETTER_LIST,
             array(
-                'api_key' => env('NEWSLETTER_CLIENT')
+                'api_key' => NEWSLETTER_CLIENT
             )
         );
 
@@ -167,10 +167,10 @@ class Newsletter
      */
     private function handle_MC($data)
     {
-        $mc = new \Mailchimp(env('NEWSLETTER_CLIENT'));
+        $mc = new \Mailchimp(NEWSLETTER_CLIENT);
 
         $result = $mc->lists->subscribe(
-            env('NEWSLETTER_LIST'),
+            NEWSLETTER_LIST,
             [
                 'email' => $data['email']
             ],
