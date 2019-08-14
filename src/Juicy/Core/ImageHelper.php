@@ -12,7 +12,7 @@ class ImageHelper extends TimberImageHelper {
             $src = $src->src();
         }
 
-        if (!defined(CLOUDINARY_URL)) || $use_timber) {
+        if (!defined('CLOUDINARY_URL') || $use_timber) {
 
             // Fix images in month folders.
             if (URLHelper::is_external_content($src)) {
@@ -59,7 +59,7 @@ class ImageHelper extends TimberImageHelper {
             $src = $src->src();
         }
 
-        if (!defined(CLOUDINARY_URL) || $use_timber) {
+        if (!defined('CLOUDINARY_URL') || $use_timber) {
             // Maintaining backwards compat.
             if ($filters == 'c_fill,g_auto') {
                 $filters = 'center';
