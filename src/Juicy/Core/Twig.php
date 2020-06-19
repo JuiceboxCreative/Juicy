@@ -18,7 +18,7 @@ class Twig extends \Timber\Twig {
      */
     public function add_timber_filters( $twig ) {
         $twig->addFilter(new \Twig_SimpleFilter('resize', array('Juicy\Core\ImageHelper', 'resize')));
-        $twig->addFilter(new \Twig_SimpleFilter('letterbox', array('Juicy\Core\ImageHelper', 'letterbox')));        
+        $twig->addFilter(new \Twig_SimpleFilter('letterbox', array('Juicy\Core\ImageHelper', 'letterbox')));
 
         /* debugging filters */
         $twig->addFilter(new \Twig_SimpleFilter('get_class', 'get_class'));
@@ -60,13 +60,7 @@ class Twig extends \Timber\Twig {
             return apply_filters_ref_array($tag, $args);
         } ));
 
-
         $twig = apply_filters('timber/twig', $twig);
-        /**
-         * get_twig is deprecated, use timber/twig
-         */
-        $twig = apply_filters('get_twig', $twig);
-
         return $twig;
     }
 }

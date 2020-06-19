@@ -27,7 +27,7 @@ class Site extends TimberSite
         }, 100);
 
         //Add custom functions to twig
-        add_filter('get_twig', array($this, 'add_to_twig'));
+        add_filter('timber/twig', array($this, 'add_to_twig'));
 
         //Remove p tags wrapped around images
         add_filter('the_content', array($this, 'filter_ptags_on_images'));

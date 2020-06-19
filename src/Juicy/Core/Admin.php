@@ -30,7 +30,7 @@ class Admin
         add_filter('admin_footer_text',         [$this, 'custom_admin_footer']);
 
         //Add custom functions to twig
-        add_filter('get_twig',                  [$this, 'add_to_twig']);
+        add_filter('timber/twig',               [$this, 'add_to_twig']);
 
         // customise WYSIWYG
         add_filter('mce_buttons_2',             [$this, 'customise_wysiwyg']);
@@ -96,7 +96,7 @@ class Admin
         if (file_exists(get_stylesheet_directory() . '/dist/css/login.css')) {
             wp_enqueue_style( 'custom-login', get_stylesheet_directory_uri() . '/dist/css/login.css', ['admin_font'] );
         } else {
-            wp_enqueue_style( 'custom-login', get_stylesheet_directory_uri() . '/dist/css/login.min.css', ['admin_font'] );            
+            wp_enqueue_style( 'custom-login', get_stylesheet_directory_uri() . '/dist/css/login.min.css', ['admin_font'] );
         }
 
     }
@@ -108,7 +108,7 @@ class Admin
         if (file_exists(get_stylesheet_directory() . '/dist/css/admin.css')) {
             wp_enqueue_style( 'custom-admin', get_stylesheet_directory_uri() . '/dist/css/admin.css', ['admin_font'] );
         } else {
-            wp_enqueue_style( 'custom-admin', get_stylesheet_directory_uri() . '/dist/css/admin.min.css', ['admin_font'] );            
+            wp_enqueue_style( 'custom-admin', get_stylesheet_directory_uri() . '/dist/css/admin.min.css', ['admin_font'] );
         }
     }
 
