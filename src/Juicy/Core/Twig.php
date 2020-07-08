@@ -2,8 +2,8 @@
 
 namespace Juicy\Core;
 
-class Twig extends \Timber\Twig {
-
+class Twig extends \Timber\Twig
+{
     public function __construct()
     {
         // Add custom filters to twig.
@@ -16,16 +16,17 @@ class Twig extends \Timber\Twig {
      * @param \Timber\Twig_Environment $twig
      * @return mixed|\Timber\Twig_Environment|void
      */
-    public function add_timber_filters( $twig ) {
+    public function add_timber_filters($twig)
+    {
         $twig->addFilter(new \Twig_SimpleFilter('resize', array('Juicy\Core\ImageHelper', 'resize')));
         $twig->addFilter(new \Twig_SimpleFilter('letterbox', array('Juicy\Core\ImageHelper', 'letterbox')));
 
         /* debugging filters */
         $twig->addFilter(new \Twig_SimpleFilter('get_class', 'get_class'));
         $twig->addFilter(new \Twig_SimpleFilter('get_type', 'get_type'));
-        $twig->addFilter(new \Twig_SimpleFilter('print_r', function( $arr ) {
+        $twig->addFilter(new \Twig_SimpleFilter('print_r', function ($arr) {
             return print_r($arr, true);
-        } ));
+        }));
 
         /* other filters */
         $twig->addFilter(new \Twig_SimpleFilter('stripshortcodes', 'strip_shortcodes'));
@@ -42,25 +43,24 @@ class Twig extends \Timber\Twig {
 
         $twig->addFilter(new \Twig_SimpleFilter('pluck', array('Timber\Helper', 'pluck')));
 
-        $twig->addFilter(new \Twig_SimpleFilter('relative', function( $link ) {
+        $twig->addFilter(new \Twig_SimpleFilter('relative', function ($link) {
             return URLHelper::get_rel_url($link, true);
-        } ));
+        }));
 
         $twig->addFilter(new \Twig_SimpleFilter('date', array($this, 'intl_date')));
 
-        $twig->addFilter(new \Twig_SimpleFilter('truncate', function( $text, $len ) {
+        $twig->addFilter(new \Twig_SimpleFilter('truncate', function ($text, $len) {
             return TextHelper::trim_words($text, $len);
-        } ));
+        }));
 
         /* actions and filters */
-        $twig->addFilter(new \Twig_SimpleFilter('apply_filters', function() {
+        $twig->addFilter(new \Twig_SimpleFilter('apply_filters', function () {
             $args = func_get_args();
             $tag = current(array_splice($args, 1, 1));
 
             return apply_filters_ref_array($tag, $args);
-        } ));
+        }));
 
-        $twig = apply_filters('timber/twig', $twig);
         return $twig;
     }
 }
