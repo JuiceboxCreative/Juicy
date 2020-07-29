@@ -150,6 +150,12 @@ class GravityForms
             $classes[] = $field->failed_validation === true ? 'has-error' : 'has-success';
         }
 
+        if (!empty($css_class)) {
+            foreach (explode(' ', $css_class) as $class) {
+                $classes[] = $class;
+            }
+        }
+
         $field_container = "<div id=\"field_{$form['id']}_{$field->id}\" class=\"". implode(' ', $classes) ."\">{FIELD_CONTENT}</div>";
 
         if ( $field->type == 'hidden' ) {
