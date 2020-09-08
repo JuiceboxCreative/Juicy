@@ -69,12 +69,12 @@ class Post extends TimberPost
 
     public function get_fb_share_link()
     {
-        return 'http://www.facebook.com/sharer/sharer.php?u='.$this->link;
+        return 'https://www.facebook.com/sharer/sharer.php?u='.$this->link;
     }
 
     public function get_twitter_share_link()
     {
-        return 'http://twitter.com/share?text='.urlencode(html_entity_decode($this->title . " - ". get_bloginfo('name'), ENT_COMPAT, 'UTF-8'))."&amp;url=" . get_bloginfo('url') . "?p=" . $this->ID;
+        return 'https://twitter.com/share?text='.urlencode(html_entity_decode($this->title . " - ". get_bloginfo('name'), ENT_COMPAT, 'UTF-8'))."&amp;url=" . get_bloginfo('url') . "?p=" . $this->ID;
     }
 
     public function get_linkedin_share_link()
