@@ -37,6 +37,8 @@ class GravityForms
         add_filter( 'gform_next_button', array($this, 'form_create_btns'), 10, 2 );
 
         add_filter( 'gform_prev_button', array($this, 'form_create_btns'), 10, 2 );
+
+        add_filter( 'gform_field_content', array($this, 'disable_honeypot_autocomplete'), 10, 2 );
     }
 
     /**
@@ -195,6 +197,17 @@ class GravityForms
             </select>
         </li>
         <?php
+    }
+
+    public function disable_honeypot_autocomplete($input)
+    {
+        $validation_field = str_contains($input, 'validation purposes');
+
+        if ($validation_field) {
+            return preg_replace( '/<(input|textarea)/', '<${1} autocomplete="off" ', $input );
+        }
+
+        return $input;
     }
 
     public function field_settings_js()
